@@ -22,11 +22,11 @@ The layer editor also allows you to specify the default styling that should be u
 
 ## TODO
 
-* [ ] Fix up the way options are specified for layers
-* [ ] Ability to add tile layers to a map
-* [ ] Ability to add wms layers to a map
-* [ ] Create geojson layer using a link to externally hosted geojson
-* [ ] Time series support for geojson data
-* [ ] Time series support for WMS/Tile layers
-* [ ] Rather than uploading files ingest geojson into database (postgres w/hstore)
-* [ ] Provide a paged API for loading geojson data into the map
+* Fix up the way options are specified for layers
+* Ability to add tile layers to a map
+* Ability to add wms layers to a map
+* Create geojson layer using a link to externally hosted geojson
+* Time series support for geojson data
+* Time series support for WMS/Tile layers
+* Rather than uploading files ingest geojson into database (postgres w/hstore)
+* Provide a paged API for loading geojson data into the map
