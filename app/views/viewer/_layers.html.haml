@@ -1,0 +1,8 @@
+#layer_container.panel.panel-default
+  .panel-heading
+    Legend
+  .panel-body
+    %ul.nav
+      - layers.each do |layer|
+        %li.layer-definition{ data: layer.leaflet_params }
+          = render layer

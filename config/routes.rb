@@ -1,4 +1,13 @@
 GenericMap::Application.routes.draw do
+  get "viewer/index"
+  resources :maps do
+    get :available_layers_for, on: :member
+    patch :add_layer, on: :member
+    patch :remove_layer, on: :member
+  end
+
+  resources :layers
+
   get '/logout', to: 'sessions#destroy'
   get '/login', to: 'sessions#new'
   get '/auth/:provider/disable', to: 'users#disable_provider'
@@ -12,9 +21,10 @@ GenericMap::Application.routes.draw do
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  get '/:slug' => 'viewer#show', as: :viewer
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'viewer#show', slug: 'default'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

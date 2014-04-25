@@ -1,0 +1,4 @@
+---
+name: output.geojson
+model_class: Layer
+model_attachment: file

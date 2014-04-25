@@ -1,0 +1,8 @@
+.layer
+  .legend-icon.text-center{ id: dom_id(layer, 'icon') }
+  .legend-content
+    %h5.list-group-item-heading= layer.name
+    %p.list-group-item-text= layer.description
+
+:javascript
+  $('##{dom_id(layer, 'icon')}').html(L.mapbox.marker.icon(#{layer.style.to_json}).createIcon())

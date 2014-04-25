@@ -1,0 +1,24 @@
+%h1 Listing layers
+.row
+  .col-lg-2.col-md-3.col-sm-3
+    = link_to 'New Layer', new_layer_path, class: 'btn btn-success btn-block'
+  .col-lg-10.col-md-9.col-sm-9
+    %table.table.table-striped.table-condensed
+      %thead
+        %tr
+          %th Name
+          %th Description
+          %th File name
+          %th Active
+          %th
+      %tbody
+        - @layers.each do |layer|
+          %tr
+            %td= layer.name
+            %td= layer.description
+            %td= layer.file_name
+            %td= layer.active
+            %td
+              .btn-group
+                = link_to 'Edit', edit_layer_path(layer), class: 'btn btn-primary'
+                = link_to 'Destroy', layer, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'

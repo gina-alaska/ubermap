@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "code": "PNG_MW_PRU", "title": "Pingos_Marilyn_Walker_Prudhoe Bay  ", "source": "M.D. Walker 1990", "index": "2a", "lat": "70.269778", "lon": "-148.573405", "plots": "", "photo": "", "url": "", "group": "2" }, "geometry": { "type": "Point", "coordinates": [ -148.573405, 70.269778 ] } },
+{ "type": "Feature", "properties": { "code": "PNG_MW_KUP", "title": "Pingos_Marilyn_Walker_Kuparuk  ", "source": "M.D. Walker 1990", "index": "2b", "lat": "70.326657", "lon": "-149.59359", "plots": "", "photo": "", "url": "", "group": "2" }, "geometry": { "type": "Point", "coordinates": [ -149.59359, 70.326657 ] } },
+{ "type": "Feature", "properties": { "code": "PNG_MW_KAD", "title": "Pingos_Marilyn_Walker_Kadleroshilik ", "source": "M.D. Walker 1990", "index": "2c", "lat": "70.054461", "lon": "-147.491286", "plots": "", "photo": "", "url": "", "group": "2" }, "geometry": { "type": "Point", "coordinates": [ -147.491286, 70.05446 ] } },
+{ "type": "Feature", "properties": { "code": "PNG_MW_TR", "title": "Pingos_Marilyn_Walker_Toolik River", "source": "M.D. Walker 1990", "index": "2d", "lat": "69.781958", "lon": "-149.133327", "plots": "", "photo": "", "url": "", "group": "2" }, "geometry": { "type": "Point", "coordinates": [ -149.133327, 69.781958 ] } }
+]
+}

@@ -1,0 +1,26 @@
+%p#notice= notice
+%h1= @map.title
+.row
+  .col-lg-3
+    = link_to 'Edit Map', edit_map_path(@map), class: 'btn btn-primary btn-block'
+    = link_to 'View Map', viewer_url(@map), class: 'btn btn-default btn-block'
+    = link_to 'Add Layer', available_layers_for_map_path(@map), class: 'btn btn-success btn-block'
+  .col-lg-9
+    %p
+      %strong Slug:
+      = @map.slug
+    %p
+      %strong Embed URL:
+      = viewer_url(@map)
+    %p
+      %strong Active:
+      = @map.active
+
+    %h4 Layers
+    %ul.list-group
+      - @map.layers.each do |layer|
+        %li.list-group-item
+          .btn-group.pull-right
+            = link_to 'Edit', edit_layer_path(layer), class: 'btn btn-default'
+            = link_to 'Remove', remove_layer_map_path(@map, layer: layer), method: :patch, class: 'btn btn-danger'
+          = render layer

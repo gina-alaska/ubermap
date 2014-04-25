@@ -1,0 +1,14 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "code": "FB_AK_HI", "title": "Frost Boils_Kade_Howe Island ", "source": "Kade et al. 2005", "index": "3a", "lat": "70.315056", "lon": "-147.993694", "plots": "", "photo": "", "url": "", "group": "3" }, "geometry": { "type": "Point", "coordinates": [ -147.993694, 70.31506 ] } },
+{ "type": "Feature", "properties": { "code": "FB_AK_WD", "title": "Frost Boils_Kade_West Dock", "source": "Kade et al. 2005", "index": "3b", "lat": "70.374612", "lon": "-148.553359", "plots": "", "photo": "", "url": "", "group": "3" }, "geometry": { "type": "Point", "coordinates": [ -148.55336, 70.374612 ] } },
+{ "type": "Feature", "properties": { "code": "FB_AK_DH", "title": "Frost Boils_Kade_Deadhorse", "source": "Kade et al. 2005", "index": "3c", "lat": "70.161361", "lon": "-148.467056", "plots": "", "photo": "", "url": "", "group": "3" }, "geometry": { "type": "Point", "coordinates": [ -148.467056, 70.161361 ] } },
+{ "type": "Feature", "properties": { "code": "FB_AK_FB", "title": "Frost Boils_Kade_Franklin Bluffs ", "source": "Kade et al. 2005", "index": "3d", "lat": "69.674111", "lon": "-148.717306", "plots": "", "photo": "", "url": "", "group": "3" }, "geometry": { "type": "Point", "coordinates": [ -148.717306, 69.674111 ] } },
+{ "type": "Feature", "properties": { "code": "FB_AK_SAGN", "title": "Frost Boils_Kade_Sagwon Nonacidic  ", "source": "Kade et al. 2005", "index": "3e", "lat": "69.433583", "lon": "-148.671833", "plots": "", "photo": "", "url": "", "group": "3" }, "geometry": { "type": "Point", "coordinates": [ -148.671833, 69.433583 ] } },
+{ "type": "Feature", "properties": { "code": "FB_AK_SAGA", "title": "Frost Boils_Kade_Sagwon Acidic", "source": "Kade et al. 2005", "index": "3f", "lat": "69.4255", "lon": "-148.695972", "plots": "", "photo": "", "url": "", "group": "3" }, "geometry": { "type": "Point", "coordinates": [ -148.695972, 69.4255 ] } },
+{ "type": "Feature", "properties": { "code": "FB_AK_HV", "title": "Frost Boils_Kade_Happy Valley ", "source": "Kade et al. 2005", "index": "3g", "lat": "69.147", "lon": "-148.847028", "plots": "", "photo": "", "url": "", "group": "3" }, "geometry": { "type": "Point", "coordinates": [ -148.847028, 69.147 ] } }
+]
+}

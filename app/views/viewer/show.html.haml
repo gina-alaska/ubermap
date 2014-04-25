@@ -1,0 +1,5 @@
+#map_container
+  #map
+
+- unless @map.nil?
+  = render 'layers', layers: @map.try(:layers)

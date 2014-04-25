@@ -11,7 +11,24 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap/dist/js/bootstrap
+//= require mapbox.js/dist/mapbox
+//= require proj4leaflet/lib/proj4-compressed
+//= require proj4leaflet/src/proj4leaflet
+//= require leaflet.markerclusterer/dist/leaflet.markercluster
+//= require leaflet-hash/leaflet-hash
+//= require gina-map-layers/dist/mapbox-adapter
+//= require ace-builds/src/ace
 //= require turbolinks
 //= require_tree .
+
+$(document).on("page:fetch", function() {
+  $('.spinner-frame').fadeIn("slow");
+});
+
+
+$(document).on("page:load", function() {
+  $('.spinner-frame').fadeOut("slow");
+});

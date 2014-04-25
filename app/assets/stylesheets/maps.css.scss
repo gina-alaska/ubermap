@@ -1,0 +1,124 @@
+// Place all the styles related to the maps controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+html,body {
+  width: 100%;
+  height: 100%;
+  margin:0;
+  padding:0;
+}
+
+#map_container {
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+
+  #map {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+#layer_editor_container {
+  position: fixed;
+  width: 450px;
+  min-height: 450px;
+  bottom: -10px;
+  left: 5px;
+  .nav-tabs {
+  }
+  .tab-pane {
+    padding: 5px;
+  }
+  .panel-body {
+    padding: 0;
+  }
+  .nav li a {
+    padding:10px 10px;
+  }
+
+  .layer-btns {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .save-btn a {
+    background-color: #428bca;
+    color: #fff;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #efefef;
+      color: #428bca;
+    }
+  }
+}
+
+#layer_container {
+  position: fixed;
+  width: 300px;
+  bottom: 5px;
+  left: 5px;
+
+  .panel-body {
+    padding: 5px;
+  }
+  ul { padding: 0; margin: 0; }
+  li {
+    position: relative;
+    border-bottom: 1px solid #efefef;
+    padding: 5px 0px;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.layer {
+  min-height: 55px;
+
+  .legend-content {
+    margin-left: 45px;
+  }
+
+  .legend-icon {
+    position: relative;
+    left: 0;
+    top: 40px;
+    width: 40px;
+
+    img {
+      left: 50%;
+      bottom: 50%;
+    }
+  }
+}
+
+.leaflet-container a.btn-primary {
+  color: #fff;
+
+}
+
+.leaflet-popup-content {
+  padding: 0;
+  img { max-width: 100%; min-width: 300px; }
+  h1,h2,h3,h4,h5 { margin-right: 18px; }
+
+  .popup-content {
+    padding: 5px;
+  }
+
+  .dl-horizontal {
+    dt {
+      text-align: left;
+      // width: 80px;
+    }
+    dd {
+      // margin-left: 90px;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+#map_container
+  #map
+
+%p#notice= notice
+
+#layer_editor_container.panel.panel-default
+  .panel-body
+    %ul.nav.nav-tabs
+      %li.active
+        = link_to 'Summary', '#layer-summary', data: { toggle: 'tab' }
+      %li
+        = link_to 'Data', '#layer-data', data: { toggle: 'tab' }
+      %li
+        = link_to 'Style', '#layer-style', data: { toggle: 'tab' }
+      %li
+        = link_to 'Popup', '#layer-popup', data: { toggle: 'tab' }
+      %li
+        = link_to 'Options', '#layer-options', data: { toggle: 'tab' }
+
+    = form_for(@layer, html: { id: dom_id(@layer, 'form'), class: 'tab-content' }) do |f|
+      - if @layer.errors.any?
+        #error_explanation
+          %h2
+            = pluralize(@layer.errors.count, "error")
+            prohibited this layer from being saved:
+          %ul
+            - @layer.errors.full_messages.each do |msg|
+              %li= msg
+      #layer-summary.tab-pane.active.layer-definition{ data: @layer.leaflet_params }
+        = render 'summary_fields', f: f
+      #layer-data.tab-pane
+        = render 'data_fields', f: f
+      #layer-style.tab-pane
+        = render 'style_fields', f: f
+      #layer-popup.tab-pane
+        = render 'popup_fields', f: f
+      #layer-options.tab-pane
+        = render 'option_fields', f: f
+  .btn-group.layer-btns.btn-block
+    = link_to 'Close', layers_path, class: 'btn col-lg-6 col-md-6 col-sm-6 btn-default'
+    %a.btn.btn-primary.col-lg-6.col-md-6.col-sm-6{ data: { behavior: 'save-form', target: "##{dom_id(@layer, 'form')}" }}
+      Save

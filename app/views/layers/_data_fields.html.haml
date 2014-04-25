@@ -1,0 +1,11 @@
+.form-group
+  = f.label :file_name, 'Current file: '
+  = f.object.file_name
+
+.form-group
+  = f.label :fields, 'Attribute fields: '
+  = f.object.fields.join(', ')
+
+.form-group
+  = f.label :file, 'Upload new file'
+  = f.file_field :file

@@ -1,0 +1,10 @@
+.form-group
+  = f.text_area :popup, rows: 10, id: 'popup_field', class: 'form-control', style: 'height: 300px;'
+.form-group
+  = f.label :fields, 'Attribute fields: '
+  - f.object.fields.each do |field|
+    = link_to "{{#{field}}}", '', data: { behavior: 'editor-action', action: 'insert', content: "{{#{field}}}" }
+
+:javascript
+  var ace = new AceEditor('popup_field', { mode: 'ace/mode/handlebars' });
+  var handler = new FieldTagHandler(ace.editor);

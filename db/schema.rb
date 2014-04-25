@@ -11,12 +11,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414183515) do
+ActiveRecord::Schema.define(version: 20140423233412) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
     t.string   "uid"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "layers", force: true do |t|
+    t.string   "name"
+    t.string   "file_uid"
+    t.string   "file_name"
+    t.boolean  "active"
+    t.text     "legend"
+    t.text     "style_old"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "popup"
+    t.text     "options"
+    t.hstore   "style"
+    t.text     "fields"
+  end
+
+  create_table "map_layers", force: true do |t|
+    t.integer  "map_id"
+    t.integer  "layer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "maps", force: true do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

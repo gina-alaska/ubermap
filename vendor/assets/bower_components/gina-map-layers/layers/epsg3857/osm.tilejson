@@ -1,0 +1,22 @@
+{
+  "tilejson": "2.1.0",
+  "name": "Open Street Maps",
+  "description": "",
+  "version": "1.0.0",
+  "attribution": "<a href='http://openstreetmap.org'>OSM contributors</a>",
+//  "template": "",
+//  "legend": "",
+  "scheme": "xyz",
+  "tiles": [
+    "http://tiles.gina.alaska.edu/tilesrv/osm/tile/{x}/{y}/{z}.png"
+  ],
+//  "grids": [
+//    
+//  ],
+// "data": [
+//  ],
+  "minzoom": 0,
+  "maxzoom": 18,
+//  "center": [],
+  "bounds": [-180, -90, 180, 90]
+}
