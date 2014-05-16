@@ -1,3 +1,48 @@
 // Place all the styles related to the Layers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.custom-marker {
+  border: 1px solid #efefef;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  width: auto !important;
+  border-radius: 5px;
+  transition: width 2s;
+}
+.custom-marker:hover {
+  z-index: 1000000 !important;
+}
+.custom-marker:hover .auto-hide {
+  display: inline-block;
+}
+.custom-marker .auto-hide {
+  display: none;
+}
+.custom-marker .no-wrap {
+  white-space: nowrap;
+}
+.custom-marker .custom-marker-wrapper {
+  position: relative;
+}
+.custom-marker .custom-marker-content {
+  margin-left: 30px;
+  padding: 5px;
+}
+.custom-marker .icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  font-size: 26px;
+  text-align: center;
+  padding: 2px;
+}
+
+.legend {
+  padding: 0;
+}
+.legend .layer li {
+  padding: 5px;
+}

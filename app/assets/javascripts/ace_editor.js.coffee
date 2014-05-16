@@ -5,11 +5,15 @@ class @AceEditor
     @options['mode'] ||= 'ace/mode/javascript'
     # @editor = ace.edit(@el)
     @initEditor()
-
+    if @options['toolbar']?
+      @initToolbar(options['toolbar'])
 
   htmlEncode: (str) ->
     str.replace /[&<>"']/g, ($0) ->
       "&" + {"&":"amp", "<":"lt", ">":"gt", '"':"quot", "'":"#39"}[$0] + ";"
+      
+  initToolbar: (el) =>
+    @toolbar = new FieldTagHandler(el, @editor)
 
   initEditor: () =>
     editor_el = $("""<div class="editor">#{@htmlEncode(@field.val())}</div>""")

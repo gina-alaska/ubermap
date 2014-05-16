@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140423233412) do
+ActiveRecord::Schema.define(version: 20140516192007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,21 @@ ActiveRecord::Schema.define(version: 20140423233412) do
     t.datetime "updated_at"
   end
 
+  create_table "geojson_layers", force: true do |t|
+    t.string   "name"
+    t.string   "file_uid"
+    t.string   "file_name"
+    t.boolean  "active",      default: true
+    t.text     "legend"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "popup"
+    t.hstore   "style"
+    t.hstore   "options"
+    t.text     "fields"
+  end
+
   create_table "layers", force: true do |t|
     t.string   "name"
     t.string   "file_uid"
@@ -36,9 +51,10 @@ ActiveRecord::Schema.define(version: 20140423233412) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "popup"
-    t.text     "options"
+    t.text     "options_old"
     t.hstore   "style"
     t.text     "fields"
+    t.hstore   "options"
   end
 
   create_table "map_layers", force: true do |t|

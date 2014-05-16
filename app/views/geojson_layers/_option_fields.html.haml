@@ -1,0 +1,11 @@
+.form-group
+  = f.fields_for :options, OpenStruct.new(f.object.options) do |opts|
+    .form-group
+      %label.checkbox
+        = opts.check_box :clickable, { }, 'yes', 'no'
+        Clickable
+        
+    .form-group
+      %label.checkbox
+        = opts.check_box :auto_zoom, { }, 'yes', 'no'
+        Auto zoom

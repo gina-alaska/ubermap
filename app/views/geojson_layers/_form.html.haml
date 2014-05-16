@@ -1,0 +1,46 @@
+#map_container
+  #map
+
+%p#notice= notice
+
+#geojson_layer_editor_container.layer_editor_container.panel.panel-default
+  .panel-body
+    %ul.nav.nav-tabs
+      %li.active
+        = link_to 'Summary', '#geojson_layer-summary', data: { toggle: 'tab' }
+      %li
+        = link_to 'Data', '#geojson_layer-data', data: { toggle: 'tab' }
+      %li
+        = link_to 'Style', '#geojson_layer-style', data: { toggle: 'tab' }
+      %li
+        = link_to 'Legend', '#geojson_layer-legend', data: { toggle: 'tab' }
+      %li
+        = link_to 'Popup', '#geojson_layer-popup', data: { toggle: 'tab' }
+      %li
+        = link_to 'Options', '#geojson_layer-options', data: { toggle: 'tab' }
+
+    = form_for(@geojson_layer, html: { id: dom_id(@geojson_layer, 'form'), class: 'tab-content' }) do |f|
+      - if @geojson_layer.errors.any?
+        #error_explanation
+          %h2
+            = pluralize(@geojson_layer.errors.count, "error")
+            prohibited this geojson_layer from being saved:
+          %ul
+            - @geojson_layer.errors.full_messages.each do |msg|
+              %li= msg
+      #geojson_layer-summary.tab-pane.active.geojson_layer-definition{ data: { layer: @geojson_layer.leaflet_params.to_json } }
+        = render 'summary_fields', f: f
+      #geojson_layer-data.tab-pane
+        = render 'data_fields', f: f
+      #geojson_layer-style.tab-pane
+        = render 'style_fields', f: f
+      #geojson_layer-legend.tab-pane
+        = render 'legend_fields', f: f
+      #geojson_layer-popup.tab-pane
+        = render 'popup_fields', f: f
+      #geojson_layer-options.tab-pane
+        = render 'option_fields', f: f
+  .btn-group.layer-btns.btn-block
+    = link_to 'Close', geojson_layers_path, class: 'btn col-lg-6 col-md-6 col-sm-6 btn-default'
+    %a.btn.btn-primary.col-lg-6.col-md-6.col-sm-6{ data: { behavior: 'save-form', target: "##{dom_id(@geojson_layer, 'form')}" }}
+      Save

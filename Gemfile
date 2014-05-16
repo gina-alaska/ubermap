@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.3'
+gem 'rails', '4.1.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
@@ -14,7 +14,6 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
-gem 'bower-tools', github:'gina-alaska/bower-tools'
 gem 'dragonfly'
 gem 'nested_form'
 
@@ -55,3 +54,5 @@ gem "omniauth-github"
 gem "omniauth-google-oauth2"
 gem "omniauth-openid"
 gem "google-api-client"
+
+ruby '2.1.1'

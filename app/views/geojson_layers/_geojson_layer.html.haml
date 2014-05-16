@@ -1,0 +1,8 @@
+.geojson_layer
+  .legend-icon.text-center{ id: dom_id(geojson_layer, 'icon') }
+  .legend-content
+    %h5.list-group-item-heading= geojson_layer.name
+    %p.list-group-item-text= geojson_layer.description
+
+:javascript
+  $('##{dom_id(geojson_layer, 'icon')}').html(L.mapbox.marker.icon(#{geojson_layer.style.to_json}).createIcon())

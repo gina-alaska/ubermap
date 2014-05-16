@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GeojsonLayersControllerTest < ActionController::TestCase
+class GeojsonLayerTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,4 +1,6 @@
 GenericMap::Application.routes.draw do
+  resources :geojson_layers
+
   get "viewer/index"
   resources :maps do
     get :available_layers_for, on: :member
