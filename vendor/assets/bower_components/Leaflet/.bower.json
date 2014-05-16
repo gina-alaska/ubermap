@@ -1,0 +1,14 @@
+{
+  "name": "Leaflet",
+  "_cacheHeaders": {
+    "ETag": "\"a597cab1dc3a59ba6898a6e10a579619\"",
+    "Content-Length": "83775",
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "_release": "e-tag:a597cab1d",
+  "main": "index.draw",
+  "_source": "https://github.com/Leaflet/Leaflet.draw",
+  "_target": "*",
+  "_originalSource": "https://github.com/Leaflet/Leaflet.draw",
+  "_direct": true
+}
