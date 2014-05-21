@@ -1,0 +1,18 @@
+%nav.navbar.navbar-default.navbar-static-top
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle{ data: { toggle: 'collapse', target: '#header-navbar-collapse' }}
+        %span.sr-only Toggle Navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      .navbar-brand Generic Map                
+    #header-navbar-collapse.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        %li= link_to 'Maps', maps_path      
+        %li.dropdown
+          = link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do
+            Layers
+            %b.caret
+          %ul.dropdown-menu
+            %li= link_to 'GeoJSON', geojson_layers_path

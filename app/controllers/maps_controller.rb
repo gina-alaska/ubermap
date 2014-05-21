@@ -1,6 +1,8 @@
 class MapsController < ApplicationController
   before_action :set_map, only: [:show, :edit, :update, :destroy, :add_layer, :remove_layer, :available_layers_for]
 
+  layout 'manager'
+
   # GET /maps
   # GET /maps.json
   def index

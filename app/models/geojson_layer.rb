@@ -11,6 +11,8 @@ class GeojsonLayer < ActiveRecord::Base
   before_save :fetch_fields
 
   def fetch_fields
+    return if self.file.nil?
+    
     case self.file.ext
     when 'geojson'
       set_fields_from_geojson
