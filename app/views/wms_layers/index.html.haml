@@ -1,0 +1,27 @@
+%h1 Listing wms_layers
+%table
+  %thead
+    %tr
+      %th Url
+      %th Layers
+      %th Legend
+      %th Active
+      %th Options
+      %th Description
+      %th Name
+      %th{:colspan => "3"}
+  %tbody
+    - @wms_layers.each do |wms_layer|
+      %tr
+        %td= wms_layer.url
+        %td= wms_layer.layers
+        %td= wms_layer.legend
+        %td= wms_layer.active
+        %td= wms_layer.options
+        %td= wms_layer.description
+        %td= wms_layer.name
+        %td= link_to 'Show', wms_layer
+        %td= link_to 'Edit', edit_wms_layer_path(wms_layer)
+        %td= link_to 'Destroy', wms_layer, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Wms layer', new_wms_layer_path

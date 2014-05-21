@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140516192007) do
+ActiveRecord::Schema.define(version: 20140521220219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,18 @@ ActiveRecord::Schema.define(version: 20140516192007) do
     t.string   "name"
     t.string   "email"
     t.string   "avatar"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "wms_layers", force: true do |t|
+    t.string   "url"
+    t.string   "layers"
+    t.text     "legend"
+    t.boolean  "active"
+    t.hstore   "options"
+    t.text     "description"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

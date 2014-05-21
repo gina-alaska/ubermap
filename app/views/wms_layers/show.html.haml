@@ -1,0 +1,25 @@
+%p#notice= notice
+%p
+  %strong Url:
+  = @wms_layer.url
+%p
+  %strong Layers:
+  = @wms_layer.layers
+%p
+  %strong Legend:
+  = @wms_layer.legend
+%p
+  %strong Active:
+  = @wms_layer.active
+%p
+  %strong Options:
+  = @wms_layer.options
+%p
+  %strong Description:
+  = @wms_layer.description
+%p
+  %strong Name:
+  = @wms_layer.name
+= link_to 'Edit', edit_wms_layer_path(@wms_layer)
+|
+\#{link_to 'Back', wms_layers_path}

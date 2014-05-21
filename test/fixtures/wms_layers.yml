@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: MyString
+  layers: MyString
+  legend: MyText
+  active: false
+  options: 
+  description: MyText
+  name: MyString
+
+two:
+  url: MyString
+  layers: MyString
+  legend: MyText
+  active: false
+  options: 
+  description: MyText
+  name: MyString

@@ -1,4 +1,6 @@
 GenericMap::Application.routes.draw do
+  resources :wms_layers
+
   resources :geojson_layers
 
   get "viewer/index"
