@@ -14,6 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.remotipart
+//= require jquery-ui-1.9.2/js/jquery-ui-1.9.2
 //= require bootstrap/dist/js/bootstrap
 //= require mapbox.js/dist/mapbox
 //= require proj4leaflet/lib/proj4-compressed
@@ -22,7 +23,9 @@
 //= require leaflet-hash/leaflet-hash
 //= require gina-map-layers/dist/mapbox-adapter
 //= require ace-builds/src/ace
+//= require leaflet-wms-time-slider/SliderControl
 //= require turbolinks
+//= require map_layer
 //= require_tree .
 
 $(document).on("page:fetch", function() {
