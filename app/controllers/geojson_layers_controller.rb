@@ -1,5 +1,6 @@
 class GeojsonLayersController < ApplicationController
-  before_action :set_geojson_layer, only: [:show, :edit, :update, :destroy]
+  before_action :set_map, only: [:remove, :add]
+  before_action :set_geojson_layer, only: [:show, :edit, :update, :destroy, :remove, :add]
 
   respond_to :html, :json, :tilejson
 
@@ -27,6 +28,19 @@ class GeojsonLayersController < ApplicationController
   def edit
     render layout: 'editor'
   end
+  
+  def remove
+    @map_layer = @map.map_layers.where(layer: @geojson_layer).first
+    @map_layer.destroy
+
+    redirect_to @map
+  end
+  
+  def add
+    @map.geojson_layers << @geojson_layer
+    
+    redirect_to @map
+  end
 
   # POST /geojson_layers
   # POST /geojson_layers.json
@@ -52,7 +66,12 @@ class GeojsonLayersController < ApplicationController
       if @geojson_layer.update(geojson_layer_params)
         format.html { redirect_to edit_geojson_layer_path(@geojson_layer), notice: 'Layer was successfully updated.' }
         format.json { head :no_content }
-        format.js
+        format.js {
+          Rails.logger.info  @geojson_layer.previous_changes
+          if @geojson_layer.previous_changes['file_uid']
+            render js: "document.location='#{edit_geojson_layer_path(@geojson_layer)}';"
+          end
+        }
       else
         format.html { render action: 'edit' }
         format.json { render json: @geojson_layer.errors, status: :unprocessable_entity }
@@ -74,6 +93,11 @@ class GeojsonLayersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_geojson_layer
       @geojson_layer = GeojsonLayer.find(params[:id])
+    end
+    
+    # Use callbacks to share common setup or constraints between actions.
+    def set_map
+      @map = Map.where('lower(slug) = ?', params[:map_id]).first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

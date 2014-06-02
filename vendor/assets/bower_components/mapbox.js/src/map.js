@@ -1,13 +1,13 @@
 'use strict';
 
 var util = require('./util'),
-    tileLayer = require('./tile_layer'),
-    featureLayer = require('./feature_layer'),
-    gridLayer = require('./grid_layer'),
-    gridControl = require('./grid_control'),
-    infoControl = require('./info_control'),
-    shareControl = require('./share_control'),
-    legendControl = require('./legend_control');
+    tileLayer = require('./tile_layer').tileLayer,
+    featureLayer = require('./feature_layer').featureLayer,
+    gridLayer = require('./grid_layer').gridLayer,
+    gridControl = require('./grid_control').gridControl,
+    infoControl = require('./info_control').infoControl,
+    shareControl = require('./share_control').shareControl,
+    legendControl = require('./legend_control').legendControl;
 
 var LMap = L.Map.extend({
     includes: [require('./load_tilejson')],
@@ -18,8 +18,7 @@ var LMap = L.Map.extend({
         gridLayer: {},
         legendControl: {},
         gridControl: {},
-        infoControl: {},
-        attributionControl: false,
+        infoControl: false,
         shareControl: false
     },
 
@@ -128,6 +127,23 @@ var LMap = L.Map.extend({
         }
     },
 
+    _editLink: function() {
+        if (!this._controlContainer.getElementsByClassName) return;
+        var link = this._controlContainer.getElementsByClassName('mapbox-improve-map');
+        if (link.length && this._loaded) {
+            var center = this.getCenter().wrap();
+            var tilejson = this._tilejson || {};
+            var id = tilejson.id || '';
+
+            for (var i = 0; i < link.length; i++) {
+                link[i].href = link[i].href.split('#')[0] + '#' + id + '/' +
+                    center.lng.toFixed(3) + '/' +
+                    center.lat.toFixed(3) + '/' +
+                    this.getZoom();
+            }
+        }
+    },
+
     _updateLayer: function(layer) {
         if (!layer.options) return;
 
@@ -139,15 +155,20 @@ var LMap = L.Map.extend({
             this.attributionControl.addAttribution(layer.getAttribution());
         }
 
+        this.on('moveend', this._editLink, this);
+
         if (!(L.stamp(layer) in this._zoomBoundLayers) &&
                 (layer.options.maxZoom || layer.options.minZoom)) {
             this._zoomBoundLayers[L.stamp(layer)] = layer;
         }
 
+        this._editLink();
         this._updateZoomLevels();
     }
 });
 
-module.exports = function(element, _, options) {
+module.exports.Map = LMap;
+
+module.exports.map = function(element, _, options) {
     return new LMap(element, _, options);
 };

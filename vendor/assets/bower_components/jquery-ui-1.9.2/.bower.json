@@ -1,0 +1,14 @@
+{
+  "name": "jquery-ui-1.9.2",
+  "_cacheHeaders": {
+    "ETag": "\"5343e88c-1e9b2b\"",
+    "Last-Modified": "Tue, 08 Apr 2014 12:16:12 GMT",
+    "Content-Length": "2005803",
+    "Content-Type": "application/zip"
+  },
+  "_release": "e-tag:5343e88c-",
+  "_source": "http://jqueryui.com/resources/download/jquery-ui-1.9.2.zip",
+  "_target": "*",
+  "_originalSource": "http://jqueryui.com/resources/download/jquery-ui-1.9.2.zip",
+  "_direct": true
+}

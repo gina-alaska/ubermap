@@ -1,5 +1,5 @@
 class MapsController < ApplicationController
-  before_action :set_map, only: [:show, :edit, :update, :destroy, :add_layer, :remove_layer, :available_layers_for]
+  before_action :set_map, only: [:show, :edit, :update, :destroy, :add_layer, :remove_layer, :available_geojson_layers_for]
 
   layout 'manager'
 
@@ -12,7 +12,6 @@ class MapsController < ApplicationController
   # GET /maps/1
   # GET /maps/1.json
   def show
-    @layers = @map.layers
   end
 
   # GET /maps/new
@@ -24,19 +23,29 @@ class MapsController < ApplicationController
   def edit
   end
 
-  def available_layers_for
-    @layers = Layer.active - @map.layers
+  def available_geojson_layers_for
+    @layers = GeojsonLayer.active - @map.geojson_layers
   end
 
-  def add_layer
-    @layer = Layer.find(params[:layer])
-    @map.layers << @layer unless @map.layers.include? @layer
+  def add_geojson_layer
+    @layer = GeojsonLayer.find(params[:layer])
+    @map.geojson_layers << @layer unless @map.geojson_layers.include? @layer
 
     respond_to do |format|
       format.html { redirect_to @map }
       format.json { head :no_content }
     end
   end
+  
+  def add_wms_layer
+    @layer = WmsLayer.find(params[:layer])
+    @map.wms_layers << @layer unless @map.wms_layers.include? @layer
+
+    respond_to do |format|
+      format.html { redirect_to @map }
+      format.json { head :no_content }
+    end
+  end  
 
   def remove_layer
     ml = @map.map_layers.where(layer_id: params[:layer]).first

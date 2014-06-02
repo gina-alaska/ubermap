@@ -46,3 +46,8 @@
 .legend .layer li {
   padding: 5px;
 }
+
+.leaflet-popup-content img.multi-thumb {
+  max-height: 200px;
+  min-width: initial;
+}

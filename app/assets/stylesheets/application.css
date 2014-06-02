@@ -8,6 +8,7 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require jquery-ui-1.9.2/css/custom-theme/jquery-ui-1.9.2
  *= require bootstrap/dist/css/bootstrap
  *= require font-awesome/css/font-awesome
  *= require mapbox.js/dist/mapbox

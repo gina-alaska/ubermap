@@ -2,4 +2,4 @@
   #map
 
 - unless @map.nil?
-  = render 'layers', layers: @map.try(:layers)
+  = render 'layers', layers: @map.try(:geojson_layers)

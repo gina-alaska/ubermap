@@ -1,5 +1,5 @@
 - unless f.object.fields.nil?
-  #attribute-fields.form-group
+  #attribute-fields-tools.form-group
     = f.label :fields, 'Attributes: '
     - f.object.fields.each do |field|
       = link_to "{{#{field}}}", '', data: { behavior: 'editor-action', action: 'insert', content: "{{#{field}}}" }
@@ -7,4 +7,4 @@
   = f.text_area :popup, rows: 10, id: 'popup_field', class: 'form-control', style: 'height: 300px;'
 
 :javascript
-  var popup = new AceEditor('popup_field', { mode: 'ace/mode/handlebars', toolbar: '#attribute-fields' });
+  var popup = new AceEditor('popup_field', { mode: 'ace/mode/handlebars', toolbar: '#attribute-fields-tools' });

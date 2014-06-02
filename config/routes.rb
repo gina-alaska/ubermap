@@ -5,7 +5,11 @@ GenericMap::Application.routes.draw do
 
   get "viewer/index"
   resources :maps do
-    get :available_layers_for, on: :member
+    resources :geojson_layers do
+      patch :remove, on: :member
+      patch :add, on: :member
+    end
+    get :available_geojson_layers_for, on: :member
     patch :add_layer, on: :member
     patch :remove_layer, on: :member
   end

@@ -18,10 +18,13 @@ class WmsLayersController < ApplicationController
   # GET /wms_layers/new
   def new
     @wms_layer = WmsLayer.new
+    
+    render layout: 'editor'
   end
 
   # GET /wms_layers/1/edit
   def edit
+    render layout: 'editor'
   end
 
   # POST /wms_layers
@@ -33,6 +36,7 @@ class WmsLayersController < ApplicationController
       if @wms_layer.save
         format.html { redirect_to @wms_layer, notice: 'Wms layer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @wms_layer }
+        format.js { render text: "document.location = '#{edit_geojson_layer_path(@geojson_layer)}'"}
       else
         format.html { render action: 'new' }
         format.json { render json: @wms_layer.errors, status: :unprocessable_entity }
@@ -47,6 +51,7 @@ class WmsLayersController < ApplicationController
       if @wms_layer.update(wms_layer_params)
         format.html { redirect_to @wms_layer, notice: 'Wms layer was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: 'edit' }
         format.json { render json: @wms_layer.errors, status: :unprocessable_entity }

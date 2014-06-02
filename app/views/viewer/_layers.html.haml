@@ -4,5 +4,5 @@
   .panel-body
     %ul.nav
       - layers.each do |layer|
-        %li.layer-definition{ data: layer.leaflet_params }
+        %li.layer-definition{ data: { layer: layer.leaflet_params.to_json } }
           = render layer

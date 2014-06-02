@@ -10,6 +10,8 @@
 $(document).ready ->
   if $('#map').length > 0
     container = new BasicMapContainer('map')
+    # container.enableSlideControl();
+    
     $('#map').data('container', container)
     
     setTimeout => 
@@ -17,19 +19,19 @@ $(document).ready ->
     , 100
     
     container.map.on('popupopen', () =>
-      $('a[href=""]').hide()
-      $('img[src=""]').hide()
-      $('img[src=""]').parent('td').hide()
-      $('img[src=""]').parent('a').parent('td').hide()
+      $('.leaflet-container a[href=""]').hide()
+      $('.leaflet-container img[src=""]').hide()
+      $('.leaflet-container img[src=""]').parent('td').hide()
+      $('.leaflet-container img[src=""]').parent('a').parent('td').hide()
     )
     
     $('#map').data('container', container)
 
     $('[data-layer]').each((index, item) =>
-      layer_config = $(item).data('layer')
-      geojson = new GeoJSONLayer(layer_config)
-      geojson.layer.addTo(container.map)
-      
-      if $('[data-map="reload"]').length > 0
-        $('[data-map="reload"]').data('layer', geojson.layer)
+      layer = MapLayer.fromConfig container.map, $(item).data('layer')
+          
+      if layer?
+        layer.addTo(container.map)
+        if $('[data-map="reload"]').length > 0
+          $('[data-map="reload"]').data('layer', layer)
     )

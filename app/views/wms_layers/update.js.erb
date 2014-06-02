@@ -1,0 +1,10 @@
+var map = $('#map').data('container').map;
+var layer = $('[data-map="reload"]').data('layer');
+
+layer.removeFrom(map);
+layer = MapLayer.fromConfig(map, <%= @wms_layer.leaflet_params.to_json.html_safe %>);
+layer.addTo(map);
+
+if ($('[data-map="reload"]').length > 0) {
+  $('[data-map="reload"]').data('layer', layer)  
+}

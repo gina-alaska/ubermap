@@ -9,6 +9,5 @@
   "main": "index.draw",
   "_source": "https://github.com/Leaflet/Leaflet.draw",
   "_target": "*",
-  "_originalSource": "https://github.com/Leaflet/Leaflet.draw",
-  "_direct": true
+  "_originalSource": "https://github.com/Leaflet/Leaflet.draw"
 }

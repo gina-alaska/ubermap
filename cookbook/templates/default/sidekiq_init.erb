@@ -1,0 +1,81 @@
+#!/bin/sh
+#
+# Startup script for unicorn
+#
+# chkconfig: - 86 14
+# processname: unicorn_rails
+# description: Rails application server
+#
+### BEGIN INIT INFO
+# Provides: <%= @name %>_unicorn
+# Required-Start: $local_fs $remote_fs $network
+# Required-Stop: $local_fs $remote_fs $network
+# Default-Start: 3
+# Default-Stop: 0 1 2 4 5 6
+# Short-Description: start and stop unicorn
+### END INIT INFO
+ 
+# Source function library.
+. /etc/rc.d/init.d/functions
+ 
+prog=sidekiq
+#ruby_home=/opt/ruby-enterprise-1.8.7-2012.02
+RAILS_ROOT="<%= @install_path %>"
+lockfile=${LOCKFILE-/var/lock/subsys/sidekiq}
+pidfile=$RAILS_ROOT/tmp/pids/sidekiq.pid
+logfile=$RAILS_ROOT/log/sidekiq.log
+SLEEPMSEC=100000
+RETVAL=0
+ENV=production
+ 
+start() {
+    echo -n $"Starting $prog: "
+    cd $RAILS_ROOT
+    su - webdev -c "cd $RAILS_ROOT && bundle exec sidekiq -d -e $ENV -l $logfile -P $pidfile"
+    RETVAL=$?
+    echo
+    [ $RETVAL = 0 ] && touch ${lockfile}
+    return $RETVAL
+}
+ 
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc -p ${pidfile} ${prog} -QUIT
+    RETVAL=$?
+    echo
+    [ $RETVAL = 0 ] && rm -f ${pidfile}
+}
+
+rh_status() {
+    status -p ${pidfile} ${prog}
+}
+ 
+# See how we were called.
+case "$1" in
+    start)
+        rh_status >/dev/null 2>&1 && exit 0
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        rh_status
+        RETVAL=$?
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    condrestart|try-restart)
+        if rh_status >/dev/null 2>&1; then
+            stop
+            start
+        fi
+        ;;
+    *)
+        echo $"Usage: $prog {start|stop|restart|status|help}"
+        RETVAL=2
+esac
+ 
+exit $RETVAL

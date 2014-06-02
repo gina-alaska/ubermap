@@ -1,6 +1,7 @@
 # Map Object
 
 ## L.mapbox.map(element, id|url|tilejson, options)
+
 Create and automatically configure a map with layers, markers, and
 interactivity.
 
@@ -9,8 +10,8 @@ interactivity.
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | element (_required_) | string | Must be the id of an element, or a DOM element reference. |
-| id _or_ url _or_ tilejson | __string__ if _id_ or _url_ __object__ if _tilejson_ | url can be <ul><li>a map `id` string `examples.map-foo`</li><li> a URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>a [TileJSON](http://mapbox.com/wax/tilejson.html) object, from your own Javascript code</li></ul> |
-| options | object | If provided, it is the same options as provided to L.Map with the following additions: <ul><li>`tileLayer` L.TileLayer options. Options passed to a `L.mapbox.tileLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.tileLayer`.</li><li>`featureLayer` `L.FeatureLayer` options. Options passed to a `L.mapbox.featureLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.tileLayer`.</li><li>`gridLayer` `L.mapbox.gridLayer`. Options passed to a `L.mapbox.gridLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.gridLayer`.</li><li>`legendControl` `L.mapbox.legendControl` options. Options passed to a `L.mapbox.legendControl` based on the TileJSON. Set to `false` to disable the `L.mapbox.legendControl`.</li><li>`shareControl`: Options passed to a `L.mapbox.shareControl`. Set to `false` to disable the `L.mapbox.shareControl`.</li><li>`infoControl`: Options passed to a `L.mapbox.infoControl`. Set to `false` to disable the `L.mapbox.infoControl`.</li> |
+| id _or_ url _or_ tilejson | __string__ if _id_ or _url_ __object__ if _tilejson_ | url can be <ul><li>a map `id` string `examples.map-foo`</li><li> a URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>a [TileJSON](https://www.mapbox.com/developers/tilejson/) object, from your own Javascript code</li></ul> |
+| options | object | If provided, it is the same options as provided to L.Map with the following additions: <ul><li>`tileLayer` L.TileLayer options. Options passed to a `L.mapbox.tileLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.tileLayer`.</li><li>`featureLayer` `L.mapbox.featureLayer` options. Options passed to a `L.mapbox.featureLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.featureLayer`.</li><li>`gridLayer` `L.mapbox.gridLayer`. Options passed to a `L.mapbox.gridLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.gridLayer`.</li><li>`legendControl` `L.mapbox.legendControl` options. Options passed to a `L.mapbox.legendControl` based on the TileJSON. Set to `false` to disable the `L.mapbox.legendControl`.</li><li>`shareControl`: Options passed to a `L.mapbox.shareControl`. Set to `true` to enable the `L.mapbox.shareControl`.</li><li>`infoControl`: Options passed to a `L.mapbox.infoControl`. Set to `true` to enable the `L.mapbox.infoControl`.</li> |
 
 _Example_:
 
@@ -23,6 +24,8 @@ _Example_:
     var map = L.mapbox.map('map');
 
 _Returns_: a map object
+
+_Class_: `L.mapbox.Map`
 
 ### map.getTileJSON()
 
@@ -70,6 +73,8 @@ _Example_:
 
 _Returns_ a `L.mapbox.tileLayer` object.
 
+_Class_: `L.mapbox.TileLayer`
+
 ### tileLayer.getTileJSON()
 
 Returns this layer's TileJSON object which determines its tile source,
@@ -105,6 +110,8 @@ _Example_:
         format: 'jpg70'
     });
 
+[Live example of .setFormat in use](https://www.mapbox.com/mapbox.js/example/v1.0.0/tilelayer-setformat/)
+
 _Returns_: the layer object
 
 ## L.mapbox.gridLayer(id|url|tilejson, options)
@@ -122,6 +129,38 @@ _Example_:
     var layer = L.mapbox.gridLayer('examples.map-20v6611k');
 
 _Returns_ a `L.mapbox.gridLayer` object.
+
+_Class_: `L.mapbox.GridLayer`
+
+### gridLayer.on(event, handler, context)
+
+Bind an event handler to a given event on this `L.mapbox.gridLayer` instance.
+GridLayers expose a number of useful events that give you access to UTFGrid
+data as the user interacts with the map.
+
+| Options | Value | Description |
+| ---- | ---- | ---- |
+| event (_required_) | __string__ | the event name |
+| handler (_required_) | __function__ | a callback function run every time that the event is fired |
+| context (_optional_) | __object__ | the context of the handler function: this is the value of `this` when that function returns |
+
+After binding an event with `.on`, you can unbind it with `.off`, with the
+same argument structure.
+
+The default events are:
+
+* `click`: mouse has clicked while on a feature in UTFGrid. Event has `{ latLng: location, data: featureData }` as its data.
+* `mouseover`: mouse has moved onto a new feature in UTFGrid. Event has `{ latLng: location, data: featureData }` as its data.
+* `mousemove`: mouse has moved within a feature in UTFGrid. Event has `{ latLng: location, data: featureData }` as its data.
+* `mouseout`: mouse has moved from a feature to an area without any features. Event has `{ latLng: location, data: featureData }` as its data, in which `featureData` is the feature data the mouse was previously on.
+
+_Example_:
+
+    map.gridLayer.on('click', function(e) {
+        if (e.data && e.data.url) {
+            window.open(e.data.url);
+        }
+    });
 
 ### gridLayer.getTileJSON()
 
@@ -155,7 +194,7 @@ _Returns_: the L.mapbox.gridLayer object
 
 ## L.mapbox.featureLayer(id|url|geojson, options)
 
-<span class='leaflet'>_Extends_: L.FeatureGroup</span>
+<span class='leaflet'>_Extends_: `L.FeatureGroup`</span>
 
 **NOTE: in version 1.6.0, `L.mapbox.markerLayer` was renamed to `L.mapbox.featureLayer`
 to signal the addition of support for lines and polygons. The `L.mapbox.markerLayer`
@@ -175,6 +214,8 @@ _Example_:
         .addTo(map);
 
 _Returns_ a `L.mapbox.featureLayer` object.
+
+_Class_: `L.mapbox.FeatureLayer`
 
 ### featureLayer.loadURL(url)
 
@@ -226,6 +267,8 @@ _Example_:
         // hide all markers
         .setFilter(function() { return false; })
         .addTo(map);
+
+[See a live example of .setFilter](https://www.mapbox.com/mapbox.js/example/v1.0.0/multiple-marker-filters/)
 
 _Returns_ the featureLayer object.
 
@@ -315,6 +358,8 @@ The callback is called with arguments
             lbounds: // leaflet-style bounds of the first result
         }
 
+_Example_: [Live example of geocoder.query centering a map.](https://www.mapbox.com/mapbox.js/example/v1.0.0/map-center-geocoding/)
+
 _Returns_: the geocoder object. The return value of this function is not useful - you must use a callback to get results.
 
 ### geocoder.reverseQuery(location, callback)
@@ -332,20 +377,22 @@ _Returns_: the geocoder object. The return value of this function is not useful 
 
 ## L.mapbox.infoControl(options)
 
-<span class='leaflet'>_Extends_: L.Control</span>
+<span class='leaflet'>_Extends_: `L.Control`</span>
 
-A map control that shows a toggleable info container. This is triggered by default and attribution is auto-detected from active layers and added to the info container.
+A map control that shows a toggleable info container. If set, attribution is auto-detected from active layers and added to the info container.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| options _optional_ | object | An options object. Beyond the default options for map controls, this object has a two additional parameters: <ul><li>`sanitizer`: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
+| options _optional_ | object | An options object. Beyond the default options for map controls, this object has a one additional parameter: <ul><li>`sanitizer`: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
 
 _Example_:
 
     var map = L.mapbox.map('map').setView([38, -77], 5);
-    map.addControl(L.mapbox.infoControl());
+    map.addControl(L.mapbox.infoControl().addInfo('foo'));
 
 _Returns_: a `L.mapbox.infoControl` object.
+
+_Class_: `L.mapbox.InfoControl`
 
 ### infoControl.addInfo(info)
 Adds an info string to infoControl.
@@ -378,6 +425,8 @@ _Example_:
 
 _Returns_: a `L.mapbox.legendControl` object.
 
+_Class_: `L.mapbox.LegendControl`
+
 ### legendControl.addLegend(legend)
 Adds a legend to the legendControl.
 
@@ -395,7 +444,7 @@ Removes a legend from the legendControl.
 
 ## L.mapbox.gridControl(layer, options)
 
-<span class='leaflet'>_Extends_: L.Control</span>
+<span class='leaflet'>_Extends_: `L.Control`</span>
 
 Interaction is what we call interactive parts of maps that are created with the powerful [tooltips &amp; regions](http://mapbox.com/tilemill/docs/crashcourse/tooltips/) system in [TileMill](http://mapbox.com/tilemill/). Under the hood, it's powered by the open [UTFGrid specification](https://github.com/mapbox/utfgrid-spec/).
 
@@ -413,6 +462,8 @@ _Example_:
     map.addControl(L.mapbox.gridControl(gridLayer));
 
 _Returns_: a `L.mapbox.gridControl` object.
+
+_Class_: `L.mapbox.GridControl`
 
 ### gridControl.hide()
 
@@ -443,15 +494,17 @@ This function is currently in private beta: [Contact Mapbox](https://mapbox.com/
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url (_required_) | string | Either a <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li></ul> |
-| options | object | An options argument with the same options as the `L.Control` class, as well as: <ul><li>`keepOpen`: a boolean for whether the control will stay open always rather than being toggled. Default `false`.<li></ul> |
+| options | object | An options argument with the same options as the `L.Control` class, as well as: <ul><li>`keepOpen`: a boolean for whether the control will stay open always rather than being toggled. Default `false`. See <a href='https://www.mapbox.com/mapbox.js/example/v1.0.0/geocoder-keep-open/'>live example</a>.<li></ul> |
 
 _Example_:
 
     var map = L.map('map')
         .setView([37, -77], 5)
-        .addControl(L.mapbox.geocoderControl('examples.map-vyofok3q'));
+        .addControl(L.mapbox.geocoderControl('examples.map-i875kd35'));
 
 _Returns_ a `L.mapbox.geocoderControl` object.
+
+_Class_: `L.mapbox.GeocoderControl`
 
 ### geocoderControl.setURL(url)
 
@@ -496,7 +549,7 @@ Bind a listener to an event emitted by the geocoder control. Supported additiona
 
 Adds a "Share" button to the map, which can be used to share the map to Twitter or Facebook, or generate HTML for a map embed.
 
-<span class='leaflet'>_Extends_: L.Control</span>
+<span class='leaflet'>_Extends_: `L.Control`</span>
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -505,7 +558,7 @@ Adds a "Share" button to the map, which can be used to share the map to Twitter 
 
 _Example_:
 
-    var map = L.map('map', 'examples.map-vyofok3q')
+    var map = L.map('map', 'examples.map-i875kd35')
         .setView([37, -77], 5)
         .addControl(L.mapbox.shareControl());
 
@@ -514,7 +567,7 @@ Returns a `L.mapbox.shareControl` object.
 
 # Markers
 
-## L.mapbox.marker.icon(feature)
+## L.mapbox.marker.icon(properties)
 
 A core icon generator used in `L.mapbox.marker.style`
 
@@ -526,6 +579,8 @@ _Returns_:
 
 A `L.Icon` object with custom settings for `iconUrl`, `iconSize`, `iconAnchor`,
 and `popupAnchor`.
+
+[A working example of L.mapbox.marker.icon in use](https://www.mapbox.com/mapbox.js/example/v1.0.0/l-mapbox-marker/)
 
 ## L.mapbox.marker.style(feature, latlng)
 
@@ -545,6 +600,8 @@ _Examples_:
         pointToLayer: L.mapbox.marker.style,
     });
 
+
+
 _Returns_:
 
 A `L.Marker` object with the latitude, longitude position and a styled marker
@@ -552,7 +609,7 @@ A `L.Marker` object with the latitude, longitude position and a styled marker
 # Simplestyle
 
 The other sections of the [simplestyle-spec](https://github.com/mapbox/simplestyle-spec) are implemented
-by `L.mapbox.simplestyle`
+by `L.mapbox.simplestyle.style`
 
 ## L.mapbox.simplestyle.style(feature)
 
@@ -568,6 +625,8 @@ _Examples_:
     L.geoJson(geoJson, {
         pointToLayer: L.mapbox.simplestyle.style,
     });
+
+[A working example of L.mapbox.simplestyle in use](https://www.mapbox.com/mapbox.js/example/v1.0.0/geojson-simplestyle/)
 
 _Returns_:
 
@@ -596,6 +655,32 @@ _Example_:
 
     var output = L.mapbox.template('Name: {{name}}', {name: 'John'});
     // output is "Name: John"
+
+# Configuration
+
+## L.mapbox.config.FORCE_HTTPS
+
+By default, this is `false`. Mapbox.js auto-detects whether the page your map
+is embedded in is using HTTPS or SSL, and matches: if you use HTTPS on your site,
+it uses HTTPS resources.
+
+Setting `FORCE_HTTPS` to `true` makes Mapbox.js always require HTTPS resources,
+regardless of the host page's scheme.
+
+_Example_:
+
+    L.mapbox.config.FORCE_HTTPS = true;
+
+## L.mapbox.config.HTTP_URLS
+
+An array of base URLs. By default, these point to the [Mapbox Web Services](https://www.mapbox.com/developers/api/).
+When you refer to a tileset, grid, marker, or geocoding endpoint, a URL
+from this array is chosen.
+
+## L.mapbox.config.HTTPS_URLS
+
+The same as `L.mapbox.config.HTTP_URLS`, but used when SSL mode is detected or
+`FORCE_HTTPS` is set to `true`.
 
 # Guides
 

@@ -1,10 +1,10 @@
 var map = $('#map').data('container').map;
 var layer = $('[data-map="reload"]').data('layer');
 
-map.removeLayer(layer);
+layer.removeFrom(map);
+layer = MapLayer.fromConfig(map, <%= @geojson_layer.leaflet_params.to_json.html_safe %>);
+layer.addTo(map);
 
-geojson = new GeoJSONLayer(<%= @geojson_layer.leaflet_params.to_json.html_safe %>);
-geojson.layer.addTo(map);
-
-$('[data-map="reload"]').data('layer', geojson.layer);
-$('.tabbed-form').html('<%= escape_javascript(render('form')) %>')
+if ($('[data-map="reload"]').length > 0) {
+  $('[data-map="reload"]').data('layer', layer)
+}

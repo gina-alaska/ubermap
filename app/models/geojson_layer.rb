@@ -1,5 +1,5 @@
 class GeojsonLayer < ActiveRecord::Base
-  has_many :map_layers
+  has_many :map_layers, as: :layer
   has_many :maps, through: :map_layers
 
   dragonfly_accessor :file
@@ -30,6 +30,7 @@ class GeojsonLayer < ActiveRecord::Base
 
   def leaflet_params
     {
+      type: 'geojson',
       url: file.try(:remote_url),
       popup: popup,
       legend: legend,

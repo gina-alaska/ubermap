@@ -15,11 +15,6 @@ var InfoControl = L.Control.extend({
         this._container = L.DomUtil.create('div', 'mapbox-control-info mapbox-small');
         this._content = L.DomUtil.create('div', 'map-info-container', this._container);
 
-        if (this.options.position === 'bottomright' ||
-            this.options.position === 'topright') {
-            this._container.className += ' mapbox-control-info-right';
-        }
-
         var link = L.DomUtil.create('a', 'mapbox-info-toggle mapbox-icon mapbox-icon-info', this._container);
         link.href = '#';
 
@@ -33,7 +28,6 @@ var InfoControl = L.Control.extend({
         }
 
         map
-            .on('moveend', this._editLink, this)
             .on('layeradd', this._onLayerAdd, this)
             .on('layerremove', this._onLayerRemove, this);
 
@@ -43,7 +37,6 @@ var InfoControl = L.Control.extend({
 
     onRemove: function(map) {
         map
-            .off('moveend', this._editLink, this)
             .off('layeradd', this._onLayerAdd, this)
             .off('layerremove', this._onLayerRemove, this);
     },
@@ -91,30 +84,10 @@ var InfoControl = L.Control.extend({
         }
 
         this._content.innerHTML += info.join(' | ');
-        this._editLink();
 
         // If there are no results in _info then hide this.
         this._container.style.display = hide;
         return this;
-    },
-
-    _editLink: function() {
-        if (!this._content.getElementsByClassName) {
-            return;
-        }
-        var link = this._content.getElementsByClassName('mapbox-improve-map');
-        if (link.length && this._map._loaded) {
-            var center = this._map.getCenter().wrap();
-            var tilejson = this._tilejson || this._map._tilejson || {};
-            var id = tilejson.id || '';
-
-            for (var i = 0; i < link.length; i++) {
-                link[i].href = link[i].href.split('#')[0] + '#' + id + '/' +
-                    center.lng.toFixed(3) + '/' +
-                    center.lat.toFixed(3) + '/' +
-                    this._map.getZoom();
-            }
-        }
     },
 
     _onLayerAdd: function(e) {
@@ -134,6 +107,8 @@ var InfoControl = L.Control.extend({
     }
 });
 
-module.exports = function(options) {
+module.exports.InfoControl = InfoControl;
+
+module.exports.infoControl = function(options) {
     return new InfoControl(options);
 };
