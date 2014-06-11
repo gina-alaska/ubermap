@@ -25,8 +25,6 @@ $(document).ready ->
       $('.leaflet-container img[src=""]').parent('a').parent('td').hide()
     )
     
-    $('#map').data('container', container)
-
     $('[data-layer]').each((index, item) =>
       layer = MapLayer.fromConfig container.map, $(item).data('layer')
           

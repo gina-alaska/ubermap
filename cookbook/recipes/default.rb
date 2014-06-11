@@ -8,7 +8,7 @@
 #
 
 
-include_recipe "ubermap::redis"
+# include_recipe "ubermap::redis"
 include_recipe "ubermap::database"
 include_recipe "ubermap::nginx"
 include_recipe "ubermap::application"

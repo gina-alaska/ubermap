@@ -23,6 +23,7 @@
 //= require gina-map-layers/dist/mapbox-adapter
 //= require ace-builds/src/ace
 //= require turbolinks
+//= require map_layer
 //= require_tree .
 
 $(document).on("page:fetch", function() {
