@@ -25,12 +25,11 @@ lockfile=${LOCKFILE-/var/lock/subsys/unicorn}
 pidfile=$RAILS_ROOT/tmp/pids/unicorn.pid
 SLEEPMSEC=100000
 RETVAL=0
-ENV=<%= @environment %>
+ENV=<%=@environment%>
  
 start() {
     echo -n $"Starting $prog: "
-    cd $RAILS_ROOT
-    su - <%= @user %> -c "cd $RAILS_ROOT && bundle exec unicorn_rails -c $UNICORN_CONF -E $ENV -D "
+    su - <%=@user%> -c "cd $RAILS_ROOT && chruby-exec 1.9.3 -- bundle exec unicorn_rails -c $UNICORN_CONF -E $ENV -D"
     RETVAL=$?
     echo
     [ $RETVAL = 0 ] && touch ${lockfile}

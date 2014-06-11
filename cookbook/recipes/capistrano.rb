@@ -7,6 +7,7 @@ account = node[app_name]['account']
     group account
     mode 00755
     action :create
+    recursive true
   end
 end
 

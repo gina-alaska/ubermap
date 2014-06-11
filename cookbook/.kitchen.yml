@@ -13,6 +13,8 @@ suites:
     run_list: 
       - ubermap::default 
     attributes:
+      chruby:
+        default: embedded
       postgresql:
         password:
           postgres: asdfasdfasdf
