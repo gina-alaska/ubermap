@@ -54,6 +54,7 @@ end
 #  Lets work on a postgis cookbook at soem point
 package 'postgis2_92'
 package 'postgis2_92-devel'
+package 'postgresql92-contrib'
 
 #  Example what the dsl might look like
 # postgis_database node[appname]['database'] do
