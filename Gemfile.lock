@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/gina-alaska/bower-tools.git
-  revision: 61472fa05cf8864caafd3ac98f665560f3c0e398
+  revision: b39212280435e54863a510b5804120bfc1f00dc2
   specs:
-    bower-tools (0.2.0)
+    bower-tools (0.2.1)
 
 GEM
   remote: https://rubygems.org/
