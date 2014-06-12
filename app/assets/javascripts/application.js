@@ -21,6 +21,13 @@
 //= require leaflet-hash/leaflet-hash
 //= require gina-map-layers/dist/mapbox-adapter
 //= require ace-builds/src/ace
+//= require ace-builds/src/mode-handlebars.js
+//= require ace-builds/src/mode-css.js
+//= require ace-builds/src/mode-haml.js
+//= require ace-builds/src/mode-html.js
+//= require ace-builds/src/mode-json.js
+//= require ace-builds/src/mode-markdown.js
+//= require ace-builds/src/theme-chrome.js
 //= require turbolinks
 //= require map_layer
 //= require_tree .
