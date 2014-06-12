@@ -20,7 +20,7 @@ gem 'nested_form'
 gem 'remotipart', '~> 1.2'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -41,10 +41,17 @@ end
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
+group :development do
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-chruby', '~> 0.1.1'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-bower'
+end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
