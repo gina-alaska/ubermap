@@ -1,6 +1,8 @@
 #layer_container.panel.panel-default
   .panel-heading
-    Legend
+    %b
+      = @map.title
+      \- Legend
   .panel-body
     %ul.nav
       - layers.each do |layer|
