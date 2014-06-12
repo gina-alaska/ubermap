@@ -56,6 +56,15 @@ package 'postgis2_92'
 package 'postgis2_92-devel'
 package 'postgresql92-contrib'
 
+bash "install-hstore-extension" do
+  user 'postgres'
+  code <<-EOH
+    echo 'CREATE EXTENSION IF NOT EXISTS "hstore";' | psql -d #{node[appname]['database']['database']}
+  EOH
+  action :run
+end
+
+
 #  Example what the dsl might look like
 # postgis_database node[appname]['database'] do
 #   action :create
