@@ -15,7 +15,6 @@
 //= require jquery_ujs
 //= require jquery.remotipart
 //= require bootstrap/dist/js/bootstrap
-//= require mapbox.js/dist/mapbox
 //= require proj4leaflet/lib/proj4-compressed
 //= require proj4leaflet/src/proj4leaflet
 //= require leaflet.markerclusterer/dist/leaflet.markercluster
