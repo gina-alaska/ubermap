@@ -29,7 +29,7 @@ ENV=<%=@environment%>
  
 start() {
     echo -n $"Starting $prog: "
-    su - <%=@user%> -c "cd $RAILS_ROOT && chruby-exec 1.9.3 -- bundle exec unicorn_rails -c $UNICORN_CONF -E $ENV -D"
+    su - <%=@user%> -c "cd $RAILS_ROOT && chruby-exec 2.1 -- bundle exec unicorn_rails -c $UNICORN_CONF -E $ENV -D"
     RETVAL=$?
     echo
     [ $RETVAL = 0 ] && touch ${lockfile}

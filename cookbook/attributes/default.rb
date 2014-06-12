@@ -24,3 +24,6 @@ default['ubermap']['after_fork'] = "
 defined?(ActiveRecord::Base) and
   ActiveRecord::Base.establish_connection
 "
+
+#sudo stuff
+default['authorization']['sudo']['include_sudoers_d'] = true

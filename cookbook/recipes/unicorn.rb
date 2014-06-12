@@ -28,3 +28,15 @@ end
 service "unicorn_#{app_name}" do 
   action :enable
 end
+
+account = node[app_name]['account']
+sudo "#{account}_unicorn" do
+  user      account    # or a username
+  runas     "root"   # or 'app_user:tomcat'
+  nopasswd  true
+  commands  [
+    "/sbin/service unicorn_#{app_name.gsub('-', '_').downcase} restart",
+    "/sbin/service unicorn_#{app_name.gsub('-', '_').downcase} stop",
+    "/sbin/service unicorn_#{app_name.gsub('-', '_').downcase} start"
+  ]
+end

@@ -8,5 +8,6 @@ cookbook 'chruby'
 cookbook 'unicorn'
 cookbook 'postgresql'
 cookbook 'database'
+cookbook 'sudo'
 
 metadata

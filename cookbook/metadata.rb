@@ -4,7 +4,7 @@ maintainer_email 'scott@gina.alaska.edu'
 license          'All rights reserved'
 description      'Installs/Configures ubermap'
 long_description 'Installs/Configures ubermap'
-version          '0.1.1'
+version          '0.1.2'
 
 depends 'yum-gina'
 depends 'yum-epel'
@@ -14,3 +14,4 @@ depends 'chruby'
 depends 'unicorn'
 depends 'postgresql'
 depends 'database'
+depends "sudo"
