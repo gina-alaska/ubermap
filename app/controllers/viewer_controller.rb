@@ -4,4 +4,12 @@ class ViewerController < ApplicationController
 
     render layout: 'fullmap'
   end
+  
+  after_action :allow_iframe!
+
+  protected
+
+  def allow_iframe!
+    response.headers.except! 'X-Frame-Options'
+  end  
 end
