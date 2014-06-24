@@ -65,7 +65,8 @@ html,body {
 #layer_container {
   position: fixed;
   width: 300px;
-  bottom: 5px;
+  max-width: 33%;
+  bottom: -15px;
   left: 5px;
 
   .panel-body {
