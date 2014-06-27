@@ -4,7 +4,8 @@
   .col-lg-3
     = link_to 'Edit Map', edit_map_path(@map), class: 'btn btn-primary btn-block'
     = link_to 'View Map', viewer_url(@map), class: 'btn btn-default btn-block'
-    = link_to 'Add Layer', available_geojson_layers_for_map_path(@map), class: 'btn btn-success btn-block'
+    = link_to 'Add GeoJSON Layer', available_geojson_layers_for_map_path(@map), class: 'btn btn-success btn-block'
+    = link_to 'Add WMS Layer', available_wms_layers_for_map_path(@map), class: 'btn btn-success btn-block'
   .col-lg-9
     %p
       %strong Slug:
@@ -22,5 +23,11 @@
         %li.list-group-item
           .btn-group.pull-right
             = link_to 'Edit', edit_geojson_layer_path(layer), class: 'btn btn-default'
+            = link_to 'Remove', [:remove, @map, layer], method: :patch, class: 'btn btn-danger'
+          = render layer
+      - @map.wms_layers.each do |layer|
+        %li.list-group-item
+          .btn-group.pull-right
+            = link_to 'Edit', edit_wms_layer_path(layer), class: 'btn btn-default'
             = link_to 'Remove', [:remove, @map, layer], method: :patch, class: 'btn btn-danger'
           = render layer

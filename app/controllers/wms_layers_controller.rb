@@ -1,6 +1,6 @@
 class WmsLayersController < ApplicationController
-  before_action :set_wms_layer, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_wms_layer, only: [:show, :edit, :update, :destroy, :add, :remove]
+  before_action :set_map, only: [:remove, :add]
 
   layout 'manager'
   
@@ -49,7 +49,7 @@ class WmsLayersController < ApplicationController
   def update
     respond_to do |format|
       if @wms_layer.update(wms_layer_params)
-        format.html { redirect_to @wms_layer, notice: 'Wms layer was successfully updated.' }
+        format.html { redirect_to edit_wms_layer_path(@wms_layer), notice: 'Wms layer was successfully updated.' }
         format.json { head :no_content }
         format.js
       else
@@ -68,15 +68,33 @@ class WmsLayersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def remove
+    @map_layer = @map.map_layers.where(layer: @wms_layer).first
+    @map_layer.destroy
+
+    redirect_to @map
+  end
+  
+  def add
+    @map.wms_layers << @wms_layer
+    
+    redirect_to @map
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_wms_layer
       @wms_layer = WmsLayer.find(params[:id])
     end
+    
+    # Use callbacks to share common setup or constraints between actions.
+    def set_map
+      @map = Map.where('lower(slug) = ?', params[:map_id]).first
+    end    
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wms_layer_params
-      params.require(:wms_layer).permit(:url, :layers, :legend, :active, :options, :description, :name)
+      params.require(:wms_layer).permit(:url, :layers, :legend, :active, :description, :name, options: [:baselayer, :timeslider, :start_time, :end_time, :interval, :slider_title])
     end
 end

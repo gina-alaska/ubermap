@@ -1,9 +1,4 @@
-#layer_container.panel.panel-default
-  .panel-heading
-    %b
-      = @map.title
-  .panel-body
-    %ul.nav
-      - layers.each do |layer|
-        %li.layer-definition{ data: { layer: layer.leaflet_params.to_json } }
-          = render layer
+%ul.nav
+  - layers.each do |layer|
+    %li.layer-definition{ data: { layer: layer.leaflet_params.to_json } }
+      = render layer

@@ -1,0 +1,23 @@
+.form-group
+  = f.fields_for :options, OpenStruct.new(f.object.options) do |opts|
+    .form-group
+      %label.checkbox
+        = opts.check_box :baselayer, { }, 'yes', 'no'
+        Baselayer
+  
+    .form-group
+      %label.checkbox
+        = opts.check_box :timeslider, { }, 'yes', 'no'
+        Timeslider
+    .form-group
+      = opts.label :start_time
+      = opts.text_field :start_time, class: 'form-control'
+    .form-group
+      = opts.label :end_time
+      = opts.text_field :end_time, class: 'form-control'      
+    .form-group
+      = opts.label :interval
+      = opts.text_field :interval, class: 'form-control'            
+    .form-group
+      = opts.label :slider_title
+      = opts.text_field :slider_title, class: 'form-control'      

@@ -1,5 +1,5 @@
 class MapsController < ApplicationController
-  before_action :set_map, only: [:show, :edit, :update, :destroy, :add_layer, :remove_layer, :available_geojson_layers_for]
+  before_action :set_map, only: [:show, :edit, :update, :destroy, :add_layer, :remove_layer, :available_geojson_layers_for,:available_wms_layers_for]
 
   layout 'manager'
 
@@ -26,7 +26,10 @@ class MapsController < ApplicationController
   def available_geojson_layers_for
     @layers = GeojsonLayer.active - @map.geojson_layers
   end
-
+  def available_wms_layers_for
+    @layers = WmsLayer.active - @map.wms_layers
+  end
+  
   def add_geojson_layer
     @layer = GeojsonLayer.find(params[:layer])
     @map.geojson_layers << @layer unless @map.geojson_layers.include? @layer

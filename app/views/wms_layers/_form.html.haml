@@ -1,4 +1,4 @@
-= form_for(@wms_layer, remote: true, html: { id: dom_id(@wms_layer, 'form'), class: 'tab-content', data: { map: "reload" } }) do |f|
+= form_for(@wms_layer, html: { id: dom_id(@wms_layer, 'form'), class: 'tab-content', data: { map: "reload" } }) do |f|
   - if @wms_layer.errors.any?
     #error_explanation
       %h2
@@ -7,7 +7,7 @@
       %ul
         - @wms_layer.errors.full_messages.each do |message|
           %li= message
-  #wms_layer-summary.tab-pane.active{ data: { layer: @wms_layer.leaflet_params.to_json } }
+  #wms_layer-summary.tab-pane.active.geojson_layer-definition{ data: { layer: @wms_layer.leaflet_params.to_json } }
     = render 'summary_fields', f: f
   #wms_layer-data.tab-pane
     = render 'data_fields', f: f

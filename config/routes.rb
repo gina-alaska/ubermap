@@ -9,7 +9,12 @@ GenericMap::Application.routes.draw do
       patch :remove, on: :member
       patch :add, on: :member
     end
+    resources :wms_layers do
+      patch :remove, on: :member
+      patch :add, on: :member
+    end
     get :available_geojson_layers_for, on: :member
+    get :available_wms_layers_for, on: :member
     patch :add_layer, on: :member
     patch :remove_layer, on: :member
   end

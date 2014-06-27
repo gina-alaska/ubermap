@@ -1,7 +1,13 @@
 class @MapLayer
   constructor: ->
+    @handleOptions()
     @autoZoom()
     
+  handleOptions: =>
+    for option,active of @config.options  
+      if @["option_#{option}"]?
+        @["option_#{option}"](active)
+        
   @fromConfig: (map, config) ->
     switch config.type
       when 'wms'
@@ -10,14 +16,19 @@ class @MapLayer
         layer = new GeoJSONLayer(map, config)
 
   autoZoom: =>
-    if @config.options.auto_zoom == 'yes'
+    if @config.options? and @config.options.auto_zoom == 'yes'
       setTimeout(=>
         @map.fitBounds(@layer.getBounds())
       , 100)  
   
-  addTo: (map) =>
-    @layer.addTo(map)
-    @layer.bringToFront()
+  addTo: (map, zIndex = 100) =>
+    map.addLayer(@layer)    
+    @layer.setZIndex(zIndex)
     
-  removeFrom: (map) =>
+    if @config.options? and @config.options.baselayer != 'yes'
+      @layer.bringToFront() 
+        
+      
+  removeFrom: (map, control) =>
     map.removeLayer(@layer)
+    

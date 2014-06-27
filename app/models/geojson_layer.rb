@@ -30,6 +30,8 @@ class GeojsonLayer < ActiveRecord::Base
 
   def leaflet_params
     {
+      name: name,
+      slug: "geojson_#{id}",
       type: 'geojson',
       url: file.try(:remote_url),
       popup: popup,

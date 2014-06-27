@@ -128,3 +128,27 @@ html,body {
     }
   }
 }
+
+.ui-slider-container {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  
+  .ui-slider {
+    margin: 0 5px;
+  }
+  
+  .ui-slider-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .ui-slider-timestamp {
+    margin-top: 10px;
+  }
+}
+
+.opacity-slider {
+  margin: 5px 5px 0 0;
+}
