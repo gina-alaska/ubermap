@@ -14,6 +14,8 @@ class @BasicMapContainer
     @layers_control = L.control.layers(baselayers, [], {
       autoZIndex: true
     }).addTo(@map)
+    
+    L.control.scale({ position: 'bottomright' }).addTo(@map);
 
     @map.on 'overlayadd', (e) ->
       e.layer.bringToFront()
