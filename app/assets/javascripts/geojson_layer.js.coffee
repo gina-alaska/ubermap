@@ -1,12 +1,14 @@
 class @GeoJSONLayer extends @MapLayer
   constructor: (@map, @config) ->
-    @layer = L.mapbox.featureLayer(@config.url)
+    @layer = L.mapbox.featureLayer()
     @setStyle()
+    @layer.loadURL(@config.url)
+    
     super()
 
   setStyle: =>
     @layer.on 'ready', () =>
-      @layer.eachLayer (l) =>    
+      @layer.eachLayer (l) =>
         if l.setIcon?
           l.setIcon(L.divIcon({
             className: 'custom-marker',
