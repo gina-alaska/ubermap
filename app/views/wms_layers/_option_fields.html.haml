@@ -10,6 +10,10 @@
         = opts.check_box :timeslider, { }, 'yes', 'no'
         Timeslider
     .form-group
+      %label.checkbox
+        = opts.check_box :wms_request_using_timerange, { }, 'yes', 'no'
+        Use range of dates for requests
+    .form-group
       = opts.label :start_time
       = opts.text_field :start_time, class: 'form-control'
     .form-group

@@ -95,6 +95,6 @@ class WmsLayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wms_layer_params
-      params.require(:wms_layer).permit(:url, :layers, :legend, :active, :description, :name, options: [:baselayer, :timeslider, :start_time, :end_time, :interval, :slider_title])
+      params.require(:wms_layer).permit(:url, :layers, :legend, :active, :description, :name, options: [:baselayer, :wms_request_using_timerange, :timeslider, :start_time, :end_time, :interval, :slider_title])
     end
 end

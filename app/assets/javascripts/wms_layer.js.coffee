@@ -17,7 +17,7 @@ class @WMSLayer extends @MapLayer
       startTime: @config.options['start_time'],
       endTime: @config.options['end_time'],
       timeStep: @config.options['interval'],
-      range: false
+      range: @config.options['wms_request_using_timerange'] == 'yes'
     })
     @map.addControl(@slider)
     

@@ -8,7 +8,8 @@ L.Control.SliderControl = L.Control.extend({
     startTime: -1,
     endTime: -1,
     timeStep: 3600,
-    range: false
+    range: true,
+    multislider: false
   },
 
   initialize: function(options) {
@@ -94,7 +95,11 @@ L.Control.SliderControl = L.Control.extend({
   },
 
   updateLayer: function(timestamps) {
-    timestamp = timestamps[0] + '/' + timestamps[1];
+    if (this.options.range) {
+      timestamp = timestamps[0] + '/' + timestamps[1];
+    } else {
+      timestamp = timestamps[0]
+    }
     
     if (this.multilayer == true) {
       for (var i = 0; i < this._layer.length; i++) {
@@ -110,7 +115,11 @@ L.Control.SliderControl = L.Control.extend({
   },
   
   updateTimestamp: function(timestamps) {
-    $(this._sliderTimestamp).html(timestamps[0] + ' - ' + timestamps[1]);
+    if (this.options.range) {
+      $(this._sliderTimestamp).html(timestamps[0] + ' - ' + timestamps[1]);
+    } else {
+      $(this._sliderTimestamp).html(timestamps[0]);
+    }
   },
   
   buildTimestamp: function(start, end) {
@@ -125,25 +134,26 @@ L.Control.SliderControl = L.Control.extend({
     var timesteps = Math.round((me._final_time - me._begin_time) / me.options.timeStep);
     
     $(me._slider).slider({
-      range: me.options.range,
+      range: me.options.multislider,
       min: 0,
       max: timesteps,
       step: 1,
       slide: function(e, ui) {
-        if (me.options.range) {
+        if (me.options.multislider) {
           me.updateTimestamp(me.buildTimestamp(ui.values[0], ui.values[1]));
         } else {
           me.updateTimestamp(me.buildTimestamp(ui.value, ui.value+1));
         }
       },
       stop: function(e, ui) {
-        if (me.options.range) {
+        if (me.options.multislider) {
           me.updateLayer(me.buildTimestamp(ui.values[0], ui.values[1]));
         } else {
           me.updateLayer(me.buildTimestamp(ui.value, ui.value+1));
         }
       }
     });
+    // Initial start conditions
     me.updateTimestamp(me.buildTimestamp(0,1));
     me.updateLayer(me.buildTimestamp(0,1));
   }
