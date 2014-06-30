@@ -1,4 +1,4 @@
-.geojson_layer{ id: wms_layer.slug }
+.geojson_layer{ id: geojson_layer.slug }
   - if geojson_layer.legend.present?
     = Mustache.render(geojson_layer.legend, geojson_layer.style).html_safe
   - else
