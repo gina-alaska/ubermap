@@ -3,8 +3,10 @@ class @BasicMapContainer
     L.Icon.Default.imagePath = '/assets/mapbox.js/dist/images';
 
     @map = L.mapbox.map(@selector, 'gina-alaska.heb1gpfg')
+
     @defaultZoom()
     @layers = {}
+    @layers_zindex = {}
     baselayers = {}
     @map.removeLayer(L.mapbox.tileLayer('gina-alaska.heb1gpfg'));
     baselayers["Mapbox Terrain"] = L.mapbox.tileLayer('gina-alaska.heb1gpfg')
@@ -32,14 +34,15 @@ class @BasicMapContainer
 
   add: (name, layer) =>
     @layers[name] = layer
-    @layers[name].addTo(@map, @zIndex)
-    @zIndex += 1
+    @layers_zindex[name] ||= @zIndex
+    @zIndex += 1    
+    @layers[name].addTo(@map, @layers_zindex[name])
 
   remove: (name) =>
     @layers[name].removeFrom(@map)
     
   showLayer:(name) =>
-    @layers[name].addTo(@map)
+    @layers[name].addTo(@map, @layers_zindex[name])
     
   hideLayer:(name) =>
     @layers[name].removeFrom(@map)

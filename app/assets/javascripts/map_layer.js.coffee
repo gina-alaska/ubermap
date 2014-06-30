@@ -1,7 +1,14 @@
 class @MapLayer
   constructor: ->
     @handleOptions()
-    @autoZoom()
+    @setupLoadEvents()
+    
+  setupLoadEvents: =>
+    @layer.on 'loading', (e) =>
+      $("##{@config.slug}").spin('layer')
+      
+    @layer.on 'load', (e) =>
+      $("##{@config.slug}").spin(false)
     
   handleOptions: =>
     for option,active of @config.options  
@@ -15,7 +22,7 @@ class @MapLayer
       when 'geojson'
         layer = new GeoJSONLayer(map, config)
 
-  autoZoom: =>
+  option_auto_zoom: =>
     if @config.options? and @config.options.auto_zoom == 'yes'
       setTimeout(=>
         @map.fitBounds(@layer.getBounds())
@@ -26,8 +33,7 @@ class @MapLayer
     @layer.setZIndex(zIndex)
     
     if @config.options? and @config.options.baselayer != 'yes'
-      @layer.bringToFront() 
-        
+      @layer.bringToFront()
       
   removeFrom: (map, control) =>
     map.removeLayer(@layer)

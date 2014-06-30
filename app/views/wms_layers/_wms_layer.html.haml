@@ -1,5 +1,5 @@
 = check_box_tag '', 'on', {}, data: { toggle: 'layer' }, class: 'pull-left', style: 'margin-right: 10px;'
-.wms_layer
+.wms_layer{ id: wms_layer.slug }
   - if wms_layer.legend.present?
     = Mustache.render(wms_layer.legend, geojson_layer.style).html_safe
   - else

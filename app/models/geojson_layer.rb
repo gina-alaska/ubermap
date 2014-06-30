@@ -27,6 +27,14 @@ class GeojsonLayer < ActiveRecord::Base
 
     self.fields = f.uniq.compact
   end
+  
+  def slug
+    "#{layer_type}_#{id}"
+  end
+  
+  def layer_type
+    'geojson'
+  end
 
   def leaflet_params
     {

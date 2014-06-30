@@ -1,7 +1,9 @@
 #map_container
   #map
 
-%p#notice= notice
+#layer_container.panel.panel-default
+  .panel-body
+    = render @wms_layer
 
 #wms_layer_editor_container.layer_editor_container.panel.panel-default
   .panel-body
