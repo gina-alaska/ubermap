@@ -3,11 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .custom-marker {
-  border: 1px solid #efefef;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+//  border: 1px solid rgba(255, 255, 255, 0.3);
+//  background: rgba(255, 255, 255, 0.3);
+//  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
   width: auto !important;
-  border-radius: 5px;
+//  border-radius: 30px;
   transition: width 2s;
 }
 .custom-marker:hover {
@@ -26,18 +26,29 @@
   position: relative;
 }
 .custom-marker .custom-marker-content {
-  margin-left: 30px;
-  padding: 5px;
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  margin-left: 20px;
+//  margin-left:5px;
+//  margin-top:30px;
+  margin-top: 5px;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #000;
+//  padding: 5px;
 }
 .custom-marker .icon {
-  position: absolute;
+//  position: relative;
   top: 0;
   left: 0;
   width: 30px;
   height: 30px;
-  font-size: 26px;
+  font-size: 30px;
   text-align: center;
-  padding: 2px;
+  padding: 0px;
 }
 
 .legend {
@@ -50,4 +61,14 @@
 .leaflet-popup-content img.multi-thumb {
   max-height: 200px;
   min-width: initial;
+}
+
+.leaflet-popup-content {
+  min-width: 300px;
+  
+  .data-label {
+    font-weight: bold;
+    white-space: nowrap;
+    color: black;
+  }
 }
