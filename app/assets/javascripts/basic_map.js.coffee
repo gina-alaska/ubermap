@@ -17,7 +17,7 @@ class @BasicMapContainer
       autoZIndex: true
     }).addTo(@map)
     
-    L.control.scale({ position: 'bottomright' }).addTo(@map);
+    L.control.scale({ position: 'bottomleft' }).addTo(@map)
 
     @map.on 'overlayadd', (e) ->
       e.layer.bringToFront()
