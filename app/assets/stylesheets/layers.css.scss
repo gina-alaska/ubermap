@@ -26,6 +26,7 @@
   position: relative;
 }
 .custom-marker .custom-marker-content {
+  text-shadow: 2px 2px 2px rgba(0,0,0, 0.4);
   position: absolute;
   top:0;
   left:0;
@@ -41,6 +42,7 @@
 //  padding: 5px;
 }
 .custom-marker .icon {
+  text-shadow: 2px 2px 2px rgba(0,0,0, 0.5);
 //  position: relative;
   top: 0;
   left: 0;
