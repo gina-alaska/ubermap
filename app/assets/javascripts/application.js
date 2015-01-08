@@ -34,11 +34,11 @@
 //= require map_layer
 //= require_tree .
 
-$(document).on("page:fetch", function() {
-  $('.spinner-frame').fadeIn("slow");
-});
-
-
-$(document).on("page:load", function() {
-  $('.spinner-frame').fadeOut("slow");
-});
+// $(document).on("page:fetch", function() {
+//   $('.spinner-frame').fadeIn("slow");
+// });
+//
+//
+// $(document).on("page:load", function() {
+//   $('.spinner-frame').fadeOut("slow");
+// });
