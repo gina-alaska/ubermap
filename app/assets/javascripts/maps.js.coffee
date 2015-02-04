@@ -11,12 +11,12 @@ $(document).ready ->
   if $('#map').length > 0
     container = new BasicMapContainer('map')
     # container.enableSlideControl();
-    
+
     $('#map').data('container', container)
-    
-    setTimeout => 
-      hash = new L.Hash(container.map)
-    , 100
+
+    # setTimeout =>
+    #   hash = new L.Hash(container.map)
+    # , 100
     
     container.map.on('popupopen', () =>
       $('.leaflet-container a[href=""]').hide()
@@ -24,7 +24,7 @@ $(document).ready ->
       $('.leaflet-container img[src=""]').parent('td').hide()
       $('.leaflet-container img[src=""]').parent('a').parent('td').hide()
     )
-    
+
     $('[data-layer]').each((index, item) =>
       config = $(item).data('layer')
       layer = MapLayer.fromConfig container.map, config
@@ -35,7 +35,7 @@ $(document).ready ->
         if $('[data-map="reload"]').length > 0
           $('[data-map="reload"]').data('layer', layer)
     )
-    
+
     $('[data-behavior="adjust-opacity"]').slider({
       max: 100,
       min: 0,
@@ -45,7 +45,7 @@ $(document).ready ->
         targetLayer= target.data('target')
         container.adjustOpacity(targetLayer, slider.value / 100)
     })
-    
+
     $('[data-toggle="layer"]').on 'change', (e) =>
       target = $(e.target)
       slug = target.parents('[data-layer]').data('layer').slug

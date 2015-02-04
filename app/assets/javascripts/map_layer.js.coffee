@@ -26,7 +26,10 @@ class @MapLayer
     @layer.on 'ready', =>
       if @config.options? and @config.options.auto_zoom == 'yes'
         @map.whenReady =>
-          @map.fitBounds(@layer.getBounds())
+          setTimeout =>
+            bounds = @layer.getBounds()
+            @map.fitBounds(bounds) if bounds.isValid()
+          , 100
 
   addTo: (map, zIndex = 100) =>
     map.addLayer(@layer)
