@@ -19,3 +19,4 @@
               .btn-group
                 = link_to "View", viewer_url(map), class: 'btn btn-default'
                 = link_to "Layers", map, class: 'btn btn-primary'
+                = link_to 'Delete', map, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
