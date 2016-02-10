@@ -3,6 +3,8 @@ class MapsController < ApplicationController
 
   layout 'manager'
 
+  authorize_resource
+
   # GET /maps
   # GET /maps.json
   def index
@@ -29,7 +31,7 @@ class MapsController < ApplicationController
   def available_wms_layers_for
     @layers = WmsLayer.active - @map.wms_layers
   end
-  
+
   def add_geojson_layer
     @layer = GeojsonLayer.find(params[:layer])
     @map.geojson_layers << @layer unless @map.geojson_layers.include? @layer
@@ -39,7 +41,7 @@ class MapsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def add_wms_layer
     @layer = WmsLayer.find(params[:layer])
     @map.wms_layers << @layer unless @map.wms_layers.include? @layer
@@ -48,7 +50,7 @@ class MapsController < ApplicationController
       format.html { redirect_to @map }
       format.json { head :no_content }
     end
-  end  
+  end
 
   def remove_layer
     ml = @map.map_layers.where(layer_id: params[:layer]).first

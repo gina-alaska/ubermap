@@ -3,7 +3,9 @@ class WmsLayersController < ApplicationController
   before_action :set_map, only: [:remove, :add]
 
   layout 'manager'
-  
+
+  authorize_resource
+
   # GET /wms_layers
   # GET /wms_layers.json
   def index
@@ -18,7 +20,7 @@ class WmsLayersController < ApplicationController
   # GET /wms_layers/new
   def new
     @wms_layer = WmsLayer.new
-    
+
     render layout: 'editor'
   end
 
@@ -68,30 +70,30 @@ class WmsLayersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def remove
     @map_layer = @map.map_layers.where(layer: @wms_layer).first
     @map_layer.destroy
 
     redirect_to @map
   end
-  
+
   def add
     @map.wms_layers << @wms_layer
-    
+
     redirect_to @map
-  end  
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_wms_layer
       @wms_layer = WmsLayer.find(params[:id])
     end
-    
+
     # Use callbacks to share common setup or constraints between actions.
     def set_map
       @map = Map.where('lower(slug) = ?', params[:map_id]).first
-    end    
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wms_layer_params

@@ -18,6 +18,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'dragonfly'
 gem 'nested_form'
 gem 'remotipart', '~> 1.2'
+gem 'cancancan', '~> 1.10'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby

@@ -3,6 +3,8 @@ class LayersController < ApplicationController
 
   respond_to :html, :json, :tilejson
 
+  authorize_resource
+
   # GET /layers
   # GET /layers.json
   def index

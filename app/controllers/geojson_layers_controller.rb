@@ -5,6 +5,8 @@ class GeojsonLayersController < ApplicationController
   respond_to :html, :json, :tilejson
 
   layout 'manager'
+
+  authorize_resource
   
   # GET /geojson_layers
   # GET /geojson_layers.json
@@ -20,7 +22,7 @@ class GeojsonLayersController < ApplicationController
   # GET /geojson_layers/new
   def new
     @geojson_layer = GeojsonLayer.new
-    
+
     render layout: 'editor'
   end
 
@@ -28,17 +30,17 @@ class GeojsonLayersController < ApplicationController
   def edit
     render layout: 'editor'
   end
-  
+
   def remove
     @map_layer = @map.map_layers.where(layer: @geojson_layer).first
     @map_layer.destroy
 
     redirect_to @map
   end
-  
+
   def add
     @map.geojson_layers << @geojson_layer
-    
+
     redirect_to @map
   end
 
@@ -94,7 +96,7 @@ class GeojsonLayersController < ApplicationController
     def set_geojson_layer
       @geojson_layer = GeojsonLayer.find(params[:id])
     end
-    
+
     # Use callbacks to share common setup or constraints between actions.
     def set_map
       @map = Map.where('lower(slug) = ?', params[:map_id]).first
