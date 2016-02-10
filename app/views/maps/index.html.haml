@@ -1,23 +1,24 @@
-%h1 Maps
-
 .row
-  .col-lg-3
-    = link_to 'New Map', new_map_path, class: 'btn btn-success btn-block'
-  .col-lg-9
-    %table.table.table-condensed.table-stripped
-      %thead
-        %tr
-          %th Title
-          %th Slug
-          %th
-      %tbody
-        - @maps.each do |map|
-          %tr
-            %td= map.title
-            %td= map.slug
-            %td
-              .btn-group
-                = link_to "View", viewer_url(map), class: 'btn btn-default'
-                = link_to "Layers", map, class: 'btn btn-primary'
-                - if can? :delete, map
-                  = link_to 'Delete', map, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+  .col-sm-10
+    %h1{ style: 'margin:0; padding: 0;'} Maps
+  .col-sm-2.text-right
+    - if can? :create, Map
+      = link_to 'New Map', new_map_path, class: 'btn btn-success btn-block'
+
+%table.table.table-condensed.table-stripped
+  %thead
+    %tr
+      %th Title
+      %th Slug
+      %th
+  %tbody
+    - @maps.each do |map|
+      %tr
+        %td= map.title
+        %td= map.slug
+        %td
+          .btn-group
+            = link_to "View", viewer_url(map), class: 'btn btn-default'
+            = link_to "Layers", map, class: 'btn btn-primary'
+            - if can? :delete, map
+              = link_to 'Delete', map, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
