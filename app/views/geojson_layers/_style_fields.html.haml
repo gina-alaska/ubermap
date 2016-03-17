@@ -1,22 +1,28 @@
-%p.alert.alert-info
+.alert.alert-info
   Default styling applied to features without
   = link_to 'simple-style', 'https://github.com/mapbox/simplestyle-spec', target: :_blank
   params
 .form-horizontal
   - style = f.object.style
   = f.fields_for :style, style do |sf|
+    %h5 Marker
     .form-group
-      = sf.label 'marker-color', class: 'col-lg-4 control-label'
+      = sf.label 'marker-color', 'Color', class: 'col-lg-4 control-label'
       .col-lg-8
         = sf.text_field 'marker-color', value: style.try(:[], 'marker-color'), class: 'form-control'
     .form-group
-      = sf.label 'marker-symbol', class: 'col-lg-4 control-label'
+      = sf.label 'marker-symbol', 'Icon', class: 'col-lg-4 control-label'
       .col-lg-8
         = sf.text_field 'marker-symbol', value: style.try(:[], 'marker-symbol'), class: 'form-control'
     .form-group
-      = sf.label 'marker-text', class: 'col-lg-4 control-label'
+      = sf.label 'marker-symbol-type', 'Icon type', class: 'col-lg-4 control-label'
+      .col-lg-8
+        = sf.select 'marker-symbol-type', [['Font-Awesome', 'fa'], ['Weather Icons', 'wi']], { selected: style.try(:[], 'marker-symbol-type') }, { class: 'form-control' }
+    .form-group
+      = sf.label 'marker-text', 'Text', class: 'col-lg-4 control-label'
       .col-lg-8
         = sf.text_field 'marker-text', value: style.try(:[], 'marker-text'), class: 'form-control'
+    %h5 Polygon
     .form-group
       = sf.label 'stroke', class: 'col-lg-4 control-label'
       .col-lg-8

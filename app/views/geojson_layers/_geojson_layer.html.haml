@@ -3,6 +3,6 @@
     = Mustache.render(geojson_layer.legend, geojson_layer.style).html_safe
   - else
     %p
-      %i.fa{ class: "fa-fw fa-#{geojson_layer.style['marker-symbol']}", style: "color: #{geojson_layer.style['marker-color']}" }
+      %i{ class: marker_css(geojson_layer.style), style: "color: #{geojson_layer.style['marker-color']}" }
       = geojson_layer.name
     = geojson_layer.description

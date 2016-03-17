@@ -21,8 +21,8 @@
 
     .tabbed-form
       = render 'form'
-    
-  .btn-group.layer-btns.btn-block
-    = link_to 'Close', geojson_layers_path, class: 'btn col-lg-6 col-md-6 col-sm-6 btn-default'
-    %a.btn.btn-primary.col-lg-6.col-md-6.col-sm-6{ data: { behavior: 'save-form', target: "##{dom_id(@geojson_layer, 'form')}" }}
-      Save
+  .panel-footer
+    .btn-group.layer-btns.btn-block
+      = link_to 'Close', geojson_layers_path, class: 'btn col-lg-6 col-md-6 col-sm-6 btn-default'
+      %a.btn.btn-primary.col-lg-6.col-md-6.col-sm-6{ data: { behavior: 'save-form', target: "##{dom_id(@geojson_layer, 'form')}" }}
+        Save

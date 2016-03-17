@@ -19,7 +19,7 @@ html,body {
     width: 100%;
     height: 100%;
   }
-  
+
 }
 
 .with_header #map_container {
@@ -29,8 +29,7 @@ html,body {
 .layer_editor_container {
   position: fixed;
   width: 450px;
-  min-height: 450px;
-  bottom: -10px;
+  top: 60px;
   right: 5px;
   .nav-tabs {
   }
@@ -135,17 +134,17 @@ html,body {
   padding: 10px;
   border-radius: 10px;
   width: 250px;
-  
+
   .ui-slider {
     margin: 0 5px;
   }
-  
+
   .ui-slider-title {
     font-size: 1.2em;
     font-weight: bold;
     margin-bottom: 5px;
   }
-  
+
   .ui-slider-timestamp {
     margin-top: 10px;
   }
