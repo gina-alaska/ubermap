@@ -1,6 +1,6 @@
 #legend-toolbar.form-group
   = link_to 'Start custom legend', '#', class: 'btn btn-default', data: { behavior: 'editor-action', action: 'insert', content: ["<ul>\n\t", "{cursor}", "<!-- new legend row placeholder -->\n</ul>"] }
-  = link_to 'New legend row', '#', class: 'btn btn-default', data: { behavior: 'editor-action', action: 'insert', before: "<!-- new legend row placeholder -->", content: ["<li>\n\t\t<i class=\"fa fa-", '{cursor}', "\"></i>\n\t\t<!-- legend description goes here -->\n\t\t\n\t</li>\n\t"] }
+  = link_to 'New legend row', '#', class: 'btn btn-default', data: { behavior: 'editor-action', action: 'insert', before: "<!-- new legend row placeholder -->", content: ["<li>\n\t\t<i class=\"fa fa-fw fa-", '{cursor}', "\"></i>\n\t\t<!-- legend description goes here -->\n\t\t\n\t</li>\n\t"] }
 .form-group
   = f.text_area :legend, rows: 10, id: 'legend_field', class: 'form-control', style: 'height: 300px;'
 
