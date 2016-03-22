@@ -4,6 +4,7 @@ one:
   name: MyString
   email: MyString
   avatar: MyString
+  admin: true
 
 two:
   name: MyString

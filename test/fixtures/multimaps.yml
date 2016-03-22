@@ -2,18 +2,12 @@
 
 one:
   name: MyString
-  file_uid: MyString
-  file_name: MyString
   active: false
-  legend: MyText
-  style: MyText
   description: MyText
+  user_id: 
 
 two:
   name: MyString
-  file_uid: MyString
-  file_name: MyString
   active: false
-  legend: MyText
-  style: MyText
   description: MyText
+  user_id: 

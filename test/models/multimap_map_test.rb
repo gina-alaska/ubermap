@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class LayerTest < ActiveSupport::TestCase
+class MultimapMapTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
