@@ -1,19 +1,27 @@
 class LayersController < ApplicationController
   before_action :set_layer, only: [:show, :edit, :update, :destroy]
 
-  respond_to :html, :json, :tilejson
-
   authorize_resource
 
   # GET /layers
   # GET /layers.json
   def index
     @layers = Layer.all
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   # GET /layers/1
   # GET /layers/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json
+      format.tilejson
+    end
   end
 
   # GET /layers/new

@@ -2,8 +2,6 @@ class GeojsonLayersController < ApplicationController
   before_action :set_map, only: [:remove, :add]
   before_action :set_geojson_layer, only: [:show, :edit, :update, :destroy, :remove, :add]
 
-  respond_to :html, :json, :tilejson
-
   layout 'manager'
 
   authorize_resource
@@ -12,11 +10,21 @@ class GeojsonLayersController < ApplicationController
   # GET /geojson_layers.json
   def index
     @geojson_layers = GeojsonLayer.all
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   # GET /geojson_layers/1
   # GET /geojson_layers/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json
+      format.tilejson
+    end
   end
 
   # GET /geojson_layers/new
