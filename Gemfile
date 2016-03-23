@@ -19,6 +19,8 @@ gem 'dragonfly'
 gem 'nested_form'
 gem 'remotipart', '~> 1.2'
 gem 'cancancan', '~> 1.10'
+gem 'simple_form'
+gem 'friendly_id', '~> 5.1.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby

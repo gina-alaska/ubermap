@@ -1,7 +1,7 @@
 = check_box_tag '', 'on', {}, data: { toggle: 'layer' }, class: 'pull-left', style: 'margin-right: 10px;'
 .wms_layer{ id: wms_layer.slug }
   - if wms_layer.legend.present?
-    = Mustache.render(wms_layer.legend, geojson_layer.style).html_safe
+    = Mustache.render(wms_layer.legend, {}).html_safe
   - else
     %p
       %i.fa.fa-globe
@@ -12,4 +12,4 @@
   .col-lg-3.col-md-3.col-sm-3.col-xs-3
     %b Opacity
   .col-lg-9.col-md-9.col-sm-9.col-xs-9
-    .opacity-slider{ data: { behavior: 'adjust-opacity', target: wms_layer.leaflet_params[:slug] } }    
+    .opacity-slider{ data: { behavior: 'adjust-opacity', target: wms_layer.leaflet_params[:slug] } }

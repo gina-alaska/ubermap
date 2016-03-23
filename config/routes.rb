@@ -1,4 +1,7 @@
 GenericMap::Application.routes.draw do
+  resources :multimaps do
+    get :add, on: :member
+  end
   resources :wms_layers
 
   resources :geojson_layers
@@ -19,7 +22,6 @@ GenericMap::Application.routes.draw do
     patch :remove_layer, on: :member
   end
 
-  resources :layers
 
   get '/logout', to: 'sessions#destroy'
   get '/login', to: 'sessions#new'
