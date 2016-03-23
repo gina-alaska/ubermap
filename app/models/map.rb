@@ -9,7 +9,12 @@ class Map < ActiveRecord::Base
   has_many :multimap_maps, dependent: :destroy
 
   validates :slug, uniqueness: true
+  validates :title, presence: true, uniqueness: true
 
   accepts_nested_attributes_for :geojson_layers
   accepts_nested_attributes_for :wms_layers
+
+  def should_generate_new_friendly_id?
+    slug.blank? || title_changed? || super
+  end
 end

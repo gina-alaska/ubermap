@@ -25,9 +25,16 @@ class MultimapsControllerTest < ActionController::TestCase
     assert_redirected_to multimap_path(assigns(:multimap))
   end
 
-  test "should get add" do
-    get :add, id: @multimap
+  test "should get available maps" do
+    get :available, id: @multimap
     assert_response :success
+  end
+
+  test "should add map" do
+    assert_difference('@multimap.maps.count') do
+      patch :add, id: @multimap, map: maps(:one).slug
+    end
+    assert_redirected_to multimap_path(@multimap)
   end
 
   test "should show multimap" do

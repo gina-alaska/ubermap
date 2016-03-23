@@ -1,5 +1,7 @@
 .row
   .col-sm-3
+    = link_to viewer_url(@multimap), class: 'btn btn-info btn-block' do
+      View Map
     = link_to edit_multimap_path(@multimap), class: 'btn btn-default btn-block' do
       %i.fa.fa-edit
       Edit
@@ -12,7 +14,7 @@
 
     %hr
 
-    = link_to add_multimap_path(@multimap), remote: true, class: 'btn btn-success btn-block' do
+    = link_to available_multimap_path(@multimap), class: 'btn btn-success btn-block' do
       %i.fa.fa-plus
       Add Map
 
@@ -27,3 +29,23 @@
         %p
           %strong Active:
           = @multimap.active ? 'Yes' : 'No'
+
+    - if @multimap.maps.any?
+      .panel.panel-default
+        .panel-heading
+          %h1.panel-title Added maps
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Name
+              %th Layers
+              %th
+          %tbody
+            - @multimap.maps.find_each do |map|
+              %tr
+                %td= map.title
+                %td= map.geojson_layers.count + map.wms_layers.count
+                %td.text-right
+                  .btn-group
+                    = link_to 'View', viewer_url(map), class: 'btn btn-default'
+                    = link_to 'Layers', map_path(map), class: 'btn btn-default'

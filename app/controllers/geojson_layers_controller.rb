@@ -112,6 +112,6 @@ class GeojsonLayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def geojson_layer_params
-      params.require(:geojson_layer).permit(:name, :file, :active, :legend, :popup, :description, options: ['clickable', 'auto_zoom'], style: ['marker-color', 'marker-symbol', 'marker-symbol-type', 'marker-text', 'stroke', 'stroke-width', 'stroke-opacity'])
+      params.require(:geojson_layer).permit(:name, :file, :active, :legend, :popup, :description, options: ['toggle', 'clickable', 'auto_zoom'], style: ['marker-color', 'marker-symbol', 'marker-symbol-type', 'marker-text', 'stroke', 'stroke-width', 'stroke-opacity'])
     end
 end

@@ -1,5 +1,5 @@
 class MultimapsController < ApplicationController
-  before_action :set_multimap, only: [:show, :edit, :update, :destroy]
+  before_action :set_multimap, only: [:show, :edit, :update, :destroy, :available, :add]
 
   authorize_resource
 
@@ -14,6 +14,20 @@ class MultimapsController < ApplicationController
   # GET /multimaps/1
   # GET /multimaps/1.json
   def show
+  end
+
+  def available
+    @maps = Map.where.not(id: @multimap.map_ids)
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def add
+    @map = Map.friendly.find(params[:map])
+    @multimap.maps << @map
+
+    redirect_to @multimap
   end
 
   # GET /multimaps/new

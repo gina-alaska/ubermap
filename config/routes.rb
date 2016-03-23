@@ -1,6 +1,7 @@
 GenericMap::Application.routes.draw do
   resources :multimaps do
-    get :add, on: :member
+    get :available, on: :member
+    patch :add, on: :member
   end
   resources :wms_layers
 
@@ -36,10 +37,10 @@ GenericMap::Application.routes.draw do
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  get '/:slug' => 'viewer#show', as: :viewer
+  get '/:id' => 'viewer#show', as: :viewer
 
   # You can have the root of your site routed with "root"
-  root 'viewer#show', slug: 'default'
+  root 'viewer#show', id: 'default'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

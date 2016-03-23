@@ -1,0 +1,8 @@
+.panel-heading
+  %b= map.title
+  .pull-right
+    = link_to dom_id(map, '#map'), { data: { toggle: 'collapse' }} do
+      %i.fa.fa-minus-square-o{ id: dom_id(map, 'collapse_icon') }
+.panel-body.collapse.in{id: dom_id(map, 'map'), data: { behavior: 'switch-icon', target: dom_id(map, '#collapse_icon')} }
+  = render 'viewer/layers', layers: map.try(:wms_layers)
+  = render 'viewer/layers', layers: map.try(:geojson_layers)
