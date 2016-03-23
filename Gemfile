@@ -49,8 +49,8 @@ gem 'unicorn'
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 group :development do
-  gem 'capistrano', '~> 3.1'
-  gem 'capistrano-chruby', '~> 0.1.1'
+  gem 'capistrano', '~> 3.4'
+  gem 'capistrano-chruby'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-bower'
@@ -60,7 +60,6 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'font-awesome-rails'
-
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
