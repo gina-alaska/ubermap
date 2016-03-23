@@ -1,0 +1,25 @@
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Available maps
+  - if @maps.any?
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Name
+          %th Layers
+          %th
+      %tbody
+        - @maps.find_each do |map|
+          %tr
+            %td= map.title
+            %td= map.geojson_layers.count + map.wms_layers.count
+            %td.text-right
+              = link_to add_multimap_path(@multimap, map: map.slug), method: :patch, class: 'btn btn-primary' do
+                %i.fa.fa-plus
+                Add map
+  - else
+    %h1.text-center No maps available
+
+= link_to @multimap, class: 'btn btn-default' do
+  %i.fa.fa-arrow-left
+  Back

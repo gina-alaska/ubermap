@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.7'
+gem 'rails', '4.2.6'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
@@ -19,6 +19,8 @@ gem 'dragonfly'
 gem 'nested_form'
 gem 'remotipart', '~> 1.2'
 gem 'cancancan', '~> 1.10'
+gem 'simple_form'
+gem 'friendly_id', '~> 5.1.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
@@ -52,13 +54,24 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-bower'
+  gem 'web-console', '~> 2.0'
 end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'font-awesome-rails'
+
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-jquery-ui', '~> 1.9.2'
+  gem 'rails-assets-proj4leaflet'
+  gem 'rails-assets-leaflet.markercluster', '0.4.0.hotfix.1'
+  gem 'rails-assets-ace-builds'
+  gem 'rails-assets-proj4'
+end
 
 gem "haml"
-gem "bower-tools", github: "gina-alaska/bower-tools"
 gem "omniauth"
 gem "omniauth-github"
 gem "omniauth-google-oauth2"

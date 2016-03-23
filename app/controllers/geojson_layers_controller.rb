@@ -2,8 +2,6 @@ class GeojsonLayersController < ApplicationController
   before_action :set_map, only: [:remove, :add]
   before_action :set_geojson_layer, only: [:show, :edit, :update, :destroy, :remove, :add]
 
-  respond_to :html, :json, :tilejson
-
   layout 'manager'
 
   authorize_resource
@@ -12,11 +10,21 @@ class GeojsonLayersController < ApplicationController
   # GET /geojson_layers.json
   def index
     @geojson_layers = GeojsonLayer.all
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   # GET /geojson_layers/1
   # GET /geojson_layers/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json
+      format.tilejson
+    end
   end
 
   # GET /geojson_layers/new
@@ -104,6 +112,6 @@ class GeojsonLayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def geojson_layer_params
-      params.require(:geojson_layer).permit(:name, :file, :active, :legend, :popup, :description, options: ['clickable', 'auto_zoom'], style: ['marker-color', 'marker-symbol', 'marker-symbol-type', 'marker-text', 'stroke', 'stroke-width', 'stroke-opacity'])
+      params.require(:geojson_layer).permit(:name, :file, :active, :legend, :popup, :description, options: ['toggle', 'clickable', 'auto_zoom'], style: ['marker-color', 'marker-symbol', 'marker-symbol-type', 'marker-text', 'stroke', 'stroke-width', 'stroke-opacity'])
     end
 end

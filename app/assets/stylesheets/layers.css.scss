@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#layer_container .panel {
+  margin-bottom: 0px;
+  border-radius: 0px;
+}
+
 .custom-marker {
 //  border: 1px solid rgba(255, 255, 255, 0.3);
 //  background: rgba(255, 255, 255, 0.3);

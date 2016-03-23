@@ -3,6 +3,7 @@ require 'test_helper'
 class WmsLayersControllerTest < ActionController::TestCase
   setup do
     @wms_layer = wms_layers(:one)
+    login_as(:one)
   end
 
   test "should get index" do
@@ -36,7 +37,7 @@ class WmsLayersControllerTest < ActionController::TestCase
 
   test "should update wms_layer" do
     patch :update, id: @wms_layer, wms_layer: { active: @wms_layer.active, description: @wms_layer.description, layers: @wms_layer.layers, legend: @wms_layer.legend, name: @wms_layer.name, options: @wms_layer.options, url: @wms_layer.url }
-    assert_redirected_to wms_layer_path(assigns(:wms_layer))
+    assert_redirected_to edit_wms_layer_path(assigns(:wms_layer))
   end
 
   test "should destroy wms_layer" do

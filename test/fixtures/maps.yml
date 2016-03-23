@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  slug: MyString
+  title: Test map one
+  slug: test-map-one
   active: false
 
 two:
-  title: MyString
-  slug: MyString
+  title: Test map two
+  slug: test-map-two
   active: false

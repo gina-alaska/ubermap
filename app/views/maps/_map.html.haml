@@ -1,0 +1,8 @@
+.panel.panel-default
+  .panel-heading{ data: { toggle: 'collapse', target: dom_id(map, '#map') }, style: 'padding: 8px 5px;'}
+    %i.fa{ id: dom_id(map, 'collapse_icon'), class: "fa-#{activate ? 'minus' : 'plus'}-square-o" }
+    %b= map.title
+  .panel-body.collapse{id: dom_id(map, 'map'), class: activate ? 'in' : '', data: { behavior: 'switch-icon', target: dom_id(map, '#collapse_icon')} }
+    .legend
+      = render 'viewer/layers', layers: map.try(:wms_layers), activate: activate
+      = render 'viewer/layers', layers: map.try(:geojson_layers), activate: activate

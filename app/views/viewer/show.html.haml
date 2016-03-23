@@ -2,10 +2,5 @@
   #map
 
 - unless @map.nil?
-  #layer_container.panel.panel-default
-    .panel-heading
-      %b
-        = @map.title
-    .panel-body
-      = render 'layers', layers: @map.try(:wms_layers)
-      = render 'layers', layers: @map.try(:geojson_layers)
+  #layer_container.legend
+    = render @map, activate: true

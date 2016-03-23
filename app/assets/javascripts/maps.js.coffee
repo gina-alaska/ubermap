@@ -17,7 +17,7 @@ $(document).ready ->
     # setTimeout =>
     #   hash = new L.Hash(container.map)
     # , 100
-    
+
     container.map.on('popupopen', () =>
       $('.leaflet-container a[href=""]').hide()
       $('.leaflet-container img[src=""]').hide()
@@ -31,6 +31,9 @@ $(document).ready ->
 
       if layer?
         container.add(config.slug, layer)
+        if !$(item).data('active')
+          container.hideLayer(config.slug)
+
         # @viewer_layers[config.slug].addTo(container.map)
         if $('[data-map="reload"]').length > 0
           $('[data-map="reload"]').data('layer', layer)
@@ -53,3 +56,9 @@ $(document).ready ->
         container.showLayer(slug)
       else
         container.hideLayer(slug)
+
+$(document).on 'ready page:load', ->
+  $('[data-behavior="switch-icon"]').on 'shown.bs.collapse', ->
+    $($(this).data('target')).removeClass('fa-plus-square-o').addClass('fa-minus-square-o')
+  $('[data-behavior="switch-icon"]').on 'hidden.bs.collapse', ->
+    $($(this).data('target')).removeClass('fa-minus-square-o').addClass('fa-plus-square-o')
