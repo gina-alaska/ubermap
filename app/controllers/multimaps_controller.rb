@@ -1,5 +1,5 @@
 class MultimapsController < ApplicationController
-  before_action :set_multimap, only: [:show, :edit, :update, :destroy, :available, :add]
+  before_action :set_multimap, only: [:show, :edit, :update, :destroy, :available, :add, :activate]
 
   authorize_resource
 
@@ -21,6 +21,15 @@ class MultimapsController < ApplicationController
     respond_to do |format|
       format.html
     end
+  end
+
+  def activate
+    @map = Map.friendly.find(params[:map])
+
+    @mmm = @multimap.multimap_maps.where(map: @map).first
+    @mmm.update_attribute(:active, !@mmm.active)
+
+    redirect_to @multimap
   end
 
   def add

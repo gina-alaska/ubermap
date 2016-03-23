@@ -31,6 +31,9 @@ $(document).ready ->
 
       if layer?
         container.add(config.slug, layer)
+        if !$(item).data('active')
+          container.hideLayer(config.slug)
+
         # @viewer_layers[config.slug].addTo(container.map)
         if $('[data-map="reload"]').length > 0
           $('[data-map="reload"]').data('layer', layer)

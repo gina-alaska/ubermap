@@ -59,9 +59,19 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'font-awesome-rails'
+
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-jquery-ui', '~> 1.9.2'
+  gem 'rails-assets-proj4leaflet'
+  gem 'rails-assets-leaflet.markercluster', '0.4.0.hotfix.1'
+  gem 'rails-assets-ace-builds'
+  gem 'rails-assets-proj4'
+end
 
 gem "haml"
-gem "bower-tools", github: "gina-alaska/bower-tools"
 gem "omniauth"
 gem "omniauth-github"
 gem "omniauth-google-oauth2"

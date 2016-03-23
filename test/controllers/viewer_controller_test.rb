@@ -6,8 +6,7 @@ class ViewerControllerTest < ActionController::TestCase
   end
 
   test "should get show" do
-    get :show, slug: @map.slug
+    get :show, id: @map.slug
     assert_response :success
   end
-
 end

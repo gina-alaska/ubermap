@@ -2,5 +2,5 @@
   #map
 
 - unless @map.nil?
-  #layer_container.panel.panel-default
-    = render @map
+  #layer_container.legend
+    = render @map, activate: true

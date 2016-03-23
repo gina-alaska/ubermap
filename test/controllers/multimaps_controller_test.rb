@@ -37,6 +37,11 @@ class MultimapsControllerTest < ActionController::TestCase
     assert_redirected_to multimap_path(@multimap)
   end
 
+  test "should toggle activation of map layers" do
+    patch :activate, id: @multimap, map: maps(:one).slug
+    assert_redirected_to multimap_path(@multimap)
+  end
+
   test "should show multimap" do
     get :show, id: @multimap
     assert_response :success

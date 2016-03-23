@@ -1,4 +1,3 @@
-%ul.nav
-  - layers.each do |layer|
-    %li.layer-definition{ data: { layer: layer.leaflet_params.to_json } }
-      = render layer
+- layers.each do |layer|
+  .layer-definition{ data: { layer: layer.leaflet_params.to_json, active: activate ? 'true' : 'false' } }
+    = render layer, activate: activate

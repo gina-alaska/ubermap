@@ -69,7 +69,7 @@ html,body {
   right: 5px;
 
   .panel-body {
-    padding: 5px;
+    padding: 0px;
   }
   ul { padding: 0; margin: 0; }
   li {
@@ -80,6 +80,10 @@ html,body {
     &:last-child {
       border-bottom: none;
     }
+  }
+
+  .legend {
+    padding: 15px;
   }
 }
 

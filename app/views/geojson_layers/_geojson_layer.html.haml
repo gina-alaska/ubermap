@@ -1,10 +1,12 @@
 .geojson_layer{ id: geojson_layer.slug }
   - if geojson_layer.options['toggle'] == 'yes'
-    = check_box_tag '', 'on', {}, data: { toggle: 'layer' }, class: 'pull-left', style: 'margin-right: 10px;'
-  - if geojson_layer.legend.present?
-    = Mustache.render(geojson_layer.legend, geojson_layer.style).html_safe
-  - else
-    %p
+    = check_box_tag '', 'on', activate, data: { toggle: 'layer' }, class: 'pull-left', style: 'margin-right: 10px;'
+
+  .layer-legend
+    - if geojson_layer.legend.present?
+      = Mustache.render(geojson_layer.legend, geojson_layer.style).html_safe
+    - else
       %i{ class: marker_css(geojson_layer.style), style: "color: #{geojson_layer.style['marker-color']}" }
       = geojson_layer.name
+  .layer-description
     = geojson_layer.description

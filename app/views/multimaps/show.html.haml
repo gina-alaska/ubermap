@@ -30,7 +30,7 @@
           %strong Active:
           = @multimap.active ? 'Yes' : 'No'
 
-    - if @multimap.maps.any?
+    - if @multimap.multimap_maps.any?
       .panel.panel-default
         .panel-heading
           %h1.panel-title Added maps
@@ -41,11 +41,17 @@
               %th Layers
               %th
           %tbody
-            - @multimap.maps.find_each do |map|
+            - @multimap.multimap_maps.find_each do |mmm|
               %tr
-                %td= map.title
-                %td= map.geojson_layers.count + map.wms_layers.count
+                %td= mmm.map.title
+                %td= mmm.map.geojson_layers.count + mmm.map.wms_layers.count
                 %td.text-right
                   .btn-group
-                    = link_to 'View', viewer_url(map), class: 'btn btn-default'
-                    = link_to 'Layers', map_path(map), class: 'btn btn-default'
+                    = link_to activate_multimap_path(mmm.multimap, map: mmm.map), method: :patch, class: "btn btn-default #{mmm.active ? 'active' : ''}" do
+                      - if mmm.active?
+                        Layers active
+                      - else
+                        Layers hidden
+                  .btn-group
+                    = link_to 'View', viewer_url(mmm.map), class: 'btn btn-default'
+                    = link_to 'Layers', map_path(mmm.map), class: 'btn btn-default'

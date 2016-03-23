@@ -1,0 +1,83 @@
+// Place all the styles related to the Layers controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#layer_container .panel {
+  margin-bottom: 0px;
+  border-radius: 0px;
+}
+
+.custom-marker {
+//  border: 1px solid rgba(255, 255, 255, 0.3);
+//  background: rgba(255, 255, 255, 0.3);
+//  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  width: auto !important;
+//  border-radius: 30px;
+  transition: width 2s;
+}
+.custom-marker:hover {
+  z-index: 1000000 !important;
+}
+.custom-marker:hover .auto-hide {
+  display: inline-block;
+}
+.custom-marker .auto-hide {
+  display: none;
+}
+.custom-marker .no-wrap {
+  white-space: nowrap;
+}
+.custom-marker .custom-marker-wrapper {
+  position: relative;
+}
+.custom-marker .custom-marker-content {
+  text-shadow: 1px 1px 1px rgba(0,0,0, 0.75);
+  position: absolute;
+  top:0;
+  left:0;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  margin:0;
+//  margin-left: 20px;
+//  margin-top:30px;
+  font-size: 12px;
+  text-align: center;
+//  font-weight: bold;
+  color: #fff;
+  padding:0;
+//  padding: 5px;
+}
+.custom-marker .icon {
+  text-shadow: 2px 2px 2px rgba(0,0,0, 0.5);
+//  position: relative;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  font-size: 26px;
+  text-align: center;
+  padding: 2px;
+}
+
+.legend {
+  padding: 0;
+}
+.legend .layer li {
+  padding: 5px;
+}
+
+.leaflet-popup-content img.multi-thumb {
+  max-height: 200px;
+  min-width: initial;
+}
+
+.leaflet-popup-content {
+  min-width: 400px;
+
+  .data-label {
+    font-weight: bold;
+    white-space: nowrap;
+    color: black;
+  }
+}
