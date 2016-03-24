@@ -28,11 +28,13 @@ $(document).ready ->
     $('[data-layer]').each((index, item) =>
       config = $(item).data('layer')
       layer = MapLayer.fromConfig container.map, config
-
       if layer?
         container.add(config.slug, layer)
+
         if !$(item).data('active')
           container.hideLayer(config.slug)
+        else
+          container.showLayer(config.slug)
 
         # @viewer_layers[config.slug].addTo(container.map)
         if $('[data-map="reload"]').length > 0
@@ -46,6 +48,7 @@ $(document).ready ->
       stop: (e, slider) ->
         target = $(e.target)
         targetLayer= target.data('target')
+        console.log slider.value / 100
         container.adjustOpacity(targetLayer, slider.value / 100)
     })
 

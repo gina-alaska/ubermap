@@ -1,6 +1,6 @@
 .geojson_layer{ id: geojson_layer.slug }
   .layer-legend
-    = check_box_tag '', 'on', activate, data: { toggle: 'layer' }, class: "pull-left #{geojson_layer.options['toggle'] != 'yes' ? 'invisible' : ''}", style: 'margin-right: 10px;'
+    = check_box_tag '', 'on', activate, data: { toggle: 'layer' }, class: "activate #{geojson_layer.options['toggle'] != 'yes' ? 'invisible' : ''}", style: 'margin-right: 10px;'
 
     - if geojson_layer.legend.present?
       = Mustache.render(geojson_layer.legend, geojson_layer.style).html_safe

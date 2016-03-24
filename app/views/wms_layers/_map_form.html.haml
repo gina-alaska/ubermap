@@ -3,7 +3,7 @@
 
 #layer_container.panel.panel-default
   .panel-body
-    = render @wms_layer
+    = render 'viewer/layers', layers: [@wms_layer], activate: true
 
 #wms_layer_editor_container.layer_editor_container.panel.panel-default
   .panel-body

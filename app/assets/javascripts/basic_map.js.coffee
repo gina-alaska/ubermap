@@ -42,4 +42,4 @@ class @BasicMapContainer
     @layers[name].removeFrom(@map)
 
   adjustOpacity: (name, opacity) =>
-    @layers[name].layer.setOpacity(opacity)
+    console.log @layers[name].layer.setOpacity(opacity)

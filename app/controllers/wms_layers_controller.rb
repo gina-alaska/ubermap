@@ -36,9 +36,9 @@ class WmsLayersController < ApplicationController
 
     respond_to do |format|
       if @wms_layer.save
-        format.html { redirect_to @wms_layer, notice: 'Wms layer was successfully created.' }
+        format.html { redirect_to edit_wms_layer_path(@wms_layer), notice: 'Wms layer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @wms_layer }
-        format.js { render text: "document.location = '#{edit_geojson_layer_path(@geojson_layer)}'"}
+        format.js { render text: "turbolinks.visit('#{edit_wms_layer_path(@wms_layer)}')"}
       else
         format.html { render action: 'new' }
         format.json { render json: @wms_layer.errors, status: :unprocessable_entity }
