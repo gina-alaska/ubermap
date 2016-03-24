@@ -62,6 +62,11 @@
 
 .legend {
   padding: 0;
+
+  .layer-legend {
+    padding: 10px;
+    border-bottom: 1px solid #dfdfdf;
+  }
 }
 .legend .layer li {
   padding: 5px;

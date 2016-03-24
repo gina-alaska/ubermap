@@ -1,6 +1,8 @@
 %ul.list-group
   - @layers.each do |layer|
     %li.list-group-item
-      .pull-right
-        = link_to 'Add Layer', [:add, @map, layer], method: :patch, class: 'btn btn-primary'
-      = render layer
+      .row
+        .col-sm-9
+          = render layer, activate: true
+        .col-sm-3.text-right
+          = link_to 'Add Layer', [:add, @map, layer], method: :patch, class: 'btn btn-primary'

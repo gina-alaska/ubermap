@@ -3,4 +3,4 @@
     %li.list-group-item
       .pull-right
         = link_to 'Add Layer', [:add, @map, layer], method: :patch, class: 'btn btn-primary'
-      = render layer
+      = render layer, activate: true

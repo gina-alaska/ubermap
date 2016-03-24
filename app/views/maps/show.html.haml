@@ -8,11 +8,8 @@
     = link_to 'Add WMS Layer', available_wms_layers_for_map_path(@map), class: 'btn btn-success btn-block'
   .col-lg-9
     %p
-      %strong Slug:
-      = @map.slug
-    %p
-      %strong Embed URL:
-      = viewer_url(@map)
+      %strong URL:
+      = link_to viewer_url(@map), viewer_url(@map)
     %p
       %strong Active:
       = @map.active
