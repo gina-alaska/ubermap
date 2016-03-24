@@ -21,13 +21,20 @@
     %ul.list-group
       - @map.geojson_layers.each do |layer|
         %li.list-group-item
-          .btn-group.pull-right
-            = link_to 'Edit', edit_geojson_layer_path(layer), class: 'btn btn-default'
-            = link_to 'Remove', [:remove, @map, layer], method: :patch, class: 'btn btn-danger'
-          = render layer
+          .row
+            .col-sm-9
+              = render layer, activate: true
+            .col-sm-3
+              .btn-group.pull-right
+                = link_to 'Edit', edit_geojson_layer_path(layer), class: 'btn btn-default'
+                = link_to 'Remove', [:remove, @map, layer], method: :patch, class: 'btn btn-danger'
+
       - @map.wms_layers.each do |layer|
         %li.list-group-item
-          .btn-group.pull-right
-            = link_to 'Edit', edit_wms_layer_path(layer), class: 'btn btn-default'
-            = link_to 'Remove', [:remove, @map, layer], method: :patch, class: 'btn btn-danger'
-          = render layer
+          .row
+            .col-sm-9
+              = render layer, activate: true
+            .col-sm-3
+              .btn-group.pull-right
+                = link_to 'Edit', edit_wms_layer_path(layer), class: 'btn btn-default'
+                = link_to 'Remove', [:remove, @map, layer], method: :patch, class: 'btn btn-danger'

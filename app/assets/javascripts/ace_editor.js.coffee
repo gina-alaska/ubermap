@@ -6,12 +6,12 @@ class @AceEditor
     # @editor = ace.edit(@el)
     @initEditor()
     if @options['toolbar']?
-      @initToolbar(options['toolbar'])
+      @initToolbar(@options['toolbar'])
 
   htmlEncode: (str) ->
     str.replace /[&<>"']/g, ($0) ->
       "&" + {"&":"amp", "<":"lt", ">":"gt", '"':"quot", "'":"#39"}[$0] + ";"
-      
+
   initToolbar: (el) =>
     @toolbar = new FieldTagHandler(el, @editor)
 
