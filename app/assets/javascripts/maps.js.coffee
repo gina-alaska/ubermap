@@ -48,7 +48,6 @@ $(document).ready ->
       stop: (e, slider) ->
         target = $(e.target)
         targetLayer= target.data('target')
-        console.log slider.value / 100
         container.adjustOpacity(targetLayer, slider.value / 100)
     })
 
@@ -60,8 +59,36 @@ $(document).ready ->
       else
         container.hideLayer(slug)
 
+      enabled = target.parents('.panel-body').find('input:checked').size() > 0
+      toggleLayersSwitch(target.parents('.panel').find('[data-behavior="toggle-layers"]'), !enabled)
+
+
+toggleLayersSwitch = (el, state = 'auto') ->
+  target = $($(el).data('target'))
+  icon = $(el).find('i')
+
+  if state == 'auto'
+    state = icon.hasClass('fa-toggle-on')
+    updateLayersCheckbox(target, state)
+
+  if state
+    icon.switchClass('fa-toggle-on', 'fa-toggle-off')
+  else
+    icon.switchClass('fa-toggle-off', 'fa-toggle-on')
+
+updateLayersCheckbox = (container, state) ->
+  if state
+    container.find('input:checked').click()
+  else
+    container.find('input:not(:checked)').click()
+
 $(document).on 'ready page:load', ->
   $('[data-behavior="switch-icon"]').on 'shown.bs.collapse', ->
-    $($(this).data('target')).removeClass('fa-plus-square-o').addClass('fa-minus-square-o')
+    $($(this).data('target')).switchClass('fa-plus-square-o', 'fa-minus-square-o')
   $('[data-behavior="switch-icon"]').on 'hidden.bs.collapse', ->
-    $($(this).data('target')).removeClass('fa-minus-square-o').addClass('fa-plus-square-o')
+    $($(this).data('target')).switchClass('fa-minus-square-o', 'fa-plus-square-o')
+  $('[data-behavior="toggle-layers"]').on 'click', ->
+    target = $($(this).data('target'))
+    icon = $(this).find('i')
+
+    toggleLayersSwitch(this)

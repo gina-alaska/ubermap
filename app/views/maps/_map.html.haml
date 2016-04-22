@@ -1,7 +1,11 @@
-.panel.panel-default
-  .panel-heading{ data: { toggle: 'collapse', target: dom_id(map, '#map') }, style: 'padding: 8px 5px;'}
-    %i.fa{ id: dom_id(map, 'collapse_icon'), class: "fa-#{activate ? 'minus' : 'plus'}-square-o" }
-    %b= map.title
+.panel.panel-default.layer-def
+  .panel-heading{ style: 'padding: 8px 5px;'}
+    = link_to '#toggle-layer-def', data: { toggle: 'collapse', target: dom_id(map, '#map'), parent: '#layer_container' } do
+      %i.fa{ id: dom_id(map, 'collapse_icon'), class: "fa-#{activate ? 'minus' : 'plus'}-square-o" }
+      %b= map.title
+    .pull-right
+      = link_to '#toggle-layers', id: dom_id(map, 'toggle'), data: { behavior: 'toggle-layers', target: dom_id(map, '#map') } do
+        %i.fa{ class: activate ? 'fa-toggle-on' : 'fa-toggle-off' }
   .panel-body.collapse{id: dom_id(map, 'map'), class: activate ? 'in' : '', data: { behavior: 'switch-icon', target: dom_id(map, '#collapse_icon')} }
     .legend
       = render 'viewer/layers', layers: map.try(:wms_layers), activate: activate
