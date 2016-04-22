@@ -1,16 +1,17 @@
 
 .wms_layer{ id: wms_layer.slug }
   .layer-legend
-    = check_box_tag '', 'on', {}, data: { toggle: 'layer' }, class: 'pull-left', style: 'margin-right: 10px;'
+    = check_box_tag '', 'on', activate, data: { toggle: 'layer' }, class: "activate", style: 'margin-right: 5px;'
+
     - if wms_layer.legend.present?
       = Mustache.render(wms_layer.legend, {}).html_safe
     - else
-      %p
-        %i.fa.fa-globe
-        = wms_layer.name
-      = wms_layer.description
+      %i.fa.fa-globe
+      = wms_layer.name
     .row
       .col-lg-3.col-md-3.col-sm-3.col-xs-3
         %b Opacity
       .col-lg-9.col-md-9.col-sm-9.col-xs-9
         .opacity-slider{ data: { behavior: 'adjust-opacity', target: wms_layer.leaflet_params[:slug] } }
+  .layer-description
+    = wms_layer.description
