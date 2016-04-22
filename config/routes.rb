@@ -2,6 +2,7 @@ GenericMap::Application.routes.draw do
   resources :multimaps do
     get :available, on: :member
     patch :add, on: :member
+    patch :remove, on: :member
     patch :activate, on: :member
   end
   resources :wms_layers

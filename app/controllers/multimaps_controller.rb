@@ -1,5 +1,5 @@
 class MultimapsController < ApplicationController
-  before_action :set_multimap, only: [:show, :edit, :update, :destroy, :available, :add, :activate]
+  before_action :set_multimap
 
   authorize_resource
 
@@ -35,6 +35,13 @@ class MultimapsController < ApplicationController
   def add
     @map = Map.friendly.find(params[:map])
     @multimap.maps << @map
+
+    redirect_to @multimap
+  end
+
+  def remove
+    @map = Map.friendly.find(params[:map])
+    @multimap.maps.delete(@map)
 
     redirect_to @multimap
   end
@@ -91,7 +98,7 @@ class MultimapsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_multimap
-      @multimap = Multimap.friendly.find(params[:id])
+      @multimap = Multimap.friendly.find(params[:id]) if params[:id].present?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
