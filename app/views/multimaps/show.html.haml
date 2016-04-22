@@ -1,3 +1,6 @@
+- content_for :title do
+  = @multimap.title
+
 .row
   .col-sm-3
     = link_to viewer_url(@multimap), class: 'btn btn-info btn-block' do
@@ -55,3 +58,5 @@
                   .btn-group
                     = link_to 'View', viewer_url(mmm.map), class: 'btn btn-default'
                     = link_to 'Layers', map_path(mmm.map), class: 'btn btn-default'
+                    = link_to remove_multimap_path(mmm.multimap, map: mmm.map), method: :patch, class: 'btn btn-danger' do
+                      Remove
