@@ -103,6 +103,6 @@ class MultimapsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def multimap_params
-      params.require(:multimap).permit(:name, :active, :description)
+      params.require(:multimap).permit(:name, :active, :slug, :description)
     end
 end
