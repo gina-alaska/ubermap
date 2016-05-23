@@ -1,5 +1,7 @@
 # Ubermap
 
+[![Stories in Ready](https://badge.waffle.io/gina-alaska/ubermap.svg?label=ready&title=Ready)](http://waffle.io/gina-alaska/ubermap)
+
 Currently this is a basic rails application that allows users to
 build a custom map.
 
