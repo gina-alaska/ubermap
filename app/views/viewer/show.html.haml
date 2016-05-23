@@ -1,8 +1,12 @@
 - content_for :title do
   = @map.title
-#map_container
-  #map
-
-- unless @map.nil?
-  #layer_container.legend
-    = render @map, activate: true
+- if @map.use_sidebar?
+  #map_container.sidebar
+    #map
+  .legend.sidebar
+    = render 'legend'
+- else
+  #map_container
+    #map
+  .legend.floating
+    = render 'legend'

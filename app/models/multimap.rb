@@ -15,4 +15,8 @@ class Multimap < ActiveRecord::Base
   def should_generate_new_friendly_id?
     slug.blank? || name_changed?
   end
+
+  def use_sidebar?
+    true
+  end
 end

@@ -17,4 +17,8 @@ class Map < ActiveRecord::Base
   def should_generate_new_friendly_id?
     slug.blank? || title_changed? || super
   end
+
+  def use_sidebar?
+    false
+  end
 end
