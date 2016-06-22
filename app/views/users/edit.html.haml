@@ -1,0 +1,10 @@
+
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Edit #{@user.name}
+  .panel-body
+    = simple_form_for @user do |f|
+      = f.input :email, disabled: true
+      = f.input :admin
+      .text-right
+        = f.button :submit, class: 'btn btn-primary'

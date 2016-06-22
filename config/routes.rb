@@ -1,4 +1,6 @@
 GenericMap::Application.routes.draw do
+  get 'welcome/index'
+
   resources :multimaps do
     get :available, on: :member
     patch :add, on: :member
@@ -8,7 +10,8 @@ GenericMap::Application.routes.draw do
   resources :wms_layers
 
   resources :geojson_layers
-
+  resources :users
+  
   get "viewer/index"
   resources :maps do
     resources :geojson_layers do
@@ -42,7 +45,7 @@ GenericMap::Application.routes.draw do
   get '/:id' => 'viewer#show', as: :viewer
 
   # You can have the root of your site routed with "root"
-  root 'viewer#show', id: 'default'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

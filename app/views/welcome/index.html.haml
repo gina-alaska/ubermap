@@ -1,0 +1,10 @@
+%h1 Welcome to ubermap
+
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Manage maps
+  .panel-body
+    - if signed_in?
+      = link_to 'Logout', '/logout', class: 'btn btn-primary btn-block'
+    - else
+      = link_to 'Login', '/login', class: 'btn btn-primary btn-block'

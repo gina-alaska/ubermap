@@ -1,0 +1,19 @@
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Users
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Name
+        %th Email
+        %th Admin?
+        %th
+    %tbody
+      - @users.find_each do |user|
+        %tr
+          %td= user.name
+          %td= user.email
+          %td= user.admin? ? 'Yes' : 'No'
+          %td.text-right
+            = link_to edit_user_path(user), class: 'btn btn-sm btn-primary' do
+              Edit
