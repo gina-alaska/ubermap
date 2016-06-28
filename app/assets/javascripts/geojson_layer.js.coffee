@@ -3,6 +3,21 @@ class @GeoJSONLayer extends @MapLayer
     @layer = L.mapbox.featureLayer()
     @setStyle()
     @layer.loadURL(@config.url)
+    if @config.popup? and @config.popup != ''
+      @config.popup_template = Handlebars.compile(@config.popup)
+
+    @intlData = {
+      "intl": {
+        "formats": {
+          "number": {
+              "USD": {
+                  "style": "currency",
+                  "currency": "USD"
+              }
+          }
+        }
+      }
+    }
 
     super()
 
@@ -32,8 +47,8 @@ class @GeoJSONLayer extends @MapLayer
                   </div>"
           }));
 
-        if @config.popup? and @config.popup != '' and @config.options.clickable != 'no'
-          l.bindPopup(L.mapbox.template(@config.popup, l.feature.properties), {
+        if @config.popup_template? and @config.options.clickable != 'no'
+          l.bindPopup(@config.popup_template(l.feature.properties, { data: @intlData }), {
             maxWidth: 800
           });
 

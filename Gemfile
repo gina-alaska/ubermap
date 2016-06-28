@@ -68,6 +68,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-leaflet.markercluster', '0.4.0.hotfix.1'
   gem 'rails-assets-ace-builds'
   gem 'rails-assets-proj4'
+  gem 'rails-assets-handlebars'
+  gem 'rails-assets-handlebars-helper-intl'
 end
 
 gem "haml"

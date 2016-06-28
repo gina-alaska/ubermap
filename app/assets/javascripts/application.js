@@ -15,6 +15,8 @@
 //= require jquery_ujs
 //= require jquery.remotipart
 //= require jquery-ui
+//= require handlebars
+//= require handlebars-helper-intl/dist/handlebars-intl.js
 //= require bootstrap
 //= require proj4
 //= require proj4leaflet
@@ -30,12 +32,6 @@
 //= require turbolinks
 //= require map_layer
 //= require_tree .
+//= require_self
 
-// $(document).on("page:fetch", function() {
-//   $('.spinner-frame').fadeIn("slow");
-// });
-//
-//
-// $(document).on("page:load", function() {
-//   $('.spinner-frame').fadeOut("slow");
-// });
+HandlebarsIntl.registerWith(Handlebars);
