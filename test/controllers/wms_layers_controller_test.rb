@@ -22,7 +22,7 @@ class WmsLayersControllerTest < ActionController::TestCase
       post :create, wms_layer: { active: @wms_layer.active, description: @wms_layer.description, layers: @wms_layer.layers, legend: @wms_layer.legend, name: @wms_layer.name, options: @wms_layer.options, url: @wms_layer.url }
     end
 
-    assert_redirected_to wms_layer_path(assigns(:wms_layer))
+    assert_redirected_to edit_wms_layer_path(assigns(:wms_layer))
   end
 
   test "should show wms_layer" do
