@@ -1,6 +1,8 @@
 class WmsLayer < ActiveRecord::Base
   scope :active, ->{ where(active: true) }
   
+  belongs_to :organization
+  
   def slug
     "#{layer_type}_#{id}"
   end

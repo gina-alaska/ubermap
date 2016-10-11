@@ -2,6 +2,8 @@ class GeojsonLayer < ActiveRecord::Base
   has_many :map_layers, as: :layer
   has_many :maps, through: :map_layers
 
+  belongs_to :organization
+
   dragonfly_accessor :file
 
   scope :active, ->{ where(active: true) }

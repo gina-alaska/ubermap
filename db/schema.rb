@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323185619) do
+ActiveRecord::Schema.define(version: 20161010191658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,14 +117,37 @@ ActiveRecord::Schema.define(version: 20160323185619) do
   add_index "multimaps", ["slug"], name: "index_multimaps_on_slug", unique: true, using: :btree
   add_index "multimaps", ["user_id"], name: "index_multimaps_on_user_id", using: :btree
 
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "slug"
+  end
+
+  add_index "organizations", ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
+
+  create_table "organizations_users", id: false, force: :cascade do |t|
+    t.integer  "organization_id"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "organizations_users", ["organization_id"], name: "index_organizations_users_on_organization_id", using: :btree
+  add_index "organizations_users", ["user_id"], name: "index_organizations_users_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "email",      limit: 255
-    t.string   "avatar",     limit: 255
+    t.string   "name",            limit: 255
+    t.string   "email",           limit: 255
+    t.string   "avatar",          limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "admin",                  default: false, null: false
+    t.boolean  "admin",                       default: false, null: false
+    t.integer  "organization_id"
   end
+
+  add_index "users", ["organization_id"], name: "index_users_on_organization_id", using: :btree
 
   create_table "wms_layers", force: :cascade do |t|
     t.string   "url",         limit: 255
@@ -141,4 +164,7 @@ ActiveRecord::Schema.define(version: 20160323185619) do
   add_foreign_key "multimap_maps", "maps"
   add_foreign_key "multimap_maps", "multimaps"
   add_foreign_key "multimaps", "users"
+  add_foreign_key "organizations_users", "organizations"
+  add_foreign_key "organizations_users", "users"
+  add_foreign_key "users", "organizations"
 end

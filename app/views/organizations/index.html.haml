@@ -1,0 +1,22 @@
+- content_for :side_menu do
+  = render 'side_menu'
+
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Organizations
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Name
+        %th Description
+        %th
+    %tbody
+      - @organizations.find_each do |org|
+        %tr
+          %td= org.name
+          %td= org.description
+          %td.text-right
+            = link_to edit_organization_path(org), class: 'btn btn-sm btn-primary' do
+              Edit
+            = link_to organization_path(org), method: :delete, data: {confirm: "Delete Organization #{org.name}?"}, class: 'btn btn-sm btn-danger' do
+              Delete

@@ -3,7 +3,7 @@ class MultimapsController < ApplicationController
 
   authorize_resource
 
-  layout 'manager'
+  #layout 'manager'
 
   # GET /multimaps
   # GET /multimaps.json

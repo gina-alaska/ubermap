@@ -1,31 +1,31 @@
 GenericMap::Application.routes.draw do
-  get 'welcome/index'
-
   resources :multimaps do
     get :available, on: :member
     patch :add, on: :member
     patch :remove, on: :member
     patch :activate, on: :member
   end
-  resources :wms_layers
 
+  resources :wms_layers
   resources :geojson_layers
-  resources :users
   
-  get "viewer/index"
+  resources :users
+
+  resources :organizations
   resources :maps do
-    resources :geojson_layers do
+    resources :geojson_layers, only: [:index] do
       patch :remove, on: :member
       patch :add, on: :member
     end
-    resources :wms_layers do
+
+    resources :wms_layers, only: [:index] do
       patch :remove, on: :member
       patch :add, on: :member
     end
     get :available_geojson_layers_for, on: :member
     get :available_wms_layers_for, on: :member
-    patch :add_layer, on: :member
-    patch :remove_layer, on: :member
+    # patch :add_layer, on: :member
+    # patch :remove_layer, on: :member
   end
 
 
