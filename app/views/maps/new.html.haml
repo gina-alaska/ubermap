@@ -1,3 +1,10 @@
-%h1 New map
-= render 'form'
-= link_to 'Back', maps_path, class: 'btn btn-default'
+- content_for :side_menu do
+  = link_to maps_path, class: 'btn btn-default btn-block' do
+    %i.fa.fa-arrow-left
+    Cancel
+
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title New Map
+  .panel-body
+    = render 'form'

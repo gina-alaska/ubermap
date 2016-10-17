@@ -1,3 +1,10 @@
-%h1 Editing map
-= render 'form'
-= link_to 'Back', @map, class: 'btn btn-default'
+- content_for :side_menu do
+  = link_to @map, class: 'btn btn-default btn-block' do
+    %i.fa.fa-arrow-left
+    Cancel
+
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Edit map
+  .panel-body
+    = render 'form'
