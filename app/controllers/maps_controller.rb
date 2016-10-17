@@ -1,8 +1,6 @@
 class MapsController < ManagerController
   before_action :set_map, only: [:show, :edit, :update, :destroy, :add_layer, :remove_layer, :available_geojson_layers_for,:available_wms_layers_for]
 
-  #layout 'manager'
-
   authorize_resource
 
   # GET /maps
