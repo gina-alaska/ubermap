@@ -42,7 +42,7 @@
             %tr
               %th Name
               %th Layers
-              %th
+              %th.text-right Actions
           %tbody
             - @multimap.multimap_maps.find_each do |mmm|
               %tr
@@ -56,7 +56,7 @@
                       - else
                         Layers hidden
                   .btn-group
-                    = link_to 'View', viewer_url(mmm.map), class: 'btn btn-default'
-                    = link_to 'Layers', map_path(mmm.map), class: 'btn btn-default'
+                    = link_to 'Preview Map', viewer_url(mmm.map), class: 'btn btn-default'
+                    = link_to 'More Info', map_path(mmm.map), class: 'btn btn-primary'
                     = link_to remove_multimap_path(mmm.multimap, map: mmm.map), method: :patch, class: 'btn btn-danger' do
-                      Remove
+                      Delete
