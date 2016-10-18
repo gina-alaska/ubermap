@@ -1,12 +1,34 @@
-%p#notice= notice
-%h1= @map.title
-.row
-  .col-lg-3
-    = link_to 'Edit Map', edit_map_path(@map), class: 'btn btn-primary btn-block'
-    = link_to 'View Map', viewer_url(@map), class: 'btn btn-default btn-block'
+- content_for :side_menu do
+  = link_to maps_path, class: 'btn btn-default btn-block' do
+    %i.fa.fa-arrow-left
+    Map List
+
+  = link_to viewer_url(@map), class: 'btn btn-default btn-block' do
+    %i.fa.fa-eye.fa-fw
+    Preview
+
+  - if can? :edit, @map
+    = link_to edit_map_path(@map), class: 'btn btn-primary btn-block' do
+      %i.fa.fa-gear.fa-fw
+      Settings
+
+  - if can? :delete, @map
+    = link_to @map, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block' do
+      %i.fa.fa-trash.fa-fw
+      Delete
+
+  %hr
+
+  - if can? :edit, @map
     = link_to 'Add GeoJSON Layer', available_geojson_layers_for_map_path(@map), class: 'btn btn-success btn-block'
     = link_to 'Add WMS Layer', available_wms_layers_for_map_path(@map), class: 'btn btn-success btn-block'
-  .col-lg-9
+
+
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title
+      Map: #{@map.title}
+  .panel-body
     %p
       %strong URL:
       = link_to viewer_url(@map), viewer_url(@map)
@@ -14,24 +36,30 @@
       %strong Active:
       = @map.active
 
-    %h4 Layers
-    %ul.list-group
-      - @map.geojson_layers.each do |layer|
-        %li.list-group-item
-          .row
-            .col-sm-9
-              = render layer, activate: true
-            .col-sm-3
-              .btn-group.pull-right
-                = link_to 'Edit', edit_geojson_layer_path(layer), class: 'btn btn-default'
-                = link_to 'Remove', [:remove, @map, layer], method: :patch, class: 'btn btn-danger'
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Layers
+  %table.table.table-striped
+    %tr
+      %th Layer Type
+      %th Legend
+      %th.text-right Actions
+    - @map.geojson_layers.each do |layer|
+      %tr
+        %td GeoJSON
+        %td
+          = render layer, activate: true
+        %td.text-right
+          .btn-group
+            = link_to 'Edit', edit_geojson_layer_path(layer), class: 'btn btn-default'
+            = link_to 'Remove', [:remove, @map, layer], method: :patch, class: 'btn btn-danger'
 
-      - @map.wms_layers.each do |layer|
-        %li.list-group-item
-          .row
-            .col-sm-9
-              = render layer, activate: true
-            .col-sm-3
-              .btn-group.pull-right
-                = link_to 'Edit', edit_wms_layer_path(layer), class: 'btn btn-default'
-                = link_to 'Remove', [:remove, @map, layer], method: :patch, class: 'btn btn-danger'
+    - @map.wms_layers.each do |layer|
+      %tr
+        %td WMS
+        %td
+          = render layer, activate: true
+        %td.text-right
+          .btn-group
+            = link_to 'Edit', edit_wms_layer_path(layer), class: 'btn btn-default'
+            = link_to 'Remove', [:remove, @map, layer], method: :patch, class: 'btn btn-danger'

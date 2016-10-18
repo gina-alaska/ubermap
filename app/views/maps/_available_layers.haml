@@ -1,0 +1,7 @@
+%table.table.table-striped
+  - @layers.each do |layer|
+    %tr
+      %td
+        = render layer, activate: true
+      %td.text-right
+        = link_to 'Add Layer', [:add, @map, layer], method: :patch, class: 'btn btn-primary'
