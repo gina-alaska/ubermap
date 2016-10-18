@@ -8,10 +8,13 @@ GenericMap::Application.routes.draw do
 
   resources :wms_layers
   resources :geojson_layers
-  
+
   resources :users
 
-  resources :organizations
+  resources :organizations do
+    resources :users, controller: 'organizations_users'
+  end
+
   resources :maps do
     resources :geojson_layers, only: [:index] do
       patch :remove, on: :member

@@ -19,10 +19,10 @@ class OrganizationsControllerTest < ActionController::TestCase
 
   test "should create organization" do
     assert_difference('Organization.count') do
-      post :create, organization: { name: @organization.name + ' testing' }
+      post :create, organization: { name: 'Some new organization' }
     end
 
-    assert_redirected_to organizations_url
+    assert_redirected_to organization_url(assigns(:organization))
   end
 
   test "should get edit" do

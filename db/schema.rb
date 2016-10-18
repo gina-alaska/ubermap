@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 20161010191658) do
 
   add_index "organizations", ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
 
-  create_table "organizations_users", id: false, force: :cascade do |t|
+  create_table "organizations_users", force: :cascade do |t|
     t.integer  "organization_id"
     t.integer  "user_id"
     t.datetime "created_at",      null: false

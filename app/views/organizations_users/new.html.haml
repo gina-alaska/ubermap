@@ -1,0 +1,3 @@
+- @users.each do |user|
+  = link_to organization_users_path(@organization, id: user), method: :post, class: 'btn btn-default' do
+    = user

@@ -1,12 +1,15 @@
 class OrganizationsController < ApplicationController
   layout 'manager'
 
-  before_action :set_organization, only: [:edit, :update, :destroy]
+  before_action :set_organization, only: [:show, :edit, :update, :destroy]
 
   authorize_resource
 
   def index
     @organizations = Organization.accessible_by(current_ability)
+  end
+
+  def show
   end
 
   def new
@@ -15,10 +18,11 @@ class OrganizationsController < ApplicationController
 
   def create
     @organization = Organization.new(organization_params)
+    @organization.users << current_user
 
     respond_to do |format|
       if @organization.save
-        format.html { redirect_to organizations_url, notice: 'Organization was successfully created.' }
+        format.html { redirect_to organization_url(@organization), notice: 'Organization was successfully created.' }
         format.json { render action: 'index', status: :created, location: @organization }
       else
         format.html { render action: 'new' }
@@ -56,6 +60,6 @@ class OrganizationsController < ApplicationController
     end
 
     def organization_params
-      params.require(:organization).permit(:name, :description)
+      params.require(:organization).permit(:name, :description, organizations_user_attributes: [:id, :name, :user_id, :_destroy])
     end
 end

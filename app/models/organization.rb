@@ -2,8 +2,8 @@ class Organization < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  has_many :organization_users
-  has_many :users, through: :organization_users
+  has_many :organizations_users
+  has_many :users, through: :organizations_users, dependent: :destroy
 
   has_many :maps
   has_many :multimaps

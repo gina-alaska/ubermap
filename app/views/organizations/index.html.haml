@@ -8,14 +8,18 @@
     %thead
       %tr
         %th Name
+        %th Users
         %th Description
         %th
     %tbody
       - @organizations.find_each do |org|
         %tr
           %td= org.name
+          %td= org.users.count
           %td= org.description
           %td.text-right
+            = link_to organization_path(org), class: 'btn btn-sm btn-default' do
+              View
             = link_to edit_organization_path(org), class: 'btn btn-sm btn-primary' do
               Edit
             = link_to organization_path(org), method: :delete, data: {confirm: "Delete Organization #{org.name}?"}, class: 'btn btn-sm btn-danger' do
