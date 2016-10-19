@@ -1,8 +1,6 @@
-class WmsLayersController < ApplicationController
+class WmsLayersController < ManagerController
   before_action :set_wms_layer, only: [:show, :edit, :update, :destroy, :add, :remove]
   before_action :set_map, only: [:remove, :add]
-
-  #layout 'manager'
 
   authorize_resource
 

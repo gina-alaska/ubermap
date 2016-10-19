@@ -1,8 +1,6 @@
-class GeojsonLayersController < ApplicationController
+class GeojsonLayersController < ManagerController
   before_action :set_map, only: [:remove, :add]
   before_action :set_geojson_layer, only: [:show, :edit, :update, :destroy, :remove, :add]
-
-  #layout 'manager'
 
   authorize_resource
 

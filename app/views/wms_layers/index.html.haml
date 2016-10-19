@@ -1,22 +1,21 @@
-%h1 Listing wms layers
-.row
-  .col-lg-2.col-md-3.col-sm-3
-    = link_to 'New layer', new_wms_layer_path, class: 'btn btn-success btn-block'
-  .col-lg-10.col-md-9.col-sm-9
-    %table.table.table-condensed
-      %thead
+- content_for :side_menu do
+  = link_to 'New WMS layer', new_wms_layer_path, class: 'btn btn-success btn-block'
+
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Listing wms layers
+  %table.table.table-condensed
+    %thead
+      %tr
+        %th Name
+        %th Description
+        %th Active
+        %th.text-right Actions
+    %tbody
+      - @wms_layers.each do |wms_layer|
         %tr
-          %th Name
-          %th Description
-          %th Active
-          %th
-      %tbody
-        - @wms_layers.each do |wms_layer|
-          %tr
-            %td= wms_layer.name
-            %td= wms_layer.description
-            %td= wms_layer.active
-            %td
-              .btn-group
-                = link_to 'Edit', edit_wms_layer_path(wms_layer), class: 'btn btn-primary'
-                = link_to 'Destroy', wms_layer, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+          %td= wms_layer.name
+          %td= wms_layer.description
+          %td= wms_layer.active
+          %td.text-right
+            = link_to 'Edit', edit_wms_layer_path(wms_layer), class: 'btn btn-primary'

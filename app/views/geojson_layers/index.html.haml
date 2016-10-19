@@ -1,24 +1,23 @@
-%h1 Listing geojson_layers
-.row
-  .col-lg-2.col-md-3.col-sm-3
-    = link_to 'New Layer', new_geojson_layer_path, class: 'btn btn-success btn-block'
-  .col-lg-10.col-md-9.col-sm-9
-    %table.table.table-striped.table-condensed
-      %thead
+- content_for :side_menu do
+  = link_to 'New GeoJSON Layer', new_geojson_layer_path, class: 'btn btn-success btn-block'
+
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Listing geojson_layers
+  %table.table.table-striped.table-condensed
+    %thead
+      %tr
+        %th Name
+        %th Description
+        %th File name
+        %th Active
+        %th.text-right Actions
+    %tbody
+      - @geojson_layers.each do |geojson_layer|
         %tr
-          %th Name
-          %th Description
-          %th File name
-          %th Active
-          %th
-      %tbody
-        - @geojson_layers.each do |geojson_layer|
-          %tr
-            %td= geojson_layer.name
-            %td= geojson_layer.description
-            %td= geojson_layer.file_name
-            %td= geojson_layer.active
-            %td
-              .btn-group
-                = link_to 'Edit', edit_geojson_layer_path(geojson_layer), class: 'btn btn-primary'
-                = link_to 'Destroy', geojson_layer, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+          %td= geojson_layer.name
+          %td= geojson_layer.description
+          %td= geojson_layer.file_name
+          %td= geojson_layer.active
+          %td.text-right
+            = link_to 'Edit', edit_geojson_layer_path(geojson_layer), class: 'btn btn-primary'
