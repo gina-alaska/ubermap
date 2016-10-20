@@ -1,8 +1,4 @@
-class OrganizationsController < ApplicationController
-  layout 'manager'
-
-  before_action :set_organization, only: [:show, :edit, :update, :destroy]
-
+class OrganizationsController < ManagerController
   authorize_resource
 
   def index
@@ -54,9 +50,9 @@ class OrganizationsController < ApplicationController
     end
   end
 
-  private
+  protected
     def set_organization
-      @organization = Organization.friendly.find(params[:id])
+      @organization = Organization.friendly.find(params[:id]) if params[:id].present?
     end
 
     def organization_params

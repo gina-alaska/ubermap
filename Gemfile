@@ -56,6 +56,8 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-bower'
   gem 'web-console', '~> 2.0'
+  gem 'guard'
+  gem 'guard-minitest'
 end
 
 # Use debugger

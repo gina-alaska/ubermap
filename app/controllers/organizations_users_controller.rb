@@ -1,4 +1,4 @@
-class OrganizationsUsersController < ApplicationController
+class OrganizationsUsersController < ManagerController
   before_action :set_organization
 
   authorize_resource

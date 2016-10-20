@@ -23,6 +23,6 @@
       = opts.label :slider_title
       = opts.text_field :slider_title, class: 'form-control'
     .form-group
-      = link_to @wms_layer, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block' do
+      = link_to [@organization, @wms_layer], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block' do
         %i.fa.fa-trash
         Delete

@@ -109,14 +109,16 @@ ActiveRecord::Schema.define(version: 20161019220419) do
 
   create_table "multimaps", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "active",      default: true
+    t.boolean  "active",          default: true
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "slug"
+    t.integer  "organization_id"
   end
 
+  add_index "multimaps", ["organization_id"], name: "index_multimaps_on_organization_id", using: :btree
   add_index "multimaps", ["slug"], name: "index_multimaps_on_slug", unique: true, using: :btree
   add_index "multimaps", ["user_id"], name: "index_multimaps_on_user_id", using: :btree
 
@@ -170,6 +172,7 @@ ActiveRecord::Schema.define(version: 20161019220419) do
   add_foreign_key "geojson_layers", "organizations"
   add_foreign_key "multimap_maps", "maps"
   add_foreign_key "multimap_maps", "multimaps"
+  add_foreign_key "multimaps", "organizations"
   add_foreign_key "multimaps", "users"
   add_foreign_key "organizations_users", "organizations"
   add_foreign_key "organizations_users", "users"

@@ -4,9 +4,16 @@ one:
   name: MyString
   email: test1@test.com
   avatar: MyString
-  admin: true
+  admin: false
 
 two:
   name: MyString
   email: test2@test.com
   avatar: MyString
+  admin: false
+
+admin:
+  name: admin
+  email: admin@test.com
+  avatar: Nope
+  admin: true

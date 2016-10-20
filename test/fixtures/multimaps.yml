@@ -4,10 +4,10 @@ one:
   name: MyString
   active: false
   description: MyText
-  user_id: 
+  organization: one
 
 two:
   name: MyString
   active: false
   description: MyText
-  user_id: 
+  organization: one

@@ -1,12 +1,8 @@
-.panel.panel-default
-  .panel-heading
-    %h1.panel-title Multimap form
-  .panel-body
-    = simple_form_for(@multimap) do |f|
-      = f.input :name
-      = f.input :slug, placeholder: 'Leave blank to autogenerate based on name'
-      = f.input :active
-      = f.input :description
+= simple_form_for([@organization, @multimap]) do |f|
+  = f.input :name
+  = f.input :slug, placeholder: 'Leave blank to autogenerate based on name'
+  = f.input :active
+  = f.input :description
 
-      .text-right
-        = f.button :submit, class: 'btn btn-primary'
+  .text-right
+    = f.button :submit, class: 'btn btn-primary'

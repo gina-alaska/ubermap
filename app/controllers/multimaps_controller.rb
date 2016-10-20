@@ -1,14 +1,13 @@
-class MultimapsController < ApplicationController
+class MultimapsController < ManagerController
+  before_action :set_organization
   before_action :set_multimap
 
   authorize_resource
 
-  #layout 'manager'
-
   # GET /multimaps
   # GET /multimaps.json
   def index
-    @multimaps = Multimap.all
+    @multimaps = @organization.multimaps
   end
 
   # GET /multimaps/1
@@ -29,26 +28,26 @@ class MultimapsController < ApplicationController
     @mmm = @multimap.multimap_maps.where(map: @map).first
     @mmm.update_attribute(:active, !@mmm.active)
 
-    redirect_to @multimap
+    redirect_to [@organization, @multimap]
   end
 
   def add
     @map = Map.friendly.find(params[:map])
     @multimap.maps << @map
 
-    redirect_to @multimap
+    redirect_to [@organization, @multimap]
   end
 
   def remove
     @map = Map.friendly.find(params[:map])
     @multimap.maps.delete(@map)
 
-    redirect_to @multimap
+    redirect_to [@organization, @multimap]
   end
 
   # GET /multimaps/new
   def new
-    @multimap = Multimap.new
+    @multimap = @organization.multimaps.build
   end
 
   # GET /multimaps/1/edit
@@ -58,11 +57,11 @@ class MultimapsController < ApplicationController
   # POST /multimaps
   # POST /multimaps.json
   def create
-    @multimap = Multimap.new(multimap_params)
+    @multimap = @organization.multimaps.build(multimap_params)
 
     respond_to do |format|
       if @multimap.save
-        format.html { redirect_to @multimap, notice: 'Multimap was successfully created.' }
+        format.html { redirect_to [@organization, @multimap], notice: 'Multimap was successfully created.' }
         format.json { render action: 'show', status: :created, location: @multimap }
       else
         format.html { render action: 'new' }
@@ -76,7 +75,7 @@ class MultimapsController < ApplicationController
   def update
     respond_to do |format|
       if @multimap.update(multimap_params)
-        format.html { redirect_to @multimap, notice: 'Multimap was successfully updated.' }
+        format.html { redirect_to [@organization, @multimap], notice: 'Multimap was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -90,7 +89,7 @@ class MultimapsController < ApplicationController
   def destroy
     @multimap.destroy
     respond_to do |format|
-      format.html { redirect_to multimaps_url }
+      format.html { redirect_to @multimap.organization }
       format.json { head :no_content }
     end
   end

@@ -1,20 +1,17 @@
 GenericMap::Application.routes.draw do
-  resources :multimaps do
-    get :available, on: :member
-    patch :add, on: :member
-    patch :remove, on: :member
-    patch :activate, on: :member
-  end
-
-  # resources :wms_layers
-  # resources :geojson_layers
-
   resources :users
 
   resources :organizations, path: 'orgs' do
     resources :users, controller: 'organizations_users'
-    resources :geojson_layers, shallow: true
-    resources :wms_layers, shallow: true
+    resources :geojson_layers
+    resources :wms_layers
+
+    resources :multimaps do
+      get :available, on: :member
+      patch :add, on: :member
+      patch :remove, on: :member
+      patch :activate, on: :member
+    end
   end
 
   resources :maps do
@@ -33,17 +30,16 @@ GenericMap::Application.routes.draw do
     # patch :remove_layer, on: :member
   end
 
-
   get '/logout', to: 'sessions#destroy'
   get '/login', to: 'sessions#new'
   get '/auth/:provider/disable', to: 'users#disable_provider'
   post '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure', to: 'sessions#failure'
+  get '/', to: 'welcome#index', as: :permission_denied
+
   resources :sessions
   resources :memberships
-
-  resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

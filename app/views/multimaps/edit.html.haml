@@ -1,7 +1,10 @@
-.row
-  .col-sm-3
-    = link_to @multimap, class: 'btn btn-default btn-block' do
-      %i.fa.fa-arrow-left
-      Back
-  .col-sm-9
+- content_for :side_menu do
+  = link_to [@organization, @multimap], class: 'btn btn-default btn-block' do
+    %i.fa.fa-arrow-left
+    Back
+
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Edit #{@multimap.name}
+  .panel-body
     = render 'form'

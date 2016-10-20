@@ -1,4 +1,11 @@
-%p#notice= notice
+- content_for :side_menu do
+  = link_to @wms_layer.organization, class: 'btn btn-default btn-block' do
+    %i.fa.fa-arrow-left
+    Back
+  = link_to edit_organization_wms_layer_path(@organization, @wms_layer), class: 'btn btn-primary' do
+    %i.fa.fa-edit
+    Edit
+
 %p
   %strong Url:
   = @wms_layer.url
@@ -20,6 +27,3 @@
 %p
   %strong Name:
   = @wms_layer.name
-= link_to 'Edit', edit_wms_layer_path(@wms_layer)
-|
-\#{link_to 'Back', organization_path(@wms_layer.organization)}

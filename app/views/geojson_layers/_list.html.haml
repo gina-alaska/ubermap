@@ -2,16 +2,16 @@
   %thead
     %tr
       %th Name
-      %th Description
-      %th File name
-      %th Active
+      %th.text-right Active
       %th.text-right Actions
   %tbody
     - geojson_layers.each do |geojson_layer|
       %tr
-        %td= geojson_layer.name
-        %td= geojson_layer.description
-        %td= geojson_layer.file_name
-        %td= geojson_layer.active
-        %td.text-right
-          = link_to 'Manage', edit_organization_geojson_layer_path(@organization, geojson_layer), class: 'btn btn-primary'
+        %td
+          %p= geojson_layer.name
+          = geojson_layer.description
+        %td.text-right= geojson_layer.active
+        %td.text-right.col-sm-2
+          = link_to edit_organization_geojson_layer_path(@organization, geojson_layer), class: 'btn btn-primary' do
+            %i.fa.fa-arrow-right
+            Manage

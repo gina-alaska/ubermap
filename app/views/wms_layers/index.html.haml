@@ -1,21 +1,7 @@
 - content_for :side_menu do
-  = link_to 'New WMS layer', new_wms_layer_path, class: 'btn btn-success btn-block'
+  = link_to 'New WMS layer', new_organization_wms_layer_path(@organization), class: 'btn btn-success btn-block'
 
 .panel.panel-default
   .panel-heading
     %h1.panel-title Listing wms layers
-  %table.table.table-condensed
-    %thead
-      %tr
-        %th Name
-        %th Description
-        %th Active
-        %th.text-right Actions
-    %tbody
-      - @wms_layers.each do |wms_layer|
-        %tr
-          %td= wms_layer.name
-          %td= wms_layer.description
-          %td= wms_layer.active
-          %td.text-right
-            = link_to 'Edit', edit_wms_layer_path(wms_layer), class: 'btn btn-primary'
+  = render 'list', wms_layers: @wms_layers

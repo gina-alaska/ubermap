@@ -1,5 +1,5 @@
 class GeojsonLayer < ActiveRecord::Base
-  has_many :map_layers, as: :layer
+  has_many :map_layers, as: :layer, dependent: :destroy
   has_many :maps, through: :map_layers
 
   belongs_to :organization
@@ -14,7 +14,7 @@ class GeojsonLayer < ActiveRecord::Base
 
   def fetch_fields
     return if self.file.nil?
-    
+
     case self.file.ext
     when 'geojson'
       set_fields_from_geojson
@@ -29,11 +29,11 @@ class GeojsonLayer < ActiveRecord::Base
 
     self.fields = f.uniq.compact
   end
-  
+
   def slug
     "#{layer_type}_#{id}"
   end
-  
+
   def layer_type
     'geojson'
   end

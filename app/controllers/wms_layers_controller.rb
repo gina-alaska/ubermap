@@ -35,7 +35,7 @@ class WmsLayersController < ManagerController
 
     respond_to do |format|
       if @wms_layer.save
-        format.html { redirect_to edit_wms_layer_path(@wms_layer), notice: 'Wms layer was successfully created.' }
+        format.html { redirect_to edit_organization_wms_layer_path(@organization, @wms_layer), notice: 'Wms layer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @wms_layer }
         format.js { render text: "turbolinks.visit('#{edit_wms_layer_path(@wms_layer)}')"}
       else
@@ -50,7 +50,7 @@ class WmsLayersController < ManagerController
   def update
     respond_to do |format|
       if @wms_layer.update(wms_layer_params)
-        format.html { redirect_to edit_wms_layer_path(@wms_layer), notice: 'Wms layer was successfully updated.' }
+        format.html { redirect_to edit_organization_wms_layer_path(@organization, @wms_layer), notice: 'Wms layer was successfully updated.' }
         format.json { head :no_content }
         format.js
       else

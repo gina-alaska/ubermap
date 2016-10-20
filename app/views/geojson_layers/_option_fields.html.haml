@@ -12,6 +12,6 @@
       = opts.check_box :auto_zoom, { }, 'yes', 'no'
       Auto zoom
     .form-group
-      = link_to @geojson_layer, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block' do
+      = link_to [@organization, @geojson_layer], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block' do
         %i.fa.fa-trash
         Delete

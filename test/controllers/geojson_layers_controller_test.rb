@@ -24,21 +24,24 @@ class GeojsonLayersControllerTest < ActionController::TestCase
 
     assert_equal @organization.id, assigns(:geojson_layer).organization_id
 
-    assert_redirected_to edit_geojson_layer_path(assigns(:geojson_layer))
+    assert_redirected_to edit_organization_geojson_layer_path(@organization, assigns(:geojson_layer))
   end
 
 
   test "should render the edit view" do
-    get :edit, id: @geojson_layer
+    get :edit, organization_id: @organization, id: @geojson_layer
+    assert_response :success
   end
 
   test "should update the geojson layer" do
-    patch :update, id: @geojson_layer, geojson_layer: { name: 'Updated layer name' }
+    patch :update, organization_id: @organization, id: @geojson_layer, geojson_layer: { name: 'Updated layer name' }
+
+    assert_redirected_to edit_organization_geojson_layer_path(@organization, @geojson_layer)
   end
 
   test "should delete the geojson layer" do
     assert_difference('GeojsonLayer.count', -1) do
-      delete :destroy, id: @geojson_layer
+      delete :destroy, organization_id: @organization, id: @geojson_layer
     end
 
     assert_redirected_to @organization

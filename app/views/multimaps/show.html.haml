@@ -1,62 +1,74 @@
 - content_for :title do
   = @multimap.title
 
-.row
-  .col-sm-3
-    = link_to viewer_url(@multimap), class: 'btn btn-info btn-block' do
-      View Map
-    = link_to edit_multimap_path(@multimap), class: 'btn btn-default btn-block' do
-      %i.fa.fa-edit
-      Edit
-    = link_to @multimap, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block' do
-      %i.fa.fa-trash-o
-      Delete
-    = link_to multimaps_path, class: 'btn btn-default btn-block' do
-      %i.fa.fa-arrow-left
-      Back
+- content_for :side_menu do
+  = link_to @multimap.organization, class: 'btn btn-default btn-block' do
+    %i.fa.fa-arrow-left
+    Back
 
-    %hr
+  %hr
 
-    = link_to available_multimap_path(@multimap), class: 'btn btn-success btn-block' do
+  = link_to viewer_url(@multimap), class: 'btn btn-default btn-block' do
+    %i.fa.fa-eye
+    Preview
+
+  = link_to edit_organization_multimap_path(@organization, @multimap), class: 'btn btn-primary btn-block' do
+    %i.fa.fa-edit
+    Edit
+
+  = link_to [@organization, @multimap], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block' do
+    %i.fa.fa-trash-o
+    Delete
+
+  %hr
+
+    = link_to available_organization_multimap_path(@organization, @multimap), class: 'btn btn-success btn-block' do
       %i.fa.fa-plus
       Add Map
 
-  .col-sm-9
-    .panel.panel-default
-      .panel-heading
-        %h1.panel-title= @multimap.name
-      .panel-body
-        %p
-          %strong Description:
-          = @multimap.description
-        %p
-          %strong Active:
-          = @multimap.active ? 'Yes' : 'No'
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title
+      Grouped Maps:
+      = @multimap.name
+  .panel-body
+    - if @multimap.description.present?
+      %p
+        %strong Description:
+        = @multimap.description
+    %p
+      %strong Active:
+      = @multimap.active ? 'Yes' : 'No'
 
-    - if @multimap.multimap_maps.any?
-      .panel.panel-default
-        .panel-heading
-          %h1.panel-title Added maps
-        %table.table.table-striped
-          %thead
-            %tr
-              %th Name
-              %th Layers
-              %th.text-right Actions
-          %tbody
-            - @multimap.multimap_maps.find_each do |mmm|
-              %tr
-                %td= mmm.map.title
-                %td= mmm.map.geojson_layers.count + mmm.map.wms_layers.count
-                %td.text-right
-                  .btn-group
-                    = link_to activate_multimap_path(mmm.multimap, map: mmm.map), method: :patch, class: "btn btn-default #{mmm.active ? 'active' : ''}" do
-                      - if mmm.active?
-                        Layers active
-                      - else
-                        Layers hidden
-                  .btn-group
-                    = link_to 'Preview Map', viewer_url(mmm.map), class: 'btn btn-default'
-                    = link_to 'More Info', map_path(mmm.map), class: 'btn btn-primary'
-                    = link_to remove_multimap_path(mmm.multimap, map: mmm.map), method: :patch, class: 'btn btn-danger' do
-                      Delete
+- if @multimap.multimap_maps.any?
+  .panel.panel-default
+    .panel-heading
+      %h1.panel-title Added maps
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Name
+          %th Layers
+          %th.text-right Actions
+      %tbody
+        - @multimap.multimap_maps.find_each do |mmm|
+          %tr
+            %td= mmm.map.title
+            %td= mmm.map.geojson_layers.count + mmm.map.wms_layers.count
+            %td.text-right
+              .btn-group
+                = link_to activate_organization_multimap_path(@organization, mmm.multimap, map: mmm.map), method: :patch, class: "btn btn-default #{mmm.active ? 'active' : ''}" do
+                  - if mmm.active?
+                    Layers active
+                  - else
+                    Layers hidden
+              .btn-group
+                = link_to viewer_url(mmm.map), class: 'btn btn-default' do
+                  %i.fa.fa-trash
+                  Preview
+                = link_to map_path(mmm.map), class: 'btn btn-primary' do
+                  %i.fa.fa-edit
+                  Manage
+                = link_to remove_organization_multimap_path(@organization, mmm.multimap, map: mmm.map), method: :patch, class: 'btn btn-danger' do
+                  %i.fa.fa-times
+                  Remove

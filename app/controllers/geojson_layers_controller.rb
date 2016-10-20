@@ -58,7 +58,7 @@ class GeojsonLayersController < ManagerController
 
     respond_to do |format|
       if @geojson_layer.save
-        format.html { redirect_to edit_geojson_layer_path(@geojson_layer), notice: 'Layer was successfully created.' }
+        format.html { redirect_to edit_organization_geojson_layer_path(@organization, @geojson_layer), notice: 'Layer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @geojson_layer }
         format.js { render text: "document.location = '#{edit_geojson_layer_path(@geojson_layer)}'"}
       else
@@ -73,10 +73,9 @@ class GeojsonLayersController < ManagerController
   def update
     respond_to do |format|
       if @geojson_layer.update(geojson_layer_params)
-        format.html { redirect_to edit_geojson_layer_path(@geojson_layer), notice: 'Layer was successfully updated.' }
+        format.html { redirect_to edit_organization_geojson_layer_path(@organization, @geojson_layer), notice: 'Layer was successfully updated.' }
         format.json { head :no_content }
         format.js {
-          Rails.logger.info  @geojson_layer.previous_changes
           if @geojson_layer.previous_changes['file_uid']
             render js: "document.location='#{edit_geojson_layer_path(@geojson_layer)}';"
           end

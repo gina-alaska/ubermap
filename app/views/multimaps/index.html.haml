@@ -1,27 +1,14 @@
-.row
-  .col-sm-3
-    = link_to 'New Multimap', new_multimap_path, class: 'btn btn-success btn-block'
+- content_for :side_menu do
+  = link_to @organization, class: 'btn btn-default btn-block' do
+    %i.fa.fa-arrow-left
+    Back
 
-  .col-sm-9
+  %hr
 
-    .panel.panel-default
-      .panel-heading
-        %h1.panel-title Multimaps
+  = link_to 'New Multimap', new_organization_multimap_path(@organization), class: 'btn btn-success btn-block'
 
-      %table.table.table-striped
-        %thead
-          %tr
-            %th Name
-            %th Active
-            %th # Maps
-            %th.text-right{:colspan => "3"} Actions
-        %tbody
-          - @multimaps.each do |multimap|
-            %tr
-              %td= multimap.name
-              %td= multimap.active
-              %td= multimap.maps.count
-              %td.text-right
-                = link_to multimap, class: 'btn btn-default' do
-                  View more info
-                  %i.fa.fa-arrow-right
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Multimaps
+
+  = render 'list', multimaps: @multimaps

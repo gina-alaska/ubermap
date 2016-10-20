@@ -6,17 +6,11 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |_exception|
     if signed_in?
+      flash[:error] = 'You do not have permission to view this page'
       redirect_to permission_denied_path
     else
       session[:redirect_back_to] = request.original_url
       redirect_to login_path
     end
-  end
-
-  protected
-
-  def permission_denied_path
-    flash[:error] = 'You do not have permission to view this page'
-    root_path
   end
 end

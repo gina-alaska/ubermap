@@ -1,7 +1,10 @@
-.row
-  .col-sm-3
-    = link_to multimaps_path, class: 'btn btn-default btn-block' do
-      %i.fa.fa-arrow-left
-      Back
-  .col-sm-9
+- content_for :side_menu do
+  = link_to @multimap.organization, class: 'btn btn-default btn-block' do
+    %i.fa.fa-arrow-left
+    Back
+
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title New MultiMap Group
+  .panel-body
     = render 'form'

@@ -1,7 +1,10 @@
 - content_for :side_menu do
   = link_to 'Organizations List', organizations_path, class: 'btn btn-default btn-block'
   %hr
+  = link_to 'New Multi Map Group', new_organization_multimap_path(@organization), class: 'btn btn-success btn-block'
+  %hr
   = link_to 'New GeoJSON Layer', new_organization_geojson_layer_path(@organization), class: 'btn btn-success btn-block'
+  = link_to 'New WMS Layer', new_organization_wms_layer_path(@organization), class: 'btn btn-success btn-block'
 
 
 .panel.panel-default
@@ -18,5 +21,16 @@
 
 .panel.panel-default
   .panel-heading
+    %h1.panel-title Grouped Maps
+  = render 'multimaps/list', multimaps: @organization.multimaps
+
+
+.panel.panel-default
+  .panel-heading
     %h1.panel-title GeoJSON layers
   = render 'geojson_layers/list', geojson_layers: @organization.geojson_layers
+
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title WMS layers
+  = render 'wms_layers/list', wms_layers: @organization.wms_layers

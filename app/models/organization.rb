@@ -6,7 +6,8 @@ class Organization < ActiveRecord::Base
   has_many :users, through: :organizations_users, dependent: :destroy
 
   has_many :maps
-  has_many :multimaps
+
+  has_many :multimaps, dependent: :destroy
   has_many :geojson_layers, dependent: :destroy
   has_many :wms_layers, dependent: :destroy
 
