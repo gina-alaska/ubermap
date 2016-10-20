@@ -1,5 +1,6 @@
 class GeojsonLayersController < ManagerController
   before_action :set_map, only: [:remove, :add]
+  before_action :set_organization
   before_action :set_geojson_layer, only: [:show, :edit, :update, :destroy, :remove, :add]
 
   authorize_resource
@@ -7,7 +8,7 @@ class GeojsonLayersController < ManagerController
   # GET /geojson_layers
   # GET /geojson_layers.json
   def index
-    @geojson_layers = GeojsonLayer.all
+    @geojson_layers = @organization.geojson_layers
 
     respond_to do |format|
       format.html
@@ -27,7 +28,7 @@ class GeojsonLayersController < ManagerController
 
   # GET /geojson_layers/new
   def new
-    @geojson_layer = GeojsonLayer.new
+    @geojson_layer = @organization.geojson_layers.build
 
     render layout: 'editor'
   end
@@ -53,7 +54,7 @@ class GeojsonLayersController < ManagerController
   # POST /geojson_layers
   # POST /geojson_layers.json
   def create
-    @geojson_layer = GeojsonLayer.new(geojson_layer_params)
+    @geojson_layer = @organization.geojson_layers.build(geojson_layer_params)
 
     respond_to do |format|
       if @geojson_layer.save
@@ -92,7 +93,7 @@ class GeojsonLayersController < ManagerController
   def destroy
     @geojson_layer.destroy
     respond_to do |format|
-      format.html { redirect_to geojson_layers_url }
+      format.html { redirect_to @geojson_layer.organization }
       format.json { head :no_content }
     end
   end
@@ -106,6 +107,10 @@ class GeojsonLayersController < ManagerController
     # Use callbacks to share common setup or constraints between actions.
     def set_map
       @map = Map.where('lower(slug) = ?', params[:map_id]).first
+    end
+
+    def set_organization
+      @organization = Organization.friendly.find(params[:organization_id]) if params[:organization_id].present?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

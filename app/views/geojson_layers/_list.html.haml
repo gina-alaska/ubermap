@@ -1,0 +1,17 @@
+%table.table.table-striped.table-condensed
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th File name
+      %th Active
+      %th.text-right Actions
+  %tbody
+    - geojson_layers.each do |geojson_layer|
+      %tr
+        %td= geojson_layer.name
+        %td= geojson_layer.description
+        %td= geojson_layer.file_name
+        %td= geojson_layer.active
+        %td.text-right
+          = link_to 'Manage', edit_organization_geojson_layer_path(@organization, geojson_layer), class: 'btn btn-primary'

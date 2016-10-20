@@ -1,8 +1,6 @@
 #map_container
   #map
 
-%p#notice= notice
-
 #geojson_layer_editor_container.layer_editor_container.panel.panel-default
   .panel-body
     %ul.nav.nav-tabs
@@ -23,6 +21,6 @@
       = render 'form'
   .panel-footer
     .btn-group.layer-btns.btn-block
-      = link_to 'Close', geojson_layers_path, class: 'btn col-lg-6 col-md-6 col-sm-6 btn-default'
+      = link_to 'Close', organization_path(@geojson_layer.organization), class: 'btn col-lg-6 col-md-6 col-sm-6 btn-default'
       %a.btn.btn-primary.col-lg-6.col-md-6.col-sm-6{ data: { behavior: 'save-form', target: "##{dom_id(@geojson_layer, 'form')}" }}
         Save

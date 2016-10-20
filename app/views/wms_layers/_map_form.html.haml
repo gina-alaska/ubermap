@@ -21,6 +21,6 @@
       = render 'form'
   .panel-footer
     .btn-group.layer-btns.btn-block
-      = link_to 'Close', wms_layers_path, class: 'btn col-lg-6 col-md-6 col-sm-6 btn-default'
+      = link_to 'Close', organization_path(@wms_layer.organization), class: 'btn col-lg-6 col-md-6 col-sm-6 btn-default'
       %a.btn.btn-primary.col-lg-6.col-md-6.col-sm-6{ data: { behavior: 'save-form', target: "##{dom_id(@wms_layer, 'form')}" }}
         Save

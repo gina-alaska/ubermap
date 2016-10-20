@@ -1,5 +1,6 @@
 class WmsLayersController < ManagerController
   before_action :set_wms_layer, only: [:show, :edit, :update, :destroy, :add, :remove]
+  before_action :set_organization
   before_action :set_map, only: [:remove, :add]
 
   authorize_resource
@@ -7,7 +8,7 @@ class WmsLayersController < ManagerController
   # GET /wms_layers
   # GET /wms_layers.json
   def index
-    @wms_layers = WmsLayer.all
+    @wms_layers = @organization.wms_layers
   end
 
   # GET /wms_layers/1
@@ -17,7 +18,7 @@ class WmsLayersController < ManagerController
 
   # GET /wms_layers/new
   def new
-    @wms_layer = WmsLayer.new
+    @wms_layer = @organization.wms_layers.build
 
     render layout: 'editor'
   end
@@ -30,7 +31,7 @@ class WmsLayersController < ManagerController
   # POST /wms_layers
   # POST /wms_layers.json
   def create
-    @wms_layer = WmsLayer.new(wms_layer_params)
+    @wms_layer = @organization.wms_layers.build(wms_layer_params)
 
     respond_to do |format|
       if @wms_layer.save
@@ -64,7 +65,7 @@ class WmsLayersController < ManagerController
   def destroy
     @wms_layer.destroy
     respond_to do |format|
-      format.html { redirect_to wms_layers_url }
+      format.html { redirect_to @wms_layer.organization }
       format.json { head :no_content }
     end
   end
@@ -91,6 +92,10 @@ class WmsLayersController < ManagerController
     # Use callbacks to share common setup or constraints between actions.
     def set_map
       @map = Map.where('lower(slug) = ?', params[:map_id]).first
+    end
+
+    def set_organization
+      @organization = Organization.friendly.find(params[:organization_id]) if params[:organization_id].present?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

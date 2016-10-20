@@ -8,6 +8,7 @@ one:
   options: 
   description: MyText
   name: MyString
+  organization: :one
 
 two:
   url: MyString
@@ -17,3 +18,4 @@ two:
   options: 
   description: MyText
   name: MyString
+  organization: :one

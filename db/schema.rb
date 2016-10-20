@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161010191658) do
+ActiveRecord::Schema.define(version: 20161019220419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,10 +39,10 @@ ActiveRecord::Schema.define(version: 20161010191658) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "geojson_layers", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "file_uid",    limit: 255
-    t.string   "file_name",   limit: 255
-    t.boolean  "active",                  default: true
+    t.string   "name",            limit: 255
+    t.string   "file_uid",        limit: 255
+    t.string   "file_name",       limit: 255
+    t.boolean  "active",                      default: true
     t.text     "legend"
     t.text     "description"
     t.datetime "created_at"
@@ -51,7 +51,10 @@ ActiveRecord::Schema.define(version: 20161010191658) do
     t.hstore   "style"
     t.hstore   "options"
     t.text     "fields"
+    t.integer  "organization_id"
   end
+
+  add_index "geojson_layers", ["organization_id"], name: "index_geojson_layers_on_organization_id", using: :btree
 
   create_table "layers", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -150,21 +153,26 @@ ActiveRecord::Schema.define(version: 20161010191658) do
   add_index "users", ["organization_id"], name: "index_users_on_organization_id", using: :btree
 
   create_table "wms_layers", force: :cascade do |t|
-    t.string   "url",         limit: 255
-    t.string   "layers",      limit: 255
+    t.string   "url",             limit: 255
+    t.string   "layers",          limit: 255
     t.text     "legend"
-    t.boolean  "active",                  default: true
+    t.boolean  "active",                      default: true
     t.hstore   "options"
     t.text     "description"
-    t.string   "name",        limit: 255
+    t.string   "name",            limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "organization_id"
   end
 
+  add_index "wms_layers", ["organization_id"], name: "index_wms_layers_on_organization_id", using: :btree
+
+  add_foreign_key "geojson_layers", "organizations"
   add_foreign_key "multimap_maps", "maps"
   add_foreign_key "multimap_maps", "multimaps"
   add_foreign_key "multimaps", "users"
   add_foreign_key "organizations_users", "organizations"
   add_foreign_key "organizations_users", "users"
   add_foreign_key "users", "organizations"
+  add_foreign_key "wms_layers", "organizations"
 end

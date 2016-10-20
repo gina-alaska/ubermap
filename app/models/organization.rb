@@ -7,8 +7,8 @@ class Organization < ActiveRecord::Base
 
   has_many :maps
   has_many :multimaps
-  has_many :geojson_layers
-  has_many :wms_layers
+  has_many :geojson_layers, dependent: :destroy
+  has_many :wms_layers, dependent: :destroy
 
   validates :slug, uniqueness: true
   validates :name, presence: true, uniqueness: true

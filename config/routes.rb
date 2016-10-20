@@ -6,13 +6,15 @@ GenericMap::Application.routes.draw do
     patch :activate, on: :member
   end
 
-  resources :wms_layers
-  resources :geojson_layers
+  # resources :wms_layers
+  # resources :geojson_layers
 
   resources :users
 
-  resources :organizations do
+  resources :organizations, path: 'orgs' do
     resources :users, controller: 'organizations_users'
+    resources :geojson_layers, shallow: true
+    resources :wms_layers, shallow: true
   end
 
   resources :maps do
