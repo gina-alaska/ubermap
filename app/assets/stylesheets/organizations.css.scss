@@ -1,0 +1,12 @@
+.navbar-default .navbar-nav > li {
+  & > a {
+    color: #000;
+  }
+  & > a.bg-primary {
+    color: #fff;
+  }
+  & > a:hover {
+    color: #000;
+    background-color: #ddd;
+  }
+}

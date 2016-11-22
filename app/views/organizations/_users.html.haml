@@ -1,0 +1,10 @@
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Users
+  .panel-body
+    %ul
+      - @organization.organizations_users.find_each do |user|
+        %li
+          = user
+          - if can? :manage, @organization
+            = link_to 'Remove', organization_user_path(@organization, user), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }

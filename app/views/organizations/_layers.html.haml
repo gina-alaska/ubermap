@@ -1,0 +1,27 @@
+%nav.navbar.navbar-default.navbar-static-top
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle.collapsed{ type: 'button', data: { toggle: 'collapse', target: '#navbar' }}
+        %span.sr-only Toggle Navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to 'Layers', @organization, class: 'navbar-brand'
+    #navbar.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          = link_to 'New GeoJSON Layer', new_organization_geojson_layer_path(@organization)
+        %li
+          = link_to 'New WMS Layer', new_organization_wms_layer_path(@organization)
+
+- if @organization.geojson_layers.any?
+  .panel.panel-default
+    .panel-heading
+      %h1.panel-title GeoJSON layers
+    = render 'geojson_layers/list', geojson_layers: @organization.geojson_layers
+
+- if @organization.wms_layers.any?
+  .panel.panel-default
+    .panel-heading
+      %h1.panel-title WMS layers
+    = render 'wms_layers/list', wms_layers: @organization.wms_layers

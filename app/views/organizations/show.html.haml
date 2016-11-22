@@ -1,44 +1,18 @@
-- content_for :side_menu do
-  = link_to 'Organizations List', organizations_path, class: 'btn btn-default btn-block'
-  %hr
-  = link_to 'New Map', new_organization_map_path(@organization), class: 'btn btn-success btn-block'
-  = link_to 'New Grouped Map', new_organization_multimap_path(@organization), class: 'btn btn-success btn-block'
-  %hr
-  = link_to 'New GeoJSON Layer', new_organization_geojson_layer_path(@organization), class: 'btn btn-success btn-block'
-  = link_to 'New WMS Layer', new_organization_wms_layer_path(@organization), class: 'btn btn-success btn-block'
+%ul.nav.nav-tabs
+  %li.active
+    = link_to '#general', data: { toggle: 'tab' } do
+      Organization Information
+  %li
+    = link_to '#maps', data: { toggle: 'tab' } do
+      Map
+  %li
+    = link_to '#layers', data: { toggle: 'tab' } do
+      Layers
 
-.panel.panel-default
-  .panel-heading
-    %h1.panel-title= "Organization #{@organization.name}"
-  .panel-body
-    %h1 Users
-    %ul
-      - @organization.organizations_users.find_each do |user|
-        %li
-          = user
-          - if can? :manage, @organization
-            = link_to 'Remove', organization_user_path(@organization, user), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
-
-- if @organization.multimaps.any?
-  .panel.panel-default
-    .panel-heading
-      %h1.panel-title Grouped Maps
-    = render 'multimaps/list', multimaps: @organization.multimaps
-
-- if @organization.maps.any?
-  .panel.panel-default
-    .panel-heading
-      %h1.panel-title Maps
-    = render 'maps/list', maps: @organization.maps
-
-- if @organization.geojson_layers.any?
-  .panel.panel-default
-    .panel-heading
-      %h1.panel-title GeoJSON layers
-    = render 'geojson_layers/list', geojson_layers: @organization.geojson_layers
-
-- if @organization.wms_layers.any?
-  .panel.panel-default
-    .panel-heading
-      %h1.panel-title WMS layers
-    = render 'wms_layers/list', wms_layers: @organization.wms_layers
+.tab-content
+  #general.tab-pane.active
+    = render 'general'
+  #maps.tab-pane
+    = render 'maps'
+  #layers.tab-pane
+    = render 'layers'
