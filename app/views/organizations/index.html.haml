@@ -1,5 +1,5 @@
 - content_for :side_menu do
-  = render 'side_menu'
+  = link_to 'New Organization', new_organization_path, class: 'btn btn-success btn-block'
 
 .panel.panel-default
   .panel-heading
@@ -18,9 +18,6 @@
           %td= org.users.count
           %td= org.description
           %td.text-right
-            = link_to organization_path(org), class: 'btn btn-sm btn-default' do
-              View
-            = link_to edit_organization_path(org), class: 'btn btn-sm btn-primary' do
-              Edit
-            = link_to organization_path(org), method: :delete, data: {confirm: "Delete Organization #{org.name}?"}, class: 'btn btn-sm btn-danger' do
-              Delete
+            = link_to organization_path(org), class: 'btn btn-primary' do
+              Manage
+              %i.fa.fa-arrow-right
