@@ -10,9 +10,13 @@
     #navbar.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
         %li
-          = link_to 'New GeoJSON Layer', new_organization_geojson_layer_path(@organization)
+          = link_to new_organization_geojson_layer_path(@organization) do
+            %i.fa.fa-plus.text-success
+            New GeoJSON Layer
         %li
-          = link_to 'New WMS Layer', new_organization_wms_layer_path(@organization)
+          = link_to new_organization_wms_layer_path(@organization) do
+            %i.fa.fa-plus.text-success
+            New WMS Layer
 
 - if @organization.geojson_layers.any?
   .panel.panel-default

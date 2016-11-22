@@ -1,14 +1,19 @@
 %table.table.table-condensed.table-stripped
   %thead
     %tr
-      %th Title
-      %th URL
+      %th Name
+      %th Permalink
+      %th.col-sm-1 # Layers
+      %th.text-right Active
       %th
   %tbody
     - maps.each do |map|
       %tr
         %td= map.title
         %td= link_to viewer_url(map), viewer_url(map)
+        %td= map.map_layers.count
+        %td.text-right
+          = map.active? ? 'Yes' : 'No'
         %td.text-right
           .btn-group
             = link_to viewer_url(map), class: 'btn btn-default' do

@@ -8,7 +8,7 @@
         %span.icon-bar
       = link_to @organization.name, @organization, class: 'navbar-brand'
     #navbar.collapse.navbar-collapse
-      %ul.nav.navbar-nav.navbar-right
+      %ul.nav.navbar-nav
         - if can? :edit, @organization
           %li
             = link_to edit_organization_path(@organization) do
@@ -16,8 +16,41 @@
               Edit
         - if can? :delete, @organization
           %li
-            = link_to organization_path(@organization), method: :delete, data: {confirm: "Delete Organization #{@organization.name}?"}, class: 'text-danger bg-danger' do
+            = link_to organization_path(@organization), method: :delete, data: {confirm: "Delete Organization #{@organization.name}?"}, class: 'text-danger' do
               %i.fa.fa-trash.text-danger
               Delete
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          = link_to new_organization_user_path(@organization) do
+            %i.fa.fa-plus.text-success
+            Add user
+
+        %li.dropdown
+          = link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do
+            Maps
+            %span.caret
+          %ul.dropdown-menu
+            %li
+              = link_to new_organization_multimap_path(@organization) do
+                %i.fa.fa-plus.text-success
+                New Grouped Map
+            %li
+              = link_to new_organization_map_path(@organization) do
+                %i.fa.fa-plus.text-success
+                New Map
+        %li.dropdown
+          = link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do
+            Layers
+            %span.caret
+          %ul.dropdown-menu
+            %li
+              = link_to new_organization_geojson_layer_path(@organization) do
+                %i.fa.fa-plus.text-success
+                New GeoJSON Layer
+            %li
+              = link_to new_organization_wms_layer_path(@organization) do
+                %i.fa.fa-plus.text-success
+                New WMS Layer
+
 
 = render 'users'
