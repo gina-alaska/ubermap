@@ -1,27 +1,27 @@
 - content_for :side_menu do
-  = link_to maps_path, class: 'btn btn-default btn-block' do
+  = link_to @organization, class: 'btn btn-default btn-block' do
     %i.fa.fa-arrow-left
-    Map List
+    Back
 
   = link_to viewer_url(@map), class: 'btn btn-default btn-block' do
     %i.fa.fa-eye.fa-fw
     Preview
 
   - if can? :edit, @map
-    = link_to edit_map_path(@map), class: 'btn btn-primary btn-block' do
+    = link_to edit_organization_map_path(@organization, @map), class: 'btn btn-primary btn-block' do
       %i.fa.fa-gear.fa-fw
       Settings
 
   - if can? :delete, @map
-    = link_to @map, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block' do
+    = link_to [@organization, @map], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block' do
       %i.fa.fa-trash.fa-fw
       Delete
 
   %hr
 
   - if can? :edit, @map
-    = link_to 'Add GeoJSON Layer', available_geojson_layers_for_map_path(@map), class: 'btn btn-success btn-block'
-    = link_to 'Add WMS Layer', available_wms_layers_for_map_path(@map), class: 'btn btn-success btn-block'
+    = link_to 'Add GeoJSON Layer', [:available_geojson, @organization, @map], class: 'btn btn-success btn-block'
+    = link_to 'Add WMS Layer', [:available_wms, @organization, @map], class: 'btn btn-success btn-block'
 
 
 .panel.panel-default
@@ -51,8 +51,8 @@
           = render layer, activate: true
         %td.text-right
           .btn-group
-            = link_to 'Edit', edit_geojson_layer_path(layer), class: 'btn btn-default'
-            = link_to 'Remove', [:remove, @map, layer], method: :patch, class: 'btn btn-danger'
+            = link_to 'Manage', [:edit, @organization, layer], class: 'btn btn-primary'
+            = link_to 'Remove', [:remove_geojson, @organization, @map, layer: layer], method: :patch, class: 'btn btn-danger'
 
     - @map.wms_layers.each do |layer|
       %tr
@@ -61,5 +61,5 @@
           = render layer, activate: true
         %td.text-right
           .btn-group
-            = link_to 'Edit', edit_wms_layer_path(layer), class: 'btn btn-default'
-            = link_to 'Remove', [:remove, @map, layer], method: :patch, class: 'btn btn-danger'
+            = link_to 'Manage', [:edit, @organization, layer], class: 'btn btn-primary'
+            = link_to 'Remove', [:remove_wms, @organization, @map, layer: layer], method: :patch, class: 'btn btn-danger'

@@ -1,11 +1,11 @@
 - content_for :side_menu do
   = link_to 'Organizations List', organizations_path, class: 'btn btn-default btn-block'
   %hr
-  = link_to 'New Multi Map Group', new_organization_multimap_path(@organization), class: 'btn btn-success btn-block'
+  = link_to 'New Map', new_organization_map_path(@organization), class: 'btn btn-success btn-block'
+  = link_to 'New Grouped Map', new_organization_multimap_path(@organization), class: 'btn btn-success btn-block'
   %hr
   = link_to 'New GeoJSON Layer', new_organization_geojson_layer_path(@organization), class: 'btn btn-success btn-block'
   = link_to 'New WMS Layer', new_organization_wms_layer_path(@organization), class: 'btn btn-success btn-block'
-
 
 .panel.panel-default
   .panel-heading
@@ -19,18 +19,26 @@
           - if can? :manage, @organization
             = link_to 'Remove', organization_user_path(@organization, user), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
 
-.panel.panel-default
-  .panel-heading
-    %h1.panel-title Grouped Maps
-  = render 'multimaps/list', multimaps: @organization.multimaps
+- if @organization.multimaps.any?
+  .panel.panel-default
+    .panel-heading
+      %h1.panel-title Grouped Maps
+    = render 'multimaps/list', multimaps: @organization.multimaps
 
+- if @organization.maps.any?
+  .panel.panel-default
+    .panel-heading
+      %h1.panel-title Maps
+    = render 'maps/list', maps: @organization.maps
 
-.panel.panel-default
-  .panel-heading
-    %h1.panel-title GeoJSON layers
-  = render 'geojson_layers/list', geojson_layers: @organization.geojson_layers
+- if @organization.geojson_layers.any?
+  .panel.panel-default
+    .panel-heading
+      %h1.panel-title GeoJSON layers
+    = render 'geojson_layers/list', geojson_layers: @organization.geojson_layers
 
-.panel.panel-default
-  .panel-heading
-    %h1.panel-title WMS layers
-  = render 'wms_layers/list', wms_layers: @organization.wms_layers
+- if @organization.wms_layers.any?
+  .panel.panel-default
+    .panel-heading
+      %h1.panel-title WMS layers
+    = render 'wms_layers/list', wms_layers: @organization.wms_layers

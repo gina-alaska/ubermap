@@ -4,8 +4,10 @@ one:
   title: Test map one
   slug: test-map-one
   active: false
+  organization: one
 
 two:
   title: Test map two
   slug: test-map-two
   active: false
+  organization: two

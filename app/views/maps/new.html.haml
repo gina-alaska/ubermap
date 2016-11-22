@@ -1,7 +1,7 @@
 - content_for :side_menu do
-  = link_to maps_path, class: 'btn btn-default btn-block' do
+  = link_to @organization, class: 'btn btn-default btn-block' do
     %i.fa.fa-arrow-left
-    Cancel
+    Back
 
 .panel.panel-default
   .panel-heading

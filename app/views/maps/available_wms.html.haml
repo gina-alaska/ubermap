@@ -1,0 +1,15 @@
+- content_for :side_menu do
+  = link_to [@organization, @map], class: 'btn btn-default btn-block' do
+    %i.fa.fa-arrow-left
+    Back
+
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Available WMS Layers
+  %table.table.table-striped
+    - @layers.each do |layer|
+      %tr
+        %td
+          = render layer, activate: true
+        %td.text-right
+          = link_to 'Add Layer', [:add_wms, @organization, @map, layer: layer], method: :patch, class: 'btn btn-primary'

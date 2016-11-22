@@ -5,7 +5,10 @@ class ViewerController < ApplicationController
     begin
       @map = Multimap.friendly.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      @map = Map.friendly.find(params[:id])
+      begin
+        @map = Map.friendly.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+      end
     end
 
     render layout: 'fullmap'

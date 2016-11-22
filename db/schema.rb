@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019220419) do
+ActiveRecord::Schema.define(version: 20161020235911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,12 +82,15 @@ ActiveRecord::Schema.define(version: 20161019220419) do
   end
 
   create_table "maps", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.string   "slug",       limit: 255
+    t.string   "title",           limit: 255
+    t.string   "slug",            limit: 255
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "organization_id"
   end
+
+  add_index "maps", ["organization_id"], name: "index_maps_on_organization_id", using: :btree
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
@@ -170,6 +173,7 @@ ActiveRecord::Schema.define(version: 20161019220419) do
   add_index "wms_layers", ["organization_id"], name: "index_wms_layers_on_organization_id", using: :btree
 
   add_foreign_key "geojson_layers", "organizations"
+  add_foreign_key "maps", "organizations"
   add_foreign_key "multimap_maps", "maps"
   add_foreign_key "multimap_maps", "multimaps"
   add_foreign_key "multimaps", "organizations"

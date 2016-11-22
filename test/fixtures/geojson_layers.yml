@@ -6,6 +6,10 @@
 #
 one:
   organization: :one
+  options: {}
+  style: {}
 
 two:
   organization: :two
+  options: {}
+  style: {}

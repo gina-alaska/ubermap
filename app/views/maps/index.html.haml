@@ -1,23 +1,9 @@
 - content_for :side_menu do
   - if can? :create, Map
-    = link_to 'New Map', new_map_path, class: 'btn btn-success btn-block'
+    = link_to 'New Map', new_organization_map_path(@organization), class: 'btn btn-success btn-block'
 
 
 .panel.panel-default
   .panel-heading
     %h1.panel-title Maps
-  %table.table.table-condensed.table-stripped
-    %thead
-      %tr
-        %th Title
-        %th URL
-        %th
-    %tbody
-      - @maps.each do |map|
-        %tr
-          %td= map.title
-          %td= link_to viewer_url(map), viewer_url(map)
-          %td.text-right
-            .btn-group
-              = link_to "Preview", viewer_url(map), class: 'btn btn-default'
-              = link_to "Manage", map, class: 'btn btn-primary'
+  = render 'list', maps: @maps

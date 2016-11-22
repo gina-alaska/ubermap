@@ -12,23 +12,32 @@ GenericMap::Application.routes.draw do
       patch :remove, on: :member
       patch :activate, on: :member
     end
+
+    resources :maps do
+      get :available_geojson, on: :member
+      get :available_wms, on: :member
+      patch :add_geojson, on: :member
+      patch :add_wms, on: :member
+      patch :remove_geojson, on: :member
+      patch :remove_wms, on: :member      
+    end
   end
 
-  resources :maps do
-    resources :geojson_layers, only: [:index] do
-      patch :remove, on: :member
-      patch :add, on: :member
-    end
-
-    resources :wms_layers, only: [:index] do
-      patch :remove, on: :member
-      patch :add, on: :member
-    end
-    get :available_geojson_layers_for, on: :member
-    get :available_wms_layers_for, on: :member
-    # patch :add_layer, on: :member
-    # patch :remove_layer, on: :member
-  end
+  # resources :maps do
+  #   resources :geojson_layers, only: [:index] do
+  #     patch :remove, on: :member
+  #     patch :add, on: :member
+  #   end
+  #
+  #   resources :wms_layers, only: [:index] do
+  #     patch :remove, on: :member
+  #     patch :add, on: :member
+  #   end
+  #   get :available_geojson_layers_for, on: :member
+  #   get :available_wms_layers_for, on: :member
+  #   # patch :add_layer, on: :member
+  #   # patch :remove_layer, on: :member
+  # end
 
   get '/logout', to: 'sessions#destroy'
   get '/login', to: 'sessions#new'

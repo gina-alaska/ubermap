@@ -66,7 +66,7 @@
                 = link_to viewer_url(mmm.map), class: 'btn btn-default' do
                   %i.fa.fa-trash
                   Preview
-                = link_to map_path(mmm.map), class: 'btn btn-primary' do
+                = link_to [@organization, mmm.map], class: 'btn btn-primary' do
                   %i.fa.fa-edit
                   Manage
                 = link_to remove_organization_multimap_path(@organization, mmm.multimap, map: mmm.map), method: :patch, class: 'btn btn-danger' do

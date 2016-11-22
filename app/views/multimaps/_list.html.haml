@@ -11,7 +11,11 @@
         %td= multimap.name
         %td= multimap.maps.count
         %td.text-right= multimap.active
-        %td.text-right.col-sm-2
-          = link_to [@organization, multimap], class: 'btn btn-primary' do
-            Manage
-            %i.fa.fa-arrow-right
+        %td.text-right
+          .btn-group
+            = link_to viewer_url(multimap), class: 'btn btn-default' do
+              %i.fa.fa-eye
+              Preview
+            = link_to [@organization, multimap], class: 'btn btn-primary' do
+              Manage
+              %i.fa.fa-arrow-right

@@ -16,7 +16,7 @@ class MultimapsController < ManagerController
   end
 
   def available
-    @maps = Map.where.not(id: @multimap.map_ids)
+    @maps = @organization.maps.where.not(id: @multimap.map_ids)
     respond_to do |format|
       format.html
     end

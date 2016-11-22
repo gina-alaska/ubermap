@@ -1,9 +1,0 @@
-- content_for :side_menu do
-  = link_to @map, class: 'btn btn-default btn-block' do
-    %i.fa.fa-arrow-left
-    Cancel
-
-.panel.panel-default
-  .panel-heading
-    %h1.panel-title Available WMS Layers
-  = render 'available_layers'

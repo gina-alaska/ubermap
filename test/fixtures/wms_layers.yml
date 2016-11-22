@@ -5,7 +5,7 @@ one:
   layers: MyString
   legend: MyText
   active: false
-  options: 
+  options:
   description: MyText
   name: MyString
   organization: :one
@@ -15,7 +15,7 @@ two:
   layers: MyString
   legend: MyText
   active: false
-  options: 
+  options:
   description: MyText
   name: MyString
   organization: :one
