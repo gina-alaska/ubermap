@@ -1,0 +1,7 @@
+- if content_for?(:breadcrumb)
+  %ol.breadcrumb
+    %li
+      = link_to organizations_path do
+        %i.fa.fa-home
+        Organizations
+    = content_for :breadcrumb

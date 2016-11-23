@@ -4,7 +4,6 @@
       %th Name
       %th Permalink
       %th.col-sm-1 # Maps
-      %th.text-right Active
       %th.text-right{:colspan => "3"} Actions
   %tbody
     - multimaps.each do |multimap|
@@ -12,12 +11,7 @@
         %td= multimap.name
         %td= link_to viewer_url(multimap), viewer_url(multimap)
         %td= multimap.maps.count
-        %td.text-right= multimap.active? ? 'Yes' : 'No'
         %td.text-right
-          .btn-group
-            = link_to viewer_url(multimap), class: 'btn btn-default' do
-              %i.fa.fa-eye
-              Preview
-            = link_to [@organization, multimap], class: 'btn btn-primary' do
-              Manage
-              %i.fa.fa-arrow-right
+          = link_to [@organization, multimap], class: 'btn btn-sm btn-primary' do
+            Manage
+            %i.fa.fa-arrow-right

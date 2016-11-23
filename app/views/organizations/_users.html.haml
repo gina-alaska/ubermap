@@ -14,4 +14,6 @@
           %td= ou.user.email
           %td.text-right
             - if can? :manage, @organization
-              = link_to 'Remove', organization_user_path(@organization, ou), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
+              = link_to organization_user_path(@organization, ou), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: 'Are you sure?' } do
+                %i.fa.fa-times
+                Remove

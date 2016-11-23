@@ -1,6 +1,10 @@
 - content_for :side_menu do
   = link_to 'New Organization', new_organization_path, class: 'btn btn-success btn-block'
 
+- content_for :breadcrumb do
+  %li.active
+    List
+
 .panel.panel-default
   .panel-heading
     %h1.panel-title Organizations

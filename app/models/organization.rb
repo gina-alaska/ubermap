@@ -13,4 +13,8 @@ class Organization < ActiveRecord::Base
 
   validates :slug, uniqueness: true
   validates :name, presence: true, uniqueness: true
+
+  def to_s
+    name
+  end
 end

@@ -1,18 +1,4 @@
-- content_for :side_menu do
-  %p
-    %strong Maps
-    %br/
-    Add layers to maps to create custom presentations
-
-  %p
-    %strong Grouped Maps
-    %br/
-    Combine multiple maps into a single interface
-    %br/
-    %br/
-    The layers on each map can be toggled on or off and allows users to create custom presentations for many different layers
-
-%nav.navbar.navbar-default.navbar-static-top
+%nav.navbar.navbar-default
   .container-fluid
     .navbar-header
       %button.navbar-toggle.collapsed{ type: 'button', data: { toggle: 'collapse', target: '#navbar' }}
@@ -31,14 +17,15 @@
           = link_to new_organization_map_path(@organization) do
             %i.fa.fa-plus.text-success
             New Map
-- if @organization.multimaps.any?
-  .panel.panel-default
-    .panel-heading
-      %h1.panel-title Grouped Maps
-    = render 'multimaps/list', multimaps: @organization.multimaps
 
-- if @organization.maps.any?
-  .panel.panel-default
-    .panel-heading
-      %h1.panel-title Maps
-    = render 'maps/list', maps: @organization.maps
+.row
+  .col-sm-6
+    .panel.panel-default
+      .panel-heading
+        %h1.panel-title Grouped Maps
+      = render 'multimaps/list', multimaps: @organization.multimaps
+  .col-sm-6
+    .panel.panel-default
+      .panel-heading
+        %h1.panel-title Single Maps
+      = render 'maps/list', maps: @organization.maps

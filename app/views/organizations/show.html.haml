@@ -1,18 +1,9 @@
-%ul.nav.nav-tabs
+- content_for :breadcrumb do
   %li.active
-    = link_to '#general', data: { toggle: 'tab' } do
-      Organization Information
-  %li
-    = link_to '#maps', data: { toggle: 'tab' } do
-      Maps
-  %li
-    = link_to '#layers', data: { toggle: 'tab' } do
-      Layers
+    = @organization
 
-.tab-content
-  #general.tab-pane.active
-    = render 'general'
-  #maps.tab-pane
-    = render 'maps'
-  #layers.tab-pane
-    = render 'layers'
+= render 'general'
+
+= render 'maps'
+
+= render 'layers'

@@ -2,5 +2,8 @@
   = f.input :title, class: 'form-control'
   = f.input :active
 
-  .actions.pull-right
-    = f.submit 'Save', class: 'btn btn-primary'
+  .actions
+    = link_to [@organization, @map], class: 'btn btn-default' do
+      %i.fa.fa-arrow-left
+      Cancel
+    = f.submit 'Save', class: 'btn btn-primary pull-right'
