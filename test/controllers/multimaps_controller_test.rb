@@ -9,8 +9,9 @@ class MultimapsControllerTest < ActionController::TestCase
 
   test "should get index" do
     get :index, organization_id: @organization
-    assert_response :success
-    assert_not_nil assigns(:multimaps)
+    assert_redirected_to @organization
+    # assert_response :success
+    # assert_not_nil assigns(:multimaps)
   end
 
   test "should get new" do

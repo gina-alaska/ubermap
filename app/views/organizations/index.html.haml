@@ -1,13 +1,24 @@
-- content_for :side_menu do
-  = link_to 'New Organization', new_organization_path, class: 'btn btn-success btn-block'
-
 - content_for :breadcrumb do
   %li.active
     List
 
 .panel.panel-default
-  .panel-heading
-    %h1.panel-title Organizations
+  %nav.navbar.navbar-default.navbar-static-top
+    .container-fluid
+      .navbar-header
+        %button.navbar-toggle.collapsed{ type: 'button', data: { toggle: 'collapse', target: '#navbar' }}
+          %span.sr-only Toggle Navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        = link_to 'Organizations', root_url, class: 'navbar-brand'
+      #navbar.collapse.navbar-collapse
+        %ul.nav.navbar-nav.navbar-right
+          - if can? :manage, Organization
+            %li
+              = link_to new_organization_path do
+                %i.fa.fa-plus
+                New Organization
   %table.table.table-striped
     %thead
       %tr

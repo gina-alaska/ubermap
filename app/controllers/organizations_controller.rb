@@ -3,6 +3,12 @@ class OrganizationsController < ManagerController
 
   def index
     @organizations = Organization.accessible_by(current_ability)
+    case @organizations.count
+    when 0
+      render :notfound
+    when 1
+      redirect_to @organizations.first
+    end
   end
 
   def show

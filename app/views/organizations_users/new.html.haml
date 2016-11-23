@@ -1,3 +1,6 @@
+%h1 Available Users
+%p Click on a user to add them to the organization
+
 - @users.each do |user|
   = link_to organization_users_path(@organization, id: user), method: :post, class: 'btn btn-default' do
     = user

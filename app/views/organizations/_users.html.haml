@@ -6,14 +6,15 @@
       %tr
         %th Name
         %th Email
-        %th.text-right Actions
+        - if can? :manage, @organization
+          %th.text-right Actions
     %tbody
       - @organization.organizations_users.find_each do |ou|
         %tr
           %td= ou.user.name
           %td= ou.user.email
-          %td.text-right
-            - if can? :manage, @organization
+          - if can? :manage, @organization
+            %td.text-right
               = link_to organization_user_path(@organization, ou), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: 'Are you sure?' } do
                 %i.fa.fa-times
                 Remove
