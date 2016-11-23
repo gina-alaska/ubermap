@@ -2,5 +2,8 @@
   = f.input :name
   = f.input :description
 
-  .text-right
+  = link_to :back, class: 'btn btn-default' do
+    %i.fa.fa-arrow-left
+    Cancel
+  .pull-right
     = f.button :submit, class: 'btn btn-primary'

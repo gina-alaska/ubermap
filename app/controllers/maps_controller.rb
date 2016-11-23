@@ -6,7 +6,8 @@ class MapsController < ManagerController
   # GET /maps
   # GET /maps.json
   def index
-    @maps = @organization.maps
+    # @maps = @organization.maps
+    redirect_to @organization
   end
 
   # GET /maps/1

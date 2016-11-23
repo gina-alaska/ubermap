@@ -1,0 +1,28 @@
+%nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle.collapsed{ type: 'button', data: { toggle: 'collapse', target: '#navbar' }}
+        %span.sr-only Toggle Navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to @organization, class: 'navbar-brand' do
+        Organization Info: #{@organization.name}
+    #navbar.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          = link_to new_organization_user_path(@organization) do
+            %i.fa.fa-plus.text-success
+            Add user
+        - if can? :edit, @organization
+          %li
+            = link_to edit_organization_path(@organization) do
+              %i.fa.fa-edit.text-primary
+              Edit
+        - if can? :delete, @organization
+          %li
+            = link_to organization_path(@organization), method: :delete, data: {confirm: "Delete Organization #{@organization.name}?"}, class: 'text-danger' do
+              %i.fa.fa-trash.text-danger
+              Delete
+
+= render 'users'

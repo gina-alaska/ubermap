@@ -1,9 +1,0 @@
-= link_to 'Organizations List', organizations_path, class: 'btn btn-default btn-block'
-- if can? :manage, Organization
-  - if !@organization
-    = link_to 'New Organization', new_organization_path, class: 'btn btn-success btn-block'
-
-  - else
-    %hr
-    - unless @organization.new_record?
-      = link_to 'Add User', new_organization_user_path(@organization), class: 'btn btn-success btn-block'

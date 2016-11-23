@@ -1,0 +1,7 @@
+- if signed_in?
+  %h1 No organizations are available
+- else
+  .alert.alert-info
+    %h1.text-center You must login before you can manage maps
+    %br/
+    = link_to 'Login', login_path, class: 'btn btn-lg btn-primary btn-block'

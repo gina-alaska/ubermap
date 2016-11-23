@@ -1,19 +1,17 @@
 %table.table.table-condensed.table-stripped
   %thead
     %tr
-      %th Title
-      %th URL
-      %th
+      %th Name
+      %th Permalink
+      %th.col-sm-1 # Layers
+      %th.text-right Actions
   %tbody
     - maps.each do |map|
       %tr
         %td= map.title
         %td= link_to viewer_url(map), viewer_url(map)
+        %td= map.map_layers.count
         %td.text-right
-          .btn-group
-            = link_to viewer_url(map), class: 'btn btn-default' do
-              %i.fa.fa-eye
-              Preview
-            = link_to [@organization, map], class: 'btn btn-primary' do
-              Manage
-              %i.fa.fa-arrow-right
+          = link_to [@organization, map], class: 'btn btn-sm btn-primary' do
+            Manage
+            %i.fa.fa-arrow-right

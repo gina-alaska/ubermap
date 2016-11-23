@@ -7,3 +7,7 @@ one:
 two:
   organization: :two
   user: :two
+
+three:
+  organization: :one
+  user: :two

@@ -1,0 +1,31 @@
+%nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle.collapsed{ type: 'button', data: { toggle: 'collapse', target: '#navbar' }}
+        %span.sr-only Toggle Navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to 'Maps', @organization, class: 'navbar-brand'
+    #navbar.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          = link_to new_organization_multimap_path(@organization) do
+            %i.fa.fa-plus.text-success
+            Create Grouped Map
+        %li
+          = link_to new_organization_map_path(@organization) do
+            %i.fa.fa-plus.text-success
+            Create Map
+
+.row
+  .col-sm-6
+    .panel.panel-default
+      .panel-heading
+        %h1.panel-title Grouped Maps
+      = render 'multimaps/list', multimaps: @organization.multimaps
+  .col-sm-6
+    .panel.panel-default
+      .panel-heading
+        %h1.panel-title Single Maps
+      = render 'maps/list', maps: @organization.maps

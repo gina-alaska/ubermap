@@ -1,33 +1,47 @@
-- content_for :side_menu do
-  = link_to @organization, class: 'btn btn-default btn-block' do
-    %i.fa.fa-arrow-left
-    Back
-
-  = link_to viewer_url(@map), class: 'btn btn-default btn-block' do
-    %i.fa.fa-eye.fa-fw
-    Preview
-
-  - if can? :edit, @map
-    = link_to edit_organization_map_path(@organization, @map), class: 'btn btn-primary btn-block' do
-      %i.fa.fa-gear.fa-fw
-      Settings
-
-  - if can? :delete, @map
-    = link_to [@organization, @map], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block' do
-      %i.fa.fa-trash.fa-fw
-      Delete
-
-  %hr
-
-  - if can? :edit, @map
-    = link_to 'Add GeoJSON Layer', [:available_geojson, @organization, @map], class: 'btn btn-success btn-block'
-    = link_to 'Add WMS Layer', [:available_wms, @organization, @map], class: 'btn btn-success btn-block'
+- content_for :breadcrumb do
+  %li
+    = link_to @organization, @organization
+  %li.active
+    = @map
 
 
 .panel.panel-default
-  .panel-heading
-    %h1.panel-title
-      Map: #{@map.title}
+  %nav.navbar.navbar-default.navbar-static-top{ style: 'margin-bottom: 0px;' }
+    .container-fluid
+      .navbar-header
+        %button.navbar-toggle.collapsed{ type: 'button', data: { toggle: 'collapse', target: '#navbar' }}
+          %span.sr-only Toggle Navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        = link_to "Map: #{@map.title}", [@organization, @map], class: 'navbar-brand'
+      #navbar.collapse.navbar-collapse
+        %ul.nav.navbar-nav
+          %li
+            = link_to viewer_url(@map) do
+              %i.fa.fa-eye.fa-fw
+              Preview
+          %li
+            - if can? :edit, @map
+              = link_to edit_organization_map_path(@organization, @map) do
+                %i.fa.fa-gear.fa-fw.text-primary
+                Settings
+          %li
+            - if can? :delete, @map
+              = link_to [@organization, @map], method: :delete, data: { confirm: 'Are you sure?' } do
+                %i.fa.fa-trash.fa-fw.text-danger
+                Delete
+        %ul.nav.navbar-nav.navbar-right
+          - if can? :edit, @map
+            %li
+              = link_to [:available_geojson, @organization, @map] do
+                %i.fa.fa-plus.text-success
+                Add GeoJSON Layer
+            %li
+              = link_to [:available_wms, @organization, @map] do
+                %i.fa.fa-plus.text-success
+                Add WMS Layer
+
   .panel-body
     %p
       %strong URL:
@@ -51,8 +65,12 @@
           = render layer, activate: true
         %td.text-right
           .btn-group
-            = link_to 'Manage', [:edit, @organization, layer], class: 'btn btn-primary'
-            = link_to 'Remove', [:remove_geojson, @organization, @map, layer: layer], method: :patch, class: 'btn btn-danger'
+            = link_to [:edit, @organization, layer], class: 'btn btn-sm btn-primary' do
+              %i.fa.fa-edit
+              Manage
+            = link_to [:remove_geojson, @organization, @map, layer: layer], method: :patch, class: 'btn btn-sm btn-danger' do
+              %i.fa.fa-times
+              Remove
 
     - @map.wms_layers.each do |layer|
       %tr
@@ -61,5 +79,5 @@
           = render layer, activate: true
         %td.text-right
           .btn-group
-            = link_to 'Manage', [:edit, @organization, layer], class: 'btn btn-primary'
-            = link_to 'Remove', [:remove_wms, @organization, @map, layer: layer], method: :patch, class: 'btn btn-danger'
+            = link_to 'Manage', [:edit, @organization, layer], class: 'btn btn-sm btn-primary'
+            = link_to 'Remove', [:remove_wms, @organization, @map, layer: layer], method: :patch, class: 'btn btn-sm btn-danger'

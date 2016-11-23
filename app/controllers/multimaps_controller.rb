@@ -7,7 +7,8 @@ class MultimapsController < ManagerController
   # GET /multimaps
   # GET /multimaps.json
   def index
-    @multimaps = @organization.multimaps
+    # @multimaps = @organization.multimaps
+    redirect_to @organization
   end
 
   # GET /multimaps/1
