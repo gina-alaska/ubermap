@@ -44,7 +44,7 @@ end
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
-gem 'unicorn'
+#gem 'unicorn'
 gem 'puma'
 
 # Use Capistrano for deployment
@@ -82,3 +82,4 @@ gem "omniauth-github"
 gem "omniauth-google-oauth2"
 gem "omniauth-openid"
 gem "google-api-client"
+gem "version"
