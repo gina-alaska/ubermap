@@ -1,0 +1,49 @@
+#!/bin/sh
+function join { local IFS="$1"; shift; echo "$*"; }
+
+_libs=(
+  "$(hab pkg path core/gcc-libs)/lib" \
+  "$(hab pkg path core/imagemagick)/lib" \
+  "$(hab pkg path core/libjpeg)/lib" \
+  "$(hab pkg path core/libpng)/lib" \
+  "$(hab pkg path core/zlib)/lib"
+)
+
+export LD_LIBRARY_PATH=$(join : ${_libs[@]})
+export UBERMAP_HOME="{{pkg.path}}"
+export UBERMAP_DATA="{{pkg.svc_data_path}}"
+export UBERMAP_DIST="${UBERMAP_DATA}/{{pkg.version}}-{{pkg.release}}"
+
+if [[ ! -d $UBERMAP_DIST ]]; then
+  echo "Deploying new version from ${UBERMAP_HOME} to ${UBERMAP_DIST}"
+  cp -a ${UBERMAP_HOME}/dist/ ${UBERMAP_DIST}
+
+  echo "Linking database.yml"
+  ln -sf {{pkg.svc_config_path}}/database.yml ${UBERMAP_DIST}/config/database.yml
+  echo "Linking secrets.yml"
+  ln -sf {{pkg.svc_config_path}}/secrets.yml ${UBERMAP_DIST}/config/secrets.yml
+  echo "Linking dotenv"
+  ln -sf {{pkg.svc_config_path}}/env.production ${UBERMAP_DIST}/.env.production
+
+  chown -R hab:hab ${UBERMAP_DIST}
+else
+  echo "{{pkg.version}} already deployed"
+fi
+
+export GEM_HOME="${UBERMAP_DIST}/vendor/bundle/ruby/2.3.0"
+export GEM_PATH="$(hab pkg path core/ruby)/lib/ruby/gems/2.3.0:$(hab pkg path core/bundler):$GEM_HOME"
+export PATH="$PATH:${UBERMAP_DIST}/bin"
+export RAILS_ENV="production"
+
+cd ${UBERMAP_DIST}
+
+exec 2>&1
+
+echo "Linking cache directory"
+ln -sf {{cfg.cache_path}} ${UBERMAP_DIST}/tmp/uploads
+
+if [[ ! -f ${UBERMAP_DIST}/.migrations_complete ]]; then
+  echo "Running 'rake db:create && rake db:migrate' in ${PWD}"
+  exec bin/rake bootstrap && \
+       touch ${UBERMAP_DIST}/.migrations_complete
+fi
