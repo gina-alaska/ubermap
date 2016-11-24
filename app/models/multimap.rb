@@ -20,4 +20,8 @@ class Multimap < ActiveRecord::Base
   def use_sidebar?
     true
   end
+
+  def to_s
+    name
+  end
 end

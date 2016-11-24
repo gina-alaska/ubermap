@@ -1,9 +1,24 @@
-- content_for :side_menu do
-  = render 'side_menu'
+- content_for :breadcrumb do
+  %li.active
+    List
 
 .panel.panel-default
-  .panel-heading
-    %h1.panel-title Organizations
+  %nav.navbar.navbar-default.navbar-static-top
+    .container-fluid
+      .navbar-header
+        %button.navbar-toggle.collapsed{ type: 'button', data: { toggle: 'collapse', target: '#navbar' }}
+          %span.sr-only Toggle Navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        = link_to 'Organizations', root_url, class: 'navbar-brand'
+      #navbar.collapse.navbar-collapse
+        %ul.nav.navbar-nav.navbar-right
+          - if can? :manage, Organization
+            %li
+              = link_to new_organization_path do
+                %i.fa.fa-plus
+                New Organization
   %table.table.table-striped
     %thead
       %tr
@@ -18,9 +33,6 @@
           %td= org.users.count
           %td= org.description
           %td.text-right
-            = link_to organization_path(org), class: 'btn btn-sm btn-default' do
-              View
-            = link_to edit_organization_path(org), class: 'btn btn-sm btn-primary' do
-              Edit
-            = link_to organization_path(org), method: :delete, data: {confirm: "Delete Organization #{org.name}?"}, class: 'btn btn-sm btn-danger' do
-              Delete
+            = link_to organization_path(org), class: 'btn btn-primary' do
+              Manage
+              %i.fa.fa-arrow-right

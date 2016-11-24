@@ -19,7 +19,7 @@ GenericMap::Application.routes.draw do
       patch :add_geojson, on: :member
       patch :add_wms, on: :member
       patch :remove_geojson, on: :member
-      patch :remove_wms, on: :member      
+      patch :remove_wms, on: :member
     end
   end
 
@@ -45,7 +45,7 @@ GenericMap::Application.routes.draw do
   post '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure', to: 'sessions#failure'
-  get '/', to: 'welcome#index', as: :permission_denied
+  get '/', to: 'organizations#index', as: :permission_denied
 
   resources :sessions
   resources :memberships
@@ -55,7 +55,7 @@ GenericMap::Application.routes.draw do
   get '/:id' => 'viewer#show', as: :viewer
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'organizations#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

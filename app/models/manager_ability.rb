@@ -6,28 +6,20 @@ class ManagerAbility
     #
     user ||= User.new # guest user (not logged in)
 
-    can :read, :all
-    cannot :read, User
+    # can :read, :all
+    # cannot :read, User
 
     if user.admin?
       can :manage, :all
       cannot :manage, User, id: user.id
     else
       if organization && organization.users.include?(user)
+        can :read, Organization, id: organization.id
         can :update, Organization, id: organization.id
-        can :manage, [Multimap, GeojsonLayer, WmsLayer, OrganizationsUser], organization_id: organization.id
+        can :manage, [Map, Multimap, GeojsonLayer, WmsLayer, OrganizationsUser], organization_id: organization.id
+      else
+        can :read, Organization, id: user.organization_ids
       end
-
-      # can :delete, [Multimap, GeojsonLayer, OrganizationsUser] do |item|
-      #   item.organization.users.include?(user)
-      # end
-      #
-      # can [:available, :add, :remove], Multimap do |item|
-      #   item.organization.users.include?(user)
-      # end
-
-      #TODO Update these when they become nested in organization
-      can :manage, [Map]
     end
     #   if user.admin?
     #     can :manage, :all

@@ -9,8 +9,7 @@ class MapsControllerTest < ActionController::TestCase
 
   test "should get index" do
     get :index, organization_id: @organization
-    assert_response :success
-    assert_not_nil assigns(:maps)
+    assert_redirected_to @organization
   end
 
   test "should get new" do

@@ -4,5 +4,7 @@
   = f.input :active
   = f.input :description
 
-  .text-right
-    = f.button :submit, class: 'btn btn-primary'
+  = link_to [@organization, @multimap], class: 'btn btn-default' do
+    %i.fa.fa-arrow-left
+    Cancel
+  = f.button :submit, class: 'btn btn-primary pull-right'

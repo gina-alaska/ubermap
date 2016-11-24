@@ -7,9 +7,15 @@ class OrganizationsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
+    login_as(:two)
     get :index
     assert_response :success
     assert_not_nil assigns(:organizations)
+  end
+
+  test "should redirect to organization" do
+    get :index
+    assert_redirected_to users(:one).organizations.first
   end
 
   test "should render show" do

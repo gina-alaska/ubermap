@@ -60,7 +60,7 @@ class GeojsonLayersController < ManagerController
       if @geojson_layer.save
         format.html { redirect_to edit_organization_geojson_layer_path(@organization, @geojson_layer), notice: 'Layer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @geojson_layer }
-        format.js { render text: "document.location = '#{edit_geojson_layer_path(@geojson_layer)}'"}
+        format.js { render text: "document.location = '#{edit_organization_geojson_layer_path(@organization, @geojson_layer)}'"}
       else
         format.html { render action: 'new' }
         format.json { render json: @geojson_layer.errors, status: :unprocessable_entity }
@@ -77,7 +77,7 @@ class GeojsonLayersController < ManagerController
         format.json { head :no_content }
         format.js {
           if @geojson_layer.previous_changes['file_uid']
-            render js: "document.location='#{edit_geojson_layer_path(@geojson_layer)}';"
+            render js: "document.location='#{edit_organization_geojson_layer_path(@organization, @geojson_layer)}';"
           end
         }
       else

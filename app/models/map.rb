@@ -23,4 +23,8 @@ class Map < ActiveRecord::Base
   def use_sidebar?
     false
   end
+
+  def to_s
+    title
+  end
 end
