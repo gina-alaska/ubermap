@@ -60,6 +60,11 @@ group :development do
   gem 'guard-minitest'
 end
 
+group :production do
+  gem 'tzinfo-data'
+  gem 'rb-readline'
+end
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'font-awesome-rails'

@@ -14,7 +14,7 @@ pkg_origin=uafgina
 
 # Required.
 # Sets the version of the package.
-pkg_version=1.0.0
+pkg_version=1.0.2
 
 # Required.
 # A URL that specifies where to download the source from. Any valid wget url
@@ -28,7 +28,7 @@ pkg_source=https://github.com/gina-alaska/${pkg_name}/archive/${pkg_version}.tar
 # and using the sha256sum or gsha256sum tools. Also, if you do not have
 # do_verify() overridden, and you do not have the correct sha-256 sum, then the
 # expected value will be shown in the build output of your package.
-pkg_shasum=10758a9f92d2a88ea45cb0d28eb6aaca9eec254b0b7b8d35dc82f82620c1935c
+pkg_shasum=69db15d8c76877158e6f3ce004d68bb5f0f43c115ff33293ea2948b764affb69
 
 # Optional.
 # The name and email address of the package maintainer.
@@ -59,7 +59,6 @@ pkg_build_deps=(
   core/gcc-libs
   core/make
   core/git
-  core/postgresql
   core/which
   core/pkg-config
   core/node
@@ -73,10 +72,11 @@ pkg_deps=(
   core/libyaml
   core/libxml2
   core/libxslt
-  core/openssl
   core/postgresql
-  core/ruby
+  core/node
+  core/openssl
   core/zlib
+  core/ruby
 )
 
 pkg_expose=(9292)
@@ -104,13 +104,16 @@ do_build() {
   local _pg_config=${_postgresql_dir}/bin/pg_config
   local _zlib_dir=$(pkg_path_for zlib)
 
+  # Update ssl ca for bundler to use
   export GIT_SSL_CAINFO="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
   export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+
   export GEM_HOME=${pkg_path}/vendor/bundler
   export GEM_PATH=${_bundler_dir}:${GEM_HOME}
+
   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pkg_path_for gcc-libs)/lib
 
-    # don't let bundler split up the nokogiri config string (it breaks
+  # don't let bundler split up the nokogiri config string (it breaks
   # the build), so specify it as an env var instead
   # -- Thanks JTimberman for writing this!
   export NOKOGIRI_CONFIG="--use-system-libraries --with-zlib-dir=${_zlib_dir} --with-xslt-dir=${_libxslt_dir} --with-xml2-include=${_libxml2_dir}/include/libxml2 --with-xml2-lib=${_libxml2_dir}/lib"
@@ -118,16 +121,19 @@ do_build() {
   build_line "Setting pg_config=${_pg_config}"
   bundle config build.pg --with-pg-config=$_pg_config
 
-  if [[ -z "`grep 'gem .*tzinfo-data.*' Gemfile`" ]]; then
-    echo 'gem "tzinfo-data"' >> Gemfile
-  fi
+  # if [[ -z "`grep 'gem .*tzinfo-data.*' Gemfile`" ]]; then
+  #   echo 'gem "tzinfo-data"' >> Gemfile
+  # fi
+  #
+  # if [[ -z "`grep 'gem .*rb-readline.*' Gemfile`" ]]; then
+  #   echo 'gem "rb-readline"' >> Gemfile
+  # fi
 
-  if [[ -z "`grep 'gem .*rb-readline.*' Gemfile`" ]]; then
-    echo 'gem "rb-readline"' >> Gemfile
-  fi
+  # Remove the specific ruby version, because our ruby is 2.3
+  sed -e 's/^ruby.*//' -i Gemfile
 
   build_line "Vendoring Gems"
-  bundle install --jobs 2 --retry 5 --path vendor/bundle --without development test
+  bundle install --jobs 2 --retry 5 --deployment --with production --without development test
 
   build_line "Precompiling Assets"
   bin/rake assets:precompile
@@ -138,11 +144,11 @@ do_build() {
 }
 
 do_install() {
-  cp -R . ${pkg_prefix}/dist
+  cp -R . "${pkg_prefix}/static"
 
-  for binstub in ${pkg_prefix}/dist/bin/*; do
+  for binstub in ${pkg_prefix}/static/bin/*; do
     build_line "Setting shebang for ${binstub} to 'ruby'"
-    [[ -f $binstub  ]] && sed -e "s#/usr/bin/env ruby#$(pkg_path_for ruby)/bin/ruby#" -i $binstub
+    [[ -f $binstub ]] && sed -e "s#/usr/bin/env ruby#$(pkg_path_for ruby)/bin/ruby#" -i "$binstub"
   done
 
   if [[ `readlink /usr/bin/env` = "$(pkg_path_for coreutils)/bin/env" ]]; then
