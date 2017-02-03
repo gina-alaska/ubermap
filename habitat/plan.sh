@@ -14,7 +14,7 @@ pkg_origin=uafgina
 
 # Required.
 # Sets the version of the package.
-pkg_version=1.0.2
+pkg_version=1.0.3
 
 # Required.
 # A URL that specifies where to download the source from. Any valid wget url
@@ -28,7 +28,7 @@ pkg_source=https://github.com/gina-alaska/${pkg_name}/archive/${pkg_version}.tar
 # and using the sha256sum or gsha256sum tools. Also, if you do not have
 # do_verify() overridden, and you do not have the correct sha-256 sum, then the
 # expected value will be shown in the build output of your package.
-pkg_shasum=69db15d8c76877158e6f3ce004d68bb5f0f43c115ff33293ea2948b764affb69
+pkg_shasum=0f189e3917dd109f6d311a0347dfe88ff16805e17d4f44a1da8e3a29c21eb419
 
 # Optional.
 # The name and email address of the package maintainer.
@@ -121,14 +121,6 @@ do_build() {
   build_line "Setting pg_config=${_pg_config}"
   bundle config build.pg --with-pg-config=$_pg_config
 
-  # if [[ -z "`grep 'gem .*tzinfo-data.*' Gemfile`" ]]; then
-  #   echo 'gem "tzinfo-data"' >> Gemfile
-  # fi
-  #
-  # if [[ -z "`grep 'gem .*rb-readline.*' Gemfile`" ]]; then
-  #   echo 'gem "rb-readline"' >> Gemfile
-  # fi
-
   # Remove the specific ruby version, because our ruby is 2.3
   sed -e 's/^ruby.*//' -i Gemfile
 
@@ -144,7 +136,7 @@ do_build() {
 }
 
 do_install() {
-  cp -R . "${pkg_prefix}/static"
+  cp -Ra . "${pkg_prefix}/static"
 
   for binstub in ${pkg_prefix}/static/bin/*; do
     build_line "Setting shebang for ${binstub} to 'ruby'"
