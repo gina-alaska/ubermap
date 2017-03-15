@@ -6,6 +6,7 @@ gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 gem 'mustache'
+gem 'dotenv-rails', require: 'dotenv/rails-now', groups: [:development, :test]
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -15,7 +16,8 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
-gem 'dragonfly'
+gem "refile", require: "refile/rails"
+gem "refile-s3"
 gem 'nested_form'
 gem 'remotipart', '~> 1.2'
 gem 'cancancan', '~> 1.10'

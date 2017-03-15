@@ -7,7 +7,7 @@
       %ul
         - @geojson_layer.errors.full_messages.each do |msg|
           %li= msg
-  #geojson_layer-summary.tab-pane.active.geojson_layer-definition{ data: { layer: @geojson_layer.leaflet_params.to_json, active: 'true' } }
+  #geojson_layer-summary.tab-pane.active.geojson_layer-definition{ data: { layer: geojson_leaflet_params(@geojson_layer), active: 'true' } }
     = render 'summary_fields', f: f
   #geojson_layer-data.tab-pane
     = render 'data_fields', f: f

@@ -14,7 +14,7 @@ pkg_origin=uafgina
 
 # Required.
 # Sets the version of the package.
-pkg_version=1.0.3
+pkg_version=2.0.0
 
 # Required.
 # A URL that specifies where to download the source from. Any valid wget url
@@ -28,7 +28,7 @@ pkg_source=https://github.com/gina-alaska/${pkg_name}/archive/${pkg_version}.tar
 # and using the sha256sum or gsha256sum tools. Also, if you do not have
 # do_verify() overridden, and you do not have the correct sha-256 sum, then the
 # expected value will be shown in the build output of your package.
-pkg_shasum=0f189e3917dd109f6d311a0347dfe88ff16805e17d4f44a1da8e3a29c21eb419
+pkg_shasum=b55576d28a46c204925913b42f998b3c73dbc9f007da06e2d4574a58cbdb5ca8
 
 # Optional.
 # The name and email address of the package maintainer.

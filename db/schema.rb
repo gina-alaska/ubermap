@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020235911) do
+ActiveRecord::Schema.define(version: 20170315005524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20161020235911) do
     t.string   "name"
     t.string   "file_uid"
     t.string   "file_name"
-    t.boolean  "active",          default: true
+    t.boolean  "active",            default: true
     t.text     "legend"
     t.text     "description"
     t.datetime "created_at"
@@ -52,6 +52,10 @@ ActiveRecord::Schema.define(version: 20161020235911) do
     t.hstore   "options"
     t.text     "fields"
     t.integer  "organization_id"
+    t.string   "file_id"
+    t.integer  "file_size"
+    t.string   "file_filename"
+    t.string   "file_content_type"
   end
 
   add_index "geojson_layers", ["organization_id"], name: "index_geojson_layers_on_organization_id", using: :btree
