@@ -6,7 +6,7 @@ gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 gem 'mustache'
-gem 'dotenv-rails', require: 'dotenv/rails-now', groups: [:development, :test]
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
