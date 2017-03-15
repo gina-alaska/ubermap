@@ -1,6 +1,7 @@
 class @BasicMapContainer
   constructor: (@selector, @default_layer = 'Mapbox Terrain') ->
     L.Icon.Default.imagePath = '/assets/mapbox.js/dist/images';
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZ2luYS1hbGFza2EiLCJhIjoiN0lJVnk5QSJ9.CsQYpUUXtdCpnUdwurAYcQ';
 
     @map = L.mapbox.map(@selector, 'gina-alaska.heb1gpfg')
 

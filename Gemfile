@@ -74,7 +74,7 @@ gem 'font-awesome-rails'
 source 'https://rails-assets.org' do
   gem 'rails-assets-intl'
   gem 'rails-assets-bootstrap'
-  gem 'rails-assets-jquery-ui', '~> 1.9.2'
+  gem 'rails-assets-jquery-ui', '~> 1.12.1'
   gem 'rails-assets-proj4leaflet'
   gem 'rails-assets-leaflet.markercluster', '0.4.0.hotfix.1'
   gem 'rails-assets-ace-builds'
