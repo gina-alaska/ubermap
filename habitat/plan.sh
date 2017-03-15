@@ -14,7 +14,7 @@ pkg_origin=uafgina
 
 # Required.
 # Sets the version of the package.
-pkg_version=2.2.0
+pkg_version=2.2.1
 
 # Required.
 # A URL that specifies where to download the source from. Any valid wget url
@@ -28,7 +28,7 @@ pkg_source=https://github.com/gina-alaska/${pkg_name}/archive/${pkg_version}.tar
 # and using the sha256sum or gsha256sum tools. Also, if you do not have
 # do_verify() overridden, and you do not have the correct sha-256 sum, then the
 # expected value will be shown in the build output of your package.
-pkg_shasum=8fc1a52a75fda5bdcb3ea7cbbdb88049b7409c15b917463e88d1f1a2bfb99ff2
+pkg_shasum=cdc3b9942f2e4123262360b68b9b633a2058a3d6cfa61ca7e2a5e14760059e0d
 
 # Optional.
 # The name and email address of the package maintainer.
@@ -128,11 +128,10 @@ do_build() {
   bundle install --jobs 2 --retry 5 --deployment --with production --without development test
 
   build_line "Precompiling Assets"
-  bin/rake assets:precompile
+  bin/rake assets:precompile HAB_PRECOMPILE=true
 
-  build_line "Removing dragonfly/uploads"
-  rm -rf public/uploads
-  rm -rf public/dragonfly
+  build_line "Clearing logs"
+  rm -f logs/*
 }
 
 do_install() {
