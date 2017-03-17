@@ -19,7 +19,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem "refile", require: "refile/rails"
 gem "refile-s3"
 gem 'nested_form'
-gem 'remotipart', '~> 1.2'
+# gem 'remotipart'
 gem 'cancancan', '~> 1.10'
 gem 'simple_form'
 gem 'friendly_id', '~> 5.1.0'
@@ -75,10 +75,10 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-intl'
   gem 'rails-assets-bootstrap'
   gem 'rails-assets-jquery-ui', '~> 1.12.1'
+  gem 'rails-assets-proj4', '~> 2.3.17'
   gem 'rails-assets-proj4leaflet'
-  gem 'rails-assets-leaflet.markercluster', '0.4.0.hotfix.1'
+  gem 'rails-assets-leaflet.markercluster'
   gem 'rails-assets-ace-builds'
-  gem 'rails-assets-proj4'
   gem 'rails-assets-handlebars'
   gem 'rails-assets-handlebars-helper-intl'
 end
