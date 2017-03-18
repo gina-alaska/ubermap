@@ -6,18 +6,20 @@ gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 gem 'mustache'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 5.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
-gem 'dragonfly'
+gem "refile", require: "refile/rails"
+gem "refile-s3"
 gem 'nested_form'
-gem 'remotipart', '~> 1.2'
+# gem 'remotipart'
 gem 'cancancan', '~> 1.10'
 gem 'simple_form'
 gem 'friendly_id', '~> 5.1.0'
@@ -44,7 +46,7 @@ end
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
-gem 'unicorn'
+#gem 'unicorn'
 gem 'puma'
 
 # Use Capistrano for deployment
@@ -60,6 +62,11 @@ group :development do
   gem 'guard-minitest'
 end
 
+group :production do
+  gem 'tzinfo-data'
+  gem 'rb-readline'
+end
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'font-awesome-rails'
@@ -67,11 +74,11 @@ gem 'font-awesome-rails'
 source 'https://rails-assets.org' do
   gem 'rails-assets-intl'
   gem 'rails-assets-bootstrap'
-  gem 'rails-assets-jquery-ui', '~> 1.9.2'
+  gem 'rails-assets-jquery-ui', '~> 1.12.1'
+  gem 'rails-assets-proj4', '~> 2.3.17'
   gem 'rails-assets-proj4leaflet'
-  gem 'rails-assets-leaflet.markercluster', '0.4.0.hotfix.1'
+  gem 'rails-assets-leaflet.markercluster'
   gem 'rails-assets-ace-builds'
-  gem 'rails-assets-proj4'
   gem 'rails-assets-handlebars'
   gem 'rails-assets-handlebars-helper-intl'
 end
@@ -82,3 +89,4 @@ gem "omniauth-github"
 gem "omniauth-google-oauth2"
 gem "omniauth-openid"
 gem "google-api-client"
+gem "version"

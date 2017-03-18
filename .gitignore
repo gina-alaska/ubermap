@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+/.env
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -14,9 +15,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-/config/database.yml
 /public/system
 
 .kitchen/logs/kitchen.log
 
 dragonfly.log
+results

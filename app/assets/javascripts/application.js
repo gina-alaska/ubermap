@@ -14,7 +14,6 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require jquery.remotipart
 //= require jquery-ui
 //= require handlebars
 //= require handlebars-helper-intl/dist/handlebars-intl.js

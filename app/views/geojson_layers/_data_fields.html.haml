@@ -1,6 +1,6 @@
 .form-group
-  = f.label :file_name, 'Current file: '
-  = f.object.file_name
+  = f.label :file_filename, 'Current file: '
+  = f.object.file_filename
 
 .form-group
   = f.label :fields, 'Attribute fields: '
@@ -8,4 +8,4 @@
 
 .form-group
   = f.label :file, 'Upload new file'
-  = f.file_field :file
+  = f.attachment_field :file, direct: true, presigned: true

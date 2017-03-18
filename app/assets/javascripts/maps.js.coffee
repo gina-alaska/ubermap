@@ -7,7 +7,26 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 @viewer_layers = {}
 
-$(document).ready ->
+toggleLayersSwitch = (el, state = 'auto') ->
+  target = $($(el).data('target'))
+  icon = $(el).find('i')
+
+  if state == 'auto'
+    state = icon.hasClass('fa-toggle-on')
+    updateLayersCheckbox(target, state)
+
+  if state
+    icon.switchClass('fa-toggle-on', 'fa-toggle-off')
+  else
+    icon.switchClass('fa-toggle-off', 'fa-toggle-on')
+
+updateLayersCheckbox = (container, state) ->
+  if state
+    container.find('input:checked').click()
+  else
+    container.find('input:not(:checked)').click()
+
+$(document).on 'turbolinks:load', ->
   if $('#map').length > 0
     container = new BasicMapContainer('map')
     # container.enableSlideControl();
@@ -63,26 +82,6 @@ $(document).ready ->
       toggleLayersSwitch(target.parents('.panel').find('[data-behavior="toggle-layers"]'), !enabled)
 
 
-toggleLayersSwitch = (el, state = 'auto') ->
-  target = $($(el).data('target'))
-  icon = $(el).find('i')
-
-  if state == 'auto'
-    state = icon.hasClass('fa-toggle-on')
-    updateLayersCheckbox(target, state)
-
-  if state
-    icon.switchClass('fa-toggle-on', 'fa-toggle-off')
-  else
-    icon.switchClass('fa-toggle-off', 'fa-toggle-on')
-
-updateLayersCheckbox = (container, state) ->
-  if state
-    container.find('input:checked').click()
-  else
-    container.find('input:not(:checked)').click()
-
-$(document).on 'ready page:load', ->
   $('[data-behavior="switch-icon"]').on 'shown.bs.collapse', ->
     $($(this).data('target')).switchClass('fa-plus-square-o', 'fa-minus-square-o')
   $('[data-behavior="switch-icon"]').on 'hidden.bs.collapse', ->
