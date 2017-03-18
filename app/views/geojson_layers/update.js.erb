@@ -2,7 +2,7 @@ var map = $('#map').data('container').map;
 var layer = $('[data-map="reload"]').data('layer');
 
 layer.removeFrom(map);
-layer = MapLayer.fromConfig(map, <%= @geojson_layer.leaflet_params.to_json.html_safe %>);
+layer = MapLayer.fromConfig(map, <%= leaflet_params(@geojson_layer).html_safe %>);
 layer.addTo(map);
 
 if ($('[data-map="reload"]').length > 0) {

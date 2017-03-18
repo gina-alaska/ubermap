@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020235911) do
+ActiveRecord::Schema.define(version: 20170315005524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
 
   create_table "authorizations", force: :cascade do |t|
-    t.string   "provider",   limit: 255
-    t.string   "uid",        limit: 255
+    t.string   "provider"
+    t.string   "uid"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -39,10 +39,10 @@ ActiveRecord::Schema.define(version: 20161020235911) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "geojson_layers", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.string   "file_uid",        limit: 255
-    t.string   "file_name",       limit: 255
-    t.boolean  "active",                      default: true
+    t.string   "name"
+    t.string   "file_uid"
+    t.string   "file_name"
+    t.boolean  "active",            default: true
     t.text     "legend"
     t.text     "description"
     t.datetime "created_at"
@@ -52,38 +52,25 @@ ActiveRecord::Schema.define(version: 20161020235911) do
     t.hstore   "options"
     t.text     "fields"
     t.integer  "organization_id"
+    t.string   "file_id"
+    t.integer  "file_size"
+    t.string   "file_filename"
+    t.string   "file_content_type"
   end
 
   add_index "geojson_layers", ["organization_id"], name: "index_geojson_layers_on_organization_id", using: :btree
-
-  create_table "layers", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "file_uid",    limit: 255
-    t.string   "file_name",   limit: 255
-    t.boolean  "active"
-    t.text     "legend"
-    t.text     "style_old"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "popup"
-    t.text     "options_old"
-    t.hstore   "style"
-    t.text     "fields"
-    t.hstore   "options"
-  end
 
   create_table "map_layers", force: :cascade do |t|
     t.integer  "map_id"
     t.integer  "layer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "layer_type", limit: 255
+    t.string   "layer_type"
   end
 
   create_table "maps", force: :cascade do |t|
-    t.string   "title",           limit: 255
-    t.string   "slug",            limit: 255
+    t.string   "title"
+    t.string   "slug"
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -94,7 +81,7 @@ ActiveRecord::Schema.define(version: 20161020235911) do
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "email",      limit: 255
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -146,25 +133,25 @@ ActiveRecord::Schema.define(version: 20161020235911) do
   add_index "organizations_users", ["user_id"], name: "index_organizations_users_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.string   "email",           limit: 255
-    t.string   "avatar",          limit: 255
+    t.string   "name"
+    t.string   "email"
+    t.string   "avatar"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "admin",                       default: false, null: false
+    t.boolean  "admin",           default: false, null: false
     t.integer  "organization_id"
   end
 
   add_index "users", ["organization_id"], name: "index_users_on_organization_id", using: :btree
 
   create_table "wms_layers", force: :cascade do |t|
-    t.string   "url",             limit: 255
-    t.string   "layers",          limit: 255
+    t.string   "url"
+    t.string   "layers"
     t.text     "legend"
-    t.boolean  "active",                      default: true
+    t.boolean  "active",          default: true
     t.hstore   "options"
     t.text     "description"
-    t.string   "name",            limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "organization_id"

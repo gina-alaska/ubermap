@@ -4,7 +4,7 @@ class GeojsonLayer < ActiveRecord::Base
 
   belongs_to :organization
 
-  dragonfly_accessor :file
+  attachment :file, extension: "geojson"
 
   scope :active, ->{ where(active: true) }
 
@@ -15,15 +15,12 @@ class GeojsonLayer < ActiveRecord::Base
   def fetch_fields
     return if self.file.nil?
 
-    case self.file.ext
-    when 'geojson'
-      set_fields_from_geojson
-    end
+    set_fields_from_geojson
   end
 
   def set_fields_from_geojson
     f = []
-    JSON.parse(self.file.data)['features'].each do |feature|
+    JSON.parse(self.file.read)['features'].each do |feature|
       f += feature['properties'].keys
     end
 
@@ -36,18 +33,5 @@ class GeojsonLayer < ActiveRecord::Base
 
   def layer_type
     'geojson'
-  end
-
-  def leaflet_params
-    {
-      name: name,
-      slug: "geojson_#{id}",
-      type: 'geojson',
-      url: file.try(:remote_url),
-      popup: popup,
-      legend: legend,
-      style: style.as_json,
-      options: options.as_json
-    }
   end
 end
