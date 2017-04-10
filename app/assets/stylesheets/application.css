@@ -29,3 +29,8 @@
 ol.breadcrumb {
   font-size: 18px;
 }
+
+.turbolinks-progress-bar {
+  height: 5px;
+  background-color: green;
+}

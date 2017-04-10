@@ -71,6 +71,7 @@ $(document).on 'turbolinks:load', ->
     })
 
     $('[data-toggle="layer"]').on 'change', (e) =>
+      e.preventDefault()
       target = $(e.target)
       slug = target.parents('[data-layer]').data('layer').slug
       if target.is(':checked')
@@ -78,9 +79,8 @@ $(document).on 'turbolinks:load', ->
       else
         container.hideLayer(slug)
 
-      enabled = target.parents('.panel-body').find('input:checked').size() > 0
+      enabled = target.parents('.panel-body').find('input:checked').length > 0
       toggleLayersSwitch(target.parents('.panel').find('[data-behavior="toggle-layers"]'), !enabled)
-
 
   $('[data-behavior="switch-icon"]').on 'shown.bs.collapse', ->
     $($(this).data('target')).switchClass('fa-plus-square-o', 'fa-minus-square-o')

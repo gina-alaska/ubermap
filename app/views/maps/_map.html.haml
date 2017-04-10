@@ -1,5 +1,5 @@
 .panel.panel-default.layer-def
-  .panel-heading{ style: 'padding: 8px 5px;'}
+  .panel-heading{ "data-turbolinks" => "false", style: 'padding: 8px 5px;'}
     = link_to '#toggle-layer-def', data: { toggle: 'collapse', target: dom_id(map, '#map'), parent: '#layer_container' } do
       %i.fa{ id: dom_id(map, 'collapse_icon'), class: "fa-#{activate ? 'minus' : 'plus'}-square-o" }
       %b= map.title
