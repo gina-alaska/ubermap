@@ -24,19 +24,21 @@ class @MapLayer
 
   option_auto_zoom: =>
     @layer.on 'ready', =>
-      if @config.options? and @config.options.auto_zoom == 'yes'
+
+  addTo: (map, zIndex = 100) =>
+    map.addLayer(@layer)
+    @layer.setZIndex(zIndex)
+
+    if @config.options?
+      if @config.options.auto_zoom == 'yes'
         @map.whenReady =>
           setTimeout =>
             bounds = @layer.getBounds()
             @map.fitBounds(bounds) if bounds.isValid()
           , 100
 
-  addTo: (map, zIndex = 100) =>
-    map.addLayer(@layer)
-    @layer.setZIndex(zIndex)
-
-    if @config.options? and @config.options.baselayer != 'yes'
-      @layer.bringToFront()
+      if @config.options.baselayer != 'yes'
+        @layer.bringToFront()
 
   removeFrom: (map, control) =>
     map.removeLayer(@layer)
