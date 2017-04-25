@@ -22,9 +22,6 @@ class @MapLayer
       when 'geojson'
         layer = new GeoJSONLayer(map, config)
 
-  option_auto_zoom: =>
-    @layer.on 'ready', =>
-
   addTo: (map, zIndex = 100) =>
     map.addLayer(@layer)
     @layer.setZIndex(zIndex)
