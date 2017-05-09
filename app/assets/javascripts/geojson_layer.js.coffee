@@ -30,10 +30,10 @@ class @GeoJSONLayer extends @MapLayer
   setStyle: =>
     @layer.on 'ready', () =>
       @layer.eachLayer (l) =>
-        if @config.arrows? || true
+        if @config.options.direction_arrows == 'yes'
           decorator = L.polylineDecorator(l, {
             patterns: [
-                {offset: 0, repeat: 100, symbol: L.Symbol.arrowHead({pixelSize: 15, polygon: false, pathOptions: {stroke: true}})}
+                {offset: 0, repeat: 80, symbol: L.Symbol.arrowHead({pixelSize: 15, polygon: false, pathOptions: {stroke: true}})}
             ]
           })
           @layer.addLayer(decorator)

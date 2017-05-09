@@ -26,12 +26,17 @@ class @MapLayer
     return if map.hasLayer(@layer)
     map.addLayer(@layer)
     @layer.setZIndex(zIndex)
-    
+
     if @config.options?
       if @config.options.auto_zoom == 'yes'
         @map.whenReady =>
           bounds = @layer.getBounds()
-          @map.fitBounds(bounds) if bounds.isValid()
+          if bounds.isValid()
+            @map.fitBounds(bounds)
+          else
+            @layer.on 'ready', =>
+              bounds = @layer.getBounds()
+              @map.fitBounds(bounds) if bounds.isValid()
 
       # if @config.options.baselayer != 'yes'
       #   @layer.bringToBack()
