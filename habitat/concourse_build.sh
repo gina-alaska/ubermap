@@ -8,8 +8,8 @@ hab -V
 
 mkdir -p /hab/cache/keys
 
-cat $HABITAT_ORIGIN_CONTENT > /hab/cache/keys/$HABITAT_ORIGIN_FILENAME
+echo "${HABITAT_ORIGIN_CONTENT}" > "/hab/cache/keys/${HABITAT_ORIGIN_FILENAME}"
 
-cd $APPLICATION_PATH
+cd "${APPLICATION_PATH}"
 
 hab pkg build .
