@@ -38,8 +38,8 @@ class @MapLayer
               bounds = @layer.getBounds()
               @map.fitBounds(bounds) if bounds.isValid()
 
-      # if @config.options.baselayer != 'yes'
-      #   @layer.bringToBack()
+      if @config.options.baselayer != 'yes'
+        @layer.bringToFront()
 
   removeFrom: (map, control) =>
     map.removeLayer(@layer)

@@ -28,7 +28,7 @@ pkg_source=https://github.com/gina-alaska/${pkg_name}/archive/${pkg_version}.tar
 # and using the sha256sum or gsha256sum tools. Also, if you do not have
 # do_verify() overridden, and you do not have the correct sha-256 sum, then the
 # expected value will be shown in the build output of your package.
-pkg_shasum=412dd78043a71483a32c2136702de429853aba70d6d4b68b72ec739c17d3fdc5
+pkg_shasum=62592f794d7405229e71fd04cc9f2235303f777f8408505b259a27e09cd53746
 
 # Optional.
 # The name and email address of the package maintainer.
@@ -65,6 +65,7 @@ pkg_build_deps=(
 )
 
 pkg_deps=(
+  core/ruby/2.3.1/20161214031900
   core/bundler/1.13.7
   core/cacerts
   core/glibc
