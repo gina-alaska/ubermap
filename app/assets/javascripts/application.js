@@ -21,6 +21,7 @@
 //= require proj4
 //= require proj4leaflet
 //= require leaflet.markercluster
+//= require leaflet-polylinedecorator
 //= require ace-builds/src/ace
 //= require ace-builds/src/mode-handlebars.js
 //= require ace-builds/src/mode-css.js

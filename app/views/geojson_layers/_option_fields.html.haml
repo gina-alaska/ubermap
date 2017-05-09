@@ -11,8 +11,13 @@
           Clickable
 
         %label.checkbox
+          = opts.check_box :direction_arrows, { }, 'yes', 'no'
+          Direction Arrows
+
+        %label.checkbox
           = opts.check_box :auto_zoom, { }, 'yes', 'no'
           Auto zoom
+
     .col-sm-6.text-center{ style: 'padding-top: 20px;' }
       = link_to [@organization, @geojson_layer], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do
         %i.fa.fa-trash

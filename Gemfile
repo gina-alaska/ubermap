@@ -81,6 +81,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-ace-builds'
   gem 'rails-assets-handlebars'
   gem 'rails-assets-handlebars-helper-intl'
+  gem 'rails-assets-leaflet-polylinedecorator'
 end
 
 gem "haml"

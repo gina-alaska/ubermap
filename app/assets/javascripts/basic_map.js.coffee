@@ -17,7 +17,7 @@ class @BasicMapContainer
     L.control.scale({ position: 'bottomleft' }).addTo(@map)
 
     @map.on 'overlayadd', (e) ->
-      e.layer.bringToFront()
+      # e.layer.bringToFront()
 
     @zIndex = 100
 
@@ -31,16 +31,16 @@ class @BasicMapContainer
     @layers[name] = layer
     @layers_zindex[name] ||= @zIndex
     @zIndex += 1
-    @layers[name].addTo(@map, @layers_zindex[name])
+    # @layers[name].addTo(@map, @layers_zindex[name])
 
   remove: (name) =>
     @layers[name].removeFrom(@map)
 
   showLayer:(name) =>
-    @layers[name].addTo(@map, @layers_zindex[name])
+    @layers[name].addTo(@map, @layers_zindex[name]) unless @map.hasLayer(@layers[name])
 
   hideLayer:(name) =>
     @layers[name].removeFrom(@map)
 
   adjustOpacity: (name, opacity) =>
-    console.log @layers[name].layer.setOpacity(opacity)
+    @layers[name].layer.setOpacity(opacity)

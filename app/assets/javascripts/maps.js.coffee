@@ -49,7 +49,6 @@ $(document).on 'turbolinks:load', ->
       layer = MapLayer.fromConfig container.map, config
       if layer?
         container.add(config.slug, layer)
-
         if !$(item).data('active')
           container.hideLayer(config.slug)
         else

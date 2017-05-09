@@ -2,7 +2,9 @@ class @GeoJSONLayer extends @MapLayer
   constructor: (@map, @config) ->
     @layer = L.mapbox.featureLayer()
     @setStyle()
+
     @layer.loadURL(@config.url)
+
     if @config.popup? and @config.popup != ''
       @config.popup_template = Handlebars.compile(@config.popup)
 
@@ -28,6 +30,14 @@ class @GeoJSONLayer extends @MapLayer
   setStyle: =>
     @layer.on 'ready', () =>
       @layer.eachLayer (l) =>
+        if @config.arrows? || true
+          decorator = L.polylineDecorator(l, {
+            patterns: [
+                {offset: 0, repeat: 100, symbol: L.Symbol.arrowHead({pixelSize: 15, polygon: false, pathOptions: {stroke: true}})}
+            ]
+          })
+          @layer.addLayer(decorator)
+
         if l.setIcon?
           icon_type = @styleProps('marker-symbol-type', l.feature.properties)
           icon_name = @styleProps('marker-symbol', l.feature.properties)

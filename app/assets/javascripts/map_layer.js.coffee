@@ -23,19 +23,18 @@ class @MapLayer
         layer = new GeoJSONLayer(map, config)
 
   addTo: (map, zIndex = 100) =>
+    return if map.hasLayer(@layer)
     map.addLayer(@layer)
     @layer.setZIndex(zIndex)
-
+    
     if @config.options?
       if @config.options.auto_zoom == 'yes'
         @map.whenReady =>
-          setTimeout =>
-            bounds = @layer.getBounds()
-            @map.fitBounds(bounds) if bounds.isValid()
-          , 100
+          bounds = @layer.getBounds()
+          @map.fitBounds(bounds) if bounds.isValid()
 
-      if @config.options.baselayer != 'yes'
-        @layer.bringToFront()
+      # if @config.options.baselayer != 'yes'
+      #   @layer.bringToBack()
 
   removeFrom: (map, control) =>
     map.removeLayer(@layer)
