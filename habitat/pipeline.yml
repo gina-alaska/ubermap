@@ -18,3 +18,5 @@ jobs:
       HABITAT_ORIGIN_KEY: {{habitat-origin-key}}
       HABITAT_ORIGIN_FILENAME: {{habitat-origin-filename}}
       HABITAT_ORIGIN_CONTENT: {{habitat-origin-content}}
+      HABITAT_PUB_FILENAME: {{habitat-pub-filename}}
+      HABITAT_PUB_CONTENT: {{habitat-pub-content}}

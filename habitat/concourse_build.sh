@@ -8,6 +8,7 @@ hab -V
 
 mkdir -p /hab/cache/keys
 echo -n "${HABITAT_ORIGIN_CONTENT}" > "/hab/cache/keys/${HABITAT_ORIGIN_FILENAME}"
+echo -n "${HABITAT_PUB_CONTENT}" > "/hab/cache/keys/${HABITAT_PUB_FILENAME}"
 
 ls -la /hab/cache/keys
 cat "/hab/cache/keys/${HABITAT_ORIGIN_FILENAME}"
