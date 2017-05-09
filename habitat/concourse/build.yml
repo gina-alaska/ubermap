@@ -13,4 +13,4 @@ params:
   APPLICATION_PATH: application
 
 run:
-  path: ./application/habitat/concourse_build.sh
+  path: ./application/habitat/concourse/build.sh

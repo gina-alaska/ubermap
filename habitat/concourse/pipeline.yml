@@ -4,7 +4,10 @@ resources:
   source:
     uri: https://github.com/gina-alaska/ubermap.git
     branch: concourse_build
-
+- name: gina-packages
+  type: s3
+  source:
+    bucket: gina-packages
 jobs:
 - name: build-habitat-pkg
   public: true
@@ -12,7 +15,9 @@ jobs:
   - get: application
   - task: build
     privileged: true
-    file: application/habitat/build.yml
+    file: application/habitat/concourse/build.yml
+    output:
+      name: results
     params:
       PACKAGE_NAME: ubermap
       HABITAT_ORIGIN_KEY: {{habitat-origin-key}}
@@ -20,3 +25,6 @@ jobs:
       HABITAT_ORIGIN_CONTENT: {{habitat-origin-content}}
       HABITAT_PUB_FILENAME: {{habitat-pub-filename}}
       HABITAT_PUB_CONTENT: {{habitat-pub-content}}
+  - put: gina-packages
+    params:
+      file: results/uafgina-ubermap-*.hart
