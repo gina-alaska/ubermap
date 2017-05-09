@@ -11,7 +11,10 @@ jobs:
   plan:
   - get: application
   - task: build
+    privileged: true
     file: application/habitat/build.yml
     params:
       PACKAGE_ORIGIN: uafgina
       PACKAGE_NAME: ubermap
+      HABITAT_ORIGIN_KEY: {{habitat-origin-key}}
+      HABITAT_ORIGIN_FILENAME: {{habitat-origin-filename}}
