@@ -28,7 +28,7 @@ pkg_source=https://github.com/gina-alaska/${pkg_name}/archive/${pkg_version}.tar
 # and using the sha256sum or gsha256sum tools. Also, if you do not have
 # do_verify() overridden, and you do not have the correct sha-256 sum, then the
 # expected value will be shown in the build output of your package.
-pkg_shasum=62592f794d7405229e71fd04cc9f2235303f777f8408505b259a27e09cd53746
+pkg_shasum=2cadbb659ba0d8bed064357f217d3bbf06576e239d8eede25cfbd647b2c6ab3f
 
 # Optional.
 # The name and email address of the package maintainer.

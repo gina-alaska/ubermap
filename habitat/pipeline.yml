@@ -1,0 +1,16 @@
+resources:
+- name: application
+  type: git
+  source:
+    uri: https://github.com/gina-alaska/ubermap.git
+
+jobs:
+- name: build-habitat-pkg
+  public: true
+  plan:
+  - get: application
+  - task: build
+    file: application/habitat/build.yml
+    params:
+      PACKAGE_ORIGIN: uafgina
+      PACKAGE_NAME: ubermap
