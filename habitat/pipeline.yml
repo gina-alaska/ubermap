@@ -3,6 +3,7 @@ resources:
   type: git
   source:
     uri: https://github.com/gina-alaska/ubermap.git
+    branch: concourse_build
 
 jobs:
 - name: build-habitat-pkg
