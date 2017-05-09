@@ -3,11 +3,14 @@ platform: linux
 
 image_resource:
   type: docker-image
-  source: { repository: bscott/habitat }
+  source:
+    repository: bscott/habitat
 
 inputs:
 - name: application
 
+params:
+  APPLICATION_PATH: application
+
 run:
-  path: hab
-  args: [pkg build habitat]
+  path: ./application/habitat/concourse_build.sh
