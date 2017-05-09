@@ -15,4 +15,4 @@ cat "/hab/cache/keys/${HABITAT_ORIGIN_FILENAME}"
 
 cd "${APPLICATION_PATH}"
 
-hab pkg build .
+hab pkg build . -k $HABITAT_ORIGIN_KEY
