@@ -4,6 +4,12 @@ resources:
   source:
     uri: https://github.com/gina-alaska/ubermap.git
     branch: concourse_build
+- name: hab-ci 
+  type: git
+  source:
+    uri: https://github.alaska.edu/gina/concourse-chef-test.git
+    username: {{git-username}}
+    password: {{git-password}} 
 - name: gina-packages
   type: s3
   source:
@@ -12,12 +18,14 @@ jobs:
 - name: build-habitat-pkg
   public: true
   plan:
+  - get: hab-ci
   - get: application
   - task: build
     privileged: true
-    file: application/habitat/concourse/build.yml
+    file: hab-ci/habitat/build.yml
     output:
       name: results
+      path: /src/results
     params:
       PACKAGE_NAME: ubermap
       HABITAT_ORIGIN_KEY: {{habitat-origin-key}}
@@ -27,4 +35,4 @@ jobs:
       HABITAT_PUB_CONTENT: {{habitat-pub-content}}
   - put: gina-packages
     params:
-      file: results/uafgina-ubermap-*.hart
+      file: /src/results/uafgina-ubermap-*.hart
