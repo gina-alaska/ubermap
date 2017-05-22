@@ -91,3 +91,5 @@ gem "omniauth-google-oauth2"
 gem "omniauth-openid"
 gem "google-api-client"
 gem "version"
+
+ruby 2.3
