@@ -3,7 +3,7 @@ require "refile/s3"
 # require 'refile/simple_form'
 
 # don't configure aws when precompiling in hab
-unless ENV['HAB_PRECOMPILE']
+if Rails.application.secrets.aws_access_key_id
   aws = {
     access_key_id: Rails.application.secrets.aws_access_key_id,
     secret_access_key: Rails.application.secrets.aws_secret_access_key,

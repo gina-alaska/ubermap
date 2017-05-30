@@ -25,7 +25,7 @@ gem 'simple_form'
 gem 'friendly_id', '~> 5.1.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -91,3 +91,6 @@ gem "omniauth-google-oauth2"
 gem "omniauth-openid"
 gem "google-api-client"
 gem "version"
+gem "rails_12factor"
+
+ruby '2.3.1'

@@ -2,11 +2,18 @@
 # See the docs at https://www.habitat.sh/docs/create-packages-configure/.
 # You can safely delete this file if you don't need it.
 rails_binding_ip = "0.0.0.0"
-rails_port = 9292
-database_name = "ubermap_production"
-database_username = "ubermap"
-database_password = ""
-database_host = "localhost"
-database_port = 5432
+rails_env = "production"
 secret_key_base = ""
 ubermap_s3_bucket = ""
+aws_secret_key_id = ""
+aws_secret_acces_key = ""
+
+[app]
+port = 9292
+
+[db]
+name = "ubermap_production"
+user = "ubermap"
+password = ""
+host = "localhost"
+port = 5432
