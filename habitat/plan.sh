@@ -13,12 +13,17 @@ pkg_deps=(
   core/cacerts
 )
 
-pkg_scaffolding=core/scaffolding-ruby
+pkg_scaffolding=uafgina/scaffolding-ruby
+
+declare -A scaffolding_env
+scaffolding_env[UBERMAP_S3_BUCKET]="{{cfg.ubermap_s3_bucket}}"
 
 do_prepare() {
   do_default_prepare
 
+  export HAB_ASSET_PRECOMPILE="true"
   export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+  scaffolding_env[SSL_CERT_FILE]="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
 
   return 0
 }

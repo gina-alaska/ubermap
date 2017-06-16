@@ -46,7 +46,6 @@ end
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
-#gem 'unicorn'
 gem 'puma'
 
 # Use Capistrano for deployment
@@ -65,6 +64,7 @@ end
 group :production do
   gem 'tzinfo-data'
   gem 'rb-readline'
+  gem "rails_12factor"
 end
 
 # Use debugger
@@ -91,6 +91,5 @@ gem "omniauth-google-oauth2"
 gem "omniauth-openid"
 gem "google-api-client"
 gem "version"
-gem "rails_12factor"
 
 ruby '2.3.1'
